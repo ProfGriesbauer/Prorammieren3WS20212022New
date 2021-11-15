@@ -10,9 +10,9 @@ using System.Windows.Shapes;
 
 namespace OOPGames
 {
-    public class TicTacToePaint : BaseTicTacToePaint
+    public class GF_TicTacToePaint : BaseTicTacToePaint 
     {
-        public override string Name { get { return "VorlesungTicTacToePaint"; } }
+        public override string Name { get { return "FranzlsTicTacToePaint"; } }
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
@@ -58,15 +58,15 @@ namespace OOPGames
 
 
 
-    public class TicTacToeRules : BaseTicTacToeRules
+    public class GF_TicTacToeRules : BaseTicTacToeRules
     {
         TicTacToeField _Field = new TicTacToeField();
 
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
 
-        public override bool MovesPossible 
-        { 
-            get 
+        public override bool MovesPossible
+        {
+            get
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -79,11 +79,11 @@ namespace OOPGames
                     }
                 }
 
-                return false; 
-            } 
+                return false;
+            }
         }
 
-        public override string Name { get { return "GriesbauerTicTacToeRules"; } }
+        public override string Name { get { return "FranzlsTicTacToeRules"; } }
 
         public override int CheckIfPLayerWon()
         {
@@ -131,7 +131,7 @@ namespace OOPGames
         }
     }
 
-    public class TicTacToeField : BaseTicTacToeField
+    public class GF_TicTacToeField : BaseTicTacToeField
     {
         int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
 
@@ -159,13 +159,13 @@ namespace OOPGames
         }
     }
 
-    public class TicTacToeMove : ITicTacToeMove
+    public class GF_TicTacToeMove : ITicTacToeMove
     {
         int _Row = 0;
         int _Column = 0;
         int _PlayerNumber = 0;
 
-        public TicTacToeMove (int row, int column, int playerNumber)
+        public GF_TicTacToeMove(int row, int column, int playerNumber)
         {
             _Row = row;
             _Column = column;
@@ -179,11 +179,11 @@ namespace OOPGames
         public int PlayerNumber { get { return _PlayerNumber; } }
     }
 
-    public class TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
+    public class GF_TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "GriesbauerHumanTicTacToePlayer"; } }
+        public override string Name { get { return "FranzlsHumanTicTacToePlayer"; } }
 
         public override IGamePlayer Clone()
         {
@@ -198,8 +198,8 @@ namespace OOPGames
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (selection.XClickPos > 20 + (j*100) && selection.XClickPos < 120 + (j*100) &&
-                        selection.YClickPos > 20 + (i*100) && selection.YClickPos < 120 + (i*100))
+                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
+                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
                     {
                         return new TicTacToeMove(i, j, _PlayerNumber);
                     }
@@ -215,11 +215,11 @@ namespace OOPGames
         }
     }
 
-    public class TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
+    public class GF_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "GriesbauerComputerTicTacToePlayer"; } }
+        public override string Name { get { return "FranzlsComputerTicTacToePlayer"; } }
 
         public override IGamePlayer Clone()
         {

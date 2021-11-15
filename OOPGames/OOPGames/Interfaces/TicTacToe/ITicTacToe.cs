@@ -9,7 +9,7 @@ namespace OOPGames
 {
     //TicTacToe specific paint game
     //DIESES INTERFACE NICHT ÄNDERN!
-    public interface IPaintTicTacToe : IPaintGame
+   public interface IPaintTicTacToe : IPaintGame
     {
         //Paints the given game field on the given canvas
         //NOTE: Clearing the canvas, etc. has to be done within this function
@@ -36,6 +36,11 @@ namespace OOPGames
 
         //Adds the given move to the current tictactoe field if possible
         void DoTicTacToeMove(ITicTacToeMove move);
+    }
+
+    public interface ITicTacToeRules_GE : ITicTacToeRules
+    {
+        void AskForGameSize();
     }
 
     //TicTacToeMove which is derived from row and column

@@ -50,6 +50,8 @@ Thumbs.db
 
 **/.vs
 
+*.xlsx
+
 /OOPGames/OOPGames/Classes/TicTacToe/TicTacToe.cs
 bin
 obj

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace OOPGames
 {
-    //Rules for a given game.
     //DIESES INTERFACE NICHT ÄNDERN!
     public interface IGameRules
     {
@@ -32,7 +31,6 @@ namespace OOPGames
         int CheckIfPLayerWon();
     }
 
-    //Game field compatible with the given rules.
     //DIESES INTERFACE NICHT ÄNDERN!
     public interface IGameField
     {
