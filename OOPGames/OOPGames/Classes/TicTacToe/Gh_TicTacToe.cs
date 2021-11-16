@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -417,8 +418,9 @@ namespace OOPGames
 
         public override ITicTacToeMove GetMove(ITicTacToeField field)
         {
-            //System.Threading.Thread.Sleep(10000); // Antwort des Computers soll verzögert werden. // Tut es aber noch nicht
-            Task.Delay(1000); // geht auch nicht
+            // Antwort des Computers soll verzögert werden.
+            //Thread.Sleep(1000);  // Tut es aber noch nicht
+            //Task.Delay(1000); // geht auch nicht
 
             Random rand = new Random();
             int f = rand.Next(0, 8);
