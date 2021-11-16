@@ -34,11 +34,7 @@ using System.Windows.Shapes;
 
 namespace OOPGames
 {
-    class Gh_TicTacToe
-    {
-        //printf("Hello WOrld\n");
-    }
-
+    //Name
     public class Gh_TicTacToePainter : BaseTicTacToePaint
     {
         public override String Name {  get { return "Gh_TicTacToePaint";  } }
@@ -85,6 +81,8 @@ namespace OOPGames
         }
     }
 
+
+    //Name
     public class Gh_TicTacToeField : BaseTicTacToeField
     {
 
@@ -133,6 +131,8 @@ namespace OOPGames
 
     }
 
+
+    //Michael
     public class Gh_TicTacToeRules : BaseTicTacToeRules
     {
         TicTacToeField _Field = new TicTacToeField();
@@ -361,6 +361,8 @@ namespace OOPGames
         }
     }
 
+
+    // Julian & Fabian
     public class Gh_TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
     {
         int _PlayerNumber = 0;
@@ -396,8 +398,10 @@ namespace OOPGames
         {
             _PlayerNumber = playerNumber;
         }
-    }
+    } 
 
+
+    //Julian
     public class Gh_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
@@ -439,5 +443,5 @@ namespace OOPGames
         {
             _PlayerNumber = playerNumber;
         }
-    }
+    }   
 }

@@ -267,13 +267,6 @@
       <FileName>Classes\TicTacToe\GG_TicTacToe.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OOPGames.Gh_TicTacToe" Collapsed="true">
-    <Position X="26.5" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Classes\TicTacToe\Gh_TicTacToe.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="OOPGames.Gh_TicTacToePainter" Collapsed="true">
     <Position X="3.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
