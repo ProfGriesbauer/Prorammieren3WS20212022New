@@ -87,25 +87,25 @@ namespace OOPGames
 
         public override int CheckIfPLayerWon()
         {
-            for (int p = 1; p < 3; p++)
+            for (int i = 0; i < 3; i++)
             {
-                for (int i = 0; i < 3; i++)
+                if (_Field[i, 0] > 0 && _Field[i, 0] == _Field[i, 1] && _Field[i, 1] == _Field[i, 2])
                 {
-                    if (_Field[i, 0] > 0 && _Field[i, 0] == _Field[i, 1] && _Field[i, 1] == _Field[i, 2])
-                    {
-                        return p;
-                    }
-                    else if (_Field[0, i] > 0 && _Field[0, i] == _Field[1, i] && _Field[1, i] == _Field[2, i])
-                    {
-                        return p;
-                    }
+                    return _Field[i, 0];
                 }
+                else if (_Field[0, i] > 0 && _Field[0, i] == _Field[1, i] && _Field[1, i] == _Field[2, i])
+                {
+                    return _Field[0, i];
+                }
+            }
 
-                if ((_Field[0, 0] > 0 && _Field[0, 0] == _Field[1, 1] && _Field[1, 1] == _Field[2, 2]) ||
-                    (_Field[0, 2] > 0 && _Field[0, 2] == _Field[1, 1] && _Field[1, 1] == _Field[2, 0]))
-                {
-                    return p;
-                }
+            if (_Field[0, 0] > 0 && _Field[0, 0] == _Field[1, 1] && _Field[1, 1] == _Field[2, 2])
+            {
+                return _Field[0, 0];
+            }
+            else if (_Field[0, 2] > 0 && _Field[0, 2] == _Field[1, 1] && _Field[1, 1] == _Field[2, 0])
+            {
+                return _Field[0, 2];
             }
 
             return -1;
@@ -199,7 +199,8 @@ namespace OOPGames
                 for (int j = 0; j < 3; j++)
                 {
                     if (selection.XClickPos > 20 + (j*100) && selection.XClickPos < 120 + (j*100) &&
-                        selection.YClickPos > 20 + (i*100) && selection.YClickPos < 120 + (i*100))
+                        selection.YClickPos > 20 + (i*100) && selection.YClickPos < 120 + (i*100) &&
+                        field[i, j] <= 0)
                     {
                         return new TicTacToeMove(i, j, _PlayerNumber);
                     }
