@@ -36,4 +36,33 @@ namespace OOPGames
 
         public int PlayerNumber { get { return _PlayerNumber; } }
     }
+
+    public class GC_TicTacToeField : BaseTicTacToeField
+    {
+        int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
+
+        public override int this[int r, int c]
+        {
+            get
+            {
+                if (r >= 0 && r < 3 && c >= 0 && c < 3)
+                {
+                    return _Field[r, c];
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+
+            set
+            {
+                if (r >= 0 && r < 3 && c >= 0 && c < 3)
+                {
+                    _Field[r, c] = value;
+                }
+            }
+        }
+    }
+
 }
