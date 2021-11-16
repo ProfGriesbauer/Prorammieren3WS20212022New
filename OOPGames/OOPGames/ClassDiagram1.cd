@@ -1,0 +1,583 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OOPGames.App" Collapsed="true">
+    <Position X="19.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.OOPGamesManager" Collapsed="true">
+    <Position X="26.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgAAAAAAAgAAAAAAAAAAEAAAAQEoAAEABIAQEAAAABA=</HashCode>
+      <FileName>Classes\OOPGames.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.MoveSelection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Classes\OOPGames.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.BaseTicTacToePaint" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\BaseTicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OOPGames.BaseTicTacToeField" Collapsed="true">
+    <Position X="7.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\BaseTicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OOPGames.BaseTicTacToeRules" Collapsed="true">
+    <Position X="6.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAEAAQAAEUAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\BaseTicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OOPGames.BaseHumanTicTacToePlayer" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\BaseTicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OOPGames.BaseComputerTicTacToePlayer" Collapsed="true">
+    <Position X="5.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\BaseTicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OOPGames.BiemelPainter" Collapsed="true">
+    <Position X="17" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GA_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.BiemelPainterAlt1" Collapsed="true">
+    <Position X="1.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GA_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.BiemelRules" Collapsed="true">
+    <Position X="1" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAABABAAAAAAQAAEQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GA_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GA_TicTacToeComputerPlayer" Collapsed="true">
+    <Position X="0.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GA_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GB_TicTacToePaint" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GB_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GB_TicTacToeRules" Collapsed="true">
+    <Position X="7.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAABAABAAAAAAQAAEQAAAAAAAAAAAAAgAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GB_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GB_TicTacToeField" Collapsed="true">
+    <Position X="5.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAEAQCAAAAAAAAAAAAAAAAAAAAAgEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GB_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GB_TicTacToeHumanPlayer" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAQAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GB_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GC_TicTacToeMove" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAgAAABBAAAAEAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GC_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.GC_TicTacToeField" Collapsed="true">
+    <Position X="10" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GC_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GD_TicTacToePaint" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GD_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.GD_TicTacToeField" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GD_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.GD_TicTacToeRules" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAEAAQAAEUAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GD_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.GD_HumanTicTacToePlayer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GD_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.GD_ComputerTicTacToePlayer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GD_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.GE_TicTacToePaint" Collapsed="true">
+    <Position X="12.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GE_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GE_TicTacToeRules" Collapsed="true">
+    <Position X="11.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAAAAQAAEQAAAAAAAAAAQAAAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GE_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.BaseTicTacToeRules_GE" Collapsed="true">
+    <Position X="11.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAEAAQAAEUAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GE_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OOPGames.GE_TicTacToeField" Collapsed="true">
+    <Position X="12.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAIAAAAAAAAAAQAAAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GE_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GE_TicTacToeMove" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAgAAABBAAAAEAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GE_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.GE_TicTacToeHumanPlayer" Collapsed="true">
+    <Position X="1" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GE_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GF_TicTacToePaint" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GF_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GF_TicTacToeRules" Collapsed="true">
+    <Position X="3.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAAAAQAAEQAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GF_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GF_TicTacToeField" Collapsed="true">
+    <Position X="3.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GF_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GF_TicTacToeMove" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAgAAABBAAAAEAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GF_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.GF_TicTacToeHumanPlayer" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GF_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GF_TicTacToeComputerPlayer" Collapsed="true">
+    <Position X="7.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GF_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GGHumanTicTacToePlayer" Collapsed="true">
+    <Position X="14.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GG_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.Gh_TicTacToe" Collapsed="true">
+    <Position X="26.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\Gh_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.Gh_TicTacToePainter" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\Gh_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.Gh_TicTacToeField" Collapsed="true">
+    <Position X="1" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAACAAAAAAAAAACAAAAAAAAAAIEAQA=</HashCode>
+      <FileName>Classes\TicTacToe\Gh_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.Gh_TicTacToeRules" Collapsed="true">
+    <Position X="5.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQBABAAAAAABAAAAAAQQAEQAAAAAAAAgAAABAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\Gh_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.Gh_TicTacToeHumanPlayer" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\Gh_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.Gh_TicTacToeComputerPlayer" Collapsed="true">
+    <Position X="5.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\Gh_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GI_TicTacToePaint" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GI_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GI_TicTacToeRules" Collapsed="true">
+    <Position X="12.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAAAAQAAEQAAAAAAAAAAQAAAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GI_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GI_TicTacToeField" Collapsed="true">
+    <Position X="14.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GI_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GI_TicTacToeMove" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAABAgAAABBAAAAEAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\GI_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.GI_TicTacToeHumanPlayer" Collapsed="true">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GI_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.GI_TicTacToeComputerPlayer" Collapsed="true">
+    <Position X="3" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\GI_TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.TicTacToePaint" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.TicTacToeRules" Collapsed="true">
+    <Position X="10" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAAAAQAAEQAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.TicTacToeField" Collapsed="true">
+    <Position X="7.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Classes\TicTacToe\TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.TicTacToeMove" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAgAAABBAAAAEAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TicTacToe\TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.TicTacToeHumanPlayer" Collapsed="true">
+    <Position X="12.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.TicTacToeComputerPlayer" Collapsed="true">
+    <Position X="9.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAEAAAAAAAQEAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\TicTacToe\TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.Haus" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABBACAIBBAAAACAIiAAAAABAAAEIAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Vorl_Bsps.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.Wasserkocher" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Classes\Vorl_Bsps.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.Verbraucher" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAEAABAAAAAAAAAAACAgAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Vorl_Bsps.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAgAAAABEAABAEAAAAABAAACAAAAEAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OOPGames.Properties.Resources" Collapsed="true">
+    <Position X="19.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OOPGames.Properties.Settings" Collapsed="true">
+    <Position X="21.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="OOPGames.ISerializable" Collapsed="true">
+    <Position X="23" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Vorl_Bsps.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IVerbraucher" Collapsed="true">
+    <Position X="24.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Vorl_Bsps.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IGeldverbraucher" Collapsed="true">
+    <Position X="19.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Classes\Vorl_Bsps.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IGamePlayer" Collapsed="true">
+    <Position X="4.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAQAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Interfaces\IGamePlayer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IHumanGamePlayer" Collapsed="true">
+    <Position X="3.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGamePlayer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IComputerGamePlayer" Collapsed="true">
+    <Position X="5.75" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGamePlayer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IGameRules" Collapsed="true">
+    <Position X="0.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAEAAQAAAUAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGameRules.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IGameField" Collapsed="true">
+    <Position X="8.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGameRules.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IPaintGame" Collapsed="true">
+    <Position X="16.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPaintGame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IMoveSelection" Collapsed="true">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Interfaces\IPaintGame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IPlayMove" Collapsed="true">
+    <Position X="13.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPlayMoves.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IRowMove" Collapsed="true">
+    <Position X="12.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPlayMoves.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IColumnMove" Collapsed="true">
+    <Position X="14.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPlayMoves.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IPaintTicTacToe" Collapsed="true">
+    <Position X="16.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Interfaces\TicTacToe\ITicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.ITicTacToeField" Collapsed="true">
+    <Position X="8.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\TicTacToe\ITicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.ITicTacToeRules" Collapsed="true">
+    <Position X="0.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\TicTacToe\ITicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.ITicTacToeRules_GE" Collapsed="true">
+    <Position X="0.5" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\TicTacToe\ITicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.ITicTacToeMove" Collapsed="true">
+    <Position X="13.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\TicTacToe\ITicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IHumanTicTacToePlayer" Collapsed="true">
+    <Position X="3.5" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\TicTacToe\ITicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OOPGames.IComputerTicTacToePlayer" Collapsed="true">
+    <Position X="5.75" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\TicTacToe\ITicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

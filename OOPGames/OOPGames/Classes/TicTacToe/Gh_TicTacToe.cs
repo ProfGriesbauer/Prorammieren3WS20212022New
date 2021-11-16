@@ -413,6 +413,9 @@ namespace OOPGames
 
         public override ITicTacToeMove GetMove(ITicTacToeField field)
         {
+            //System.Threading.Thread.Sleep(10000); // Antwort des Computers soll verzögert werden. // Tut es aber noch nicht
+            Task.Delay(1000); // geht auch nicht
+
             Random rand = new Random();
             int f = rand.Next(0, 8);
             for (int i = 0; i < 9; i++)
