@@ -360,7 +360,7 @@ namespace OOPGames
         }
     }
 
-    /*//
+    //
     //Den Computerspieler wollten wir noch nicht implementieren
 
     public class GB_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
@@ -378,6 +378,11 @@ namespace OOPGames
 
         public override ITicTacToeMove GetMove(ITicTacToeField field)
         {
+            return GetMove_A(field);
+        }
+
+        public ITicTacToeMove GetMove_A(ITicTacToeField field)
+        {
             Random rand = new Random();
             int f = rand.Next(0, 8);
             for (int i = 0; i < 9; i++)
@@ -394,6 +399,12 @@ namespace OOPGames
                 }
             }
 
+            return null;
+        }
+
+        public ITicTacToeMove GetMove_B(ITicTacToeField field)
+        {
+            //intelligenter ComputerPlayer für 3
             return null;
         }
 

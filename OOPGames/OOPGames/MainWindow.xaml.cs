@@ -66,7 +66,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPlayer(new Gh_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new Gh_TicTacToeComputerPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GA_TicTacToeComputerPlayer());
-            //OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
 
             InitializeComponent();
             PaintList.ItemsSource = OOPGamesManager.Singleton.Painters;
