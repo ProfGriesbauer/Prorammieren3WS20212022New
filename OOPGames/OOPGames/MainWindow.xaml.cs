@@ -112,7 +112,7 @@ namespace OOPGames
             {
                 ((ITicTacToeRules_GE)_CurrentRules).AskForGameSize();
             }
-
+                       
             if (_CurrentPainter != null && 
                 _CurrentRules != null && _CurrentRules.CurrentField.CanBePaintedBy(_CurrentPainter))
             {
