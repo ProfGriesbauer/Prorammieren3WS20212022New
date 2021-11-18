@@ -32,6 +32,7 @@ namespace OOPGames
         int YClickPos { get; }
     }
 
+
     public interface IKeySelection //: IMoveSelection
     {
         Key Key { get; }
