@@ -178,10 +178,41 @@ namespace OOPGames
             }
         }
 
+        private void PaintCanvas_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (_CurrentRules == null) return;
+            int winner = _CurrentRules.CheckIfPLayerWon();
+            if (winner > 0)
+            {
+                Status.Text = "Player" + winner + " Won!";
+            }
+            else
+            {
+                if (_CurrentRules.MovesPossible &&
+                    _CurrentPlayer is IHumanGamePlayer)
+                {
+                    IPlayMove pm = ((IHumanGamePlayer)_CurrentPlayer).GetMove(new KeySelection(e.Key), _CurrentRules.CurrentField);
+                    if (pm != null)
+                    {
+                        _CurrentRules.DoMove(pm);
+                    }
+
+                    _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
+
+                    DoComputerMoves();
+                }
+            }
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             _PaintTimer.Stop();
             _PaintTimer = null;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            PaintCanvas_KeyDown(sender, e);
         }
     }
 }
