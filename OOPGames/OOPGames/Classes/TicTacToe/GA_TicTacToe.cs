@@ -11,42 +11,6 @@ using System.Reflection;
 
 namespace OOPGames
 {
-    /*
-    public class GA_Timer
-    {
-        public bool _GaRulesActive = 0;      //Gets High if GA_Rules == _CurrentRules
-        public int _timeLeft;                //Saves the Time the current Player has left for its turn
-        public int _timeLimit = 30;          //Gives the Opportunity to change the Time Limit for each turn
-        public DateTime _lastChange;            //Saves the Date of the Last Change of _TimeLeft
-
-        public void start()
-        {
-            _timeLeft = _timeLimit;
-            _lastChange = DateTime.Now;
-        }
-
-        public void update()
-        {
-            DateTime _currentTime = DateTime.Now;
-            double elapsedTicks = _currentTime.Ticks - _lastChange.Ticks;
-            if(elapsedTicks >= 10000000)
-            {
-                _timeLeft--;
-                _lastChange = _currentTime;
-            }
-        }
-    }
-
-    public class GA_TimerAssistant
-    {
-        public GA_Timer Tim = new GA_Timer;
-
-        public void startTimer()
-        {
-            Tim._GaRulesActive = true;
-            Tim.start();
-        }
-    }*/
 
     public class GA_Painter : BaseTicTacToePaint
     {
@@ -283,7 +247,6 @@ namespace OOPGames
 
 
     }
-
 
     public class GA_TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
     {
