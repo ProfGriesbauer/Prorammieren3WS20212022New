@@ -7,15 +7,66 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Reflection;
 
 namespace OOPGames
 {
+    /*
+    public class GA_Timer
+    {
+        public bool _GaRulesActive = 0;      //Gets High if GA_Rules == _CurrentRules
+        public int _timeLeft;                //Saves the Time the current Player has left for its turn
+        public int _timeLimit = 30;          //Gives the Opportunity to change the Time Limit for each turn
+        public DateTime _lastChange;            //Saves the Date of the Last Change of _TimeLeft
+
+        public void start()
+        {
+            _timeLeft = _timeLimit;
+            _lastChange = DateTime.Now;
+        }
+
+        public void update()
+        {
+            DateTime _currentTime = DateTime.Now;
+            double elapsedTicks = _currentTime.Ticks - _lastChange.Ticks;
+            if(elapsedTicks >= 10000000)
+            {
+                _timeLeft--;
+                _lastChange = _currentTime;
+            }
+        }
+    }
+
+    public class GA_TimerAssistant
+    {
+        public GA_Timer Tim = new GA_Timer;
+
+        public void startTimer()
+        {
+            Tim._GaRulesActive = true;
+            Tim.start();
+        }
+    }*/
+
     public class GA_Painter : BaseTicTacToePaint
     {
+        public int _TimeLimit = 30;
+        public int _TimeLeft;
+        public long _LastChanged;
+
         public override string Name { get { return "GA_Painter"; } }
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
+            //Variable verringern um Zähler anzeigen zu lassen
+            DateTime currentTime = DateTime.Now;
+            long elapsedTicks = currentTime.Ticks - _LastChanged;
+            if (elapsedTicks > 10000000)
+            {
+                _TimeLimit--;
+                _LastChanged = currentTime.Ticks;
+            }
+
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
             canvas.Background = new SolidColorBrush(bgColor);
@@ -45,6 +96,22 @@ namespace OOPGames
             Line l8 = new Line() { X1 = 20, Y1 = 320, X2 = 320, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(l8);
 
+            //Anzeige der Verbleibenden Sekunden
+            TextBlock textBlock = new TextBlock();
+            TextBlock.SetFontSize(textBlock, 20);
+            textBlock.Text = "Time Left " + _TimeLimit;
+            Color textColor = Color.FromRgb(0, 0, 0);
+            textBlock.Foreground = new SolidColorBrush(textColor);
+            Canvas.SetLeft(textBlock, 30);
+            Canvas.SetTop(textBlock, 320);
+            canvas.Children.Add(textBlock);
+            Line l9 = new Line() { X1 = 20, Y1 = 320, X2 = 20, Y2 = 350, Stroke = lineStroke, StrokeThickness = 3.0 };
+            canvas.Children.Add(l9);
+            Line l10 = new Line() { X1 = 20, Y1 = 350, X2 = 150, Y2 = 350, Stroke = lineStroke, StrokeThickness = 3.0 };
+            canvas.Children.Add(l10);
+            Line l11 = new Line() { X1 = 150, Y1 = 350, X2 = 150, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
+            canvas.Children.Add(l11);
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -63,6 +130,7 @@ namespace OOPGames
                     }
                 }
             }
+            
         }
     }
 
@@ -210,10 +278,50 @@ namespace OOPGames
             {
                 _Board[move.Row, move.Column] = move.PlayerNumber;
             }
-          
+            
         }
 
 
+    }
+<<<<<<< .mine
+
+=======
+
+>>>>>>> .theirs
+    public class GA_TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
+    {
+        int _PlayerNumber = 0;
+
+        public override string Name { get { return "Gruppe A HumanTicTacToePlayer"; } }
+
+        public override IGamePlayer Clone()
+        {
+            GA_TicTacToeHumanPlayer ttthp = new GA_TicTacToeHumanPlayer();
+            ttthp.SetPlayerNumber(_PlayerNumber);
+            return ttthp;
+        }
+
+        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field) //evtl Eigene funktion (Wie bei Gruppe B)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
+                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
+                    {
+                        return new TicTacToeMove(i, j, _PlayerNumber);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public override void SetPlayerNumber(int playerNumber)
+        {
+            _PlayerNumber = playerNumber;
+        }
     }
     public class GA_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
