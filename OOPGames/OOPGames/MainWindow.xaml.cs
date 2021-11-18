@@ -42,8 +42,8 @@ namespace OOPGames
             //Painters
             OOPGamesManager.Singleton.RegisterPainter(new TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GE_TicTacToePaint());
-            OOPGamesManager.Singleton.RegisterPainter(new BiemelPainter());
-            OOPGamesManager.Singleton.RegisterPainter(new BiemelPainterAlt1());
+            OOPGamesManager.Singleton.RegisterPainter(new GA_Painter());
+            OOPGamesManager.Singleton.RegisterPainter(new GA_PainterGlow());
             OOPGamesManager.Singleton.RegisterPainter(new Gh_TicTacToePainter());
             OOPGamesManager.Singleton.RegisterPainter(new GI_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GF_TicTacToePaint());
@@ -56,7 +56,7 @@ namespace OOPGames
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GB_TicTacToeRules());
-            OOPGamesManager.Singleton.RegisterRules(new BiemelRules());
+            OOPGamesManager.Singleton.RegisterRules(new GA_Rules());
             //Players
             OOPGamesManager.Singleton.RegisterPlayer(new TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeHumanPlayer());
@@ -65,7 +65,8 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPlayer(new GI_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new Gh_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new Gh_TicTacToeComputerPlayer());
-            //OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GA_TicTacToeComputerPlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
 
             InitializeComponent();
             PaintList.ItemsSource = OOPGamesManager.Singleton.Painters;
@@ -111,7 +112,7 @@ namespace OOPGames
             {
                 ((ITicTacToeRules_GE)_CurrentRules).AskForGameSize();
             }
-
+                       
             if (_CurrentPainter != null && 
                 _CurrentRules != null && _CurrentRules.CurrentField.CanBePaintedBy(_CurrentPainter))
             {

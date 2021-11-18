@@ -147,6 +147,7 @@ namespace OOPGames
             //int size = Prompt.ShowDialog("Test", "123");
 
         }
+        //commentar
         /*
         public static class Prompt
         {
