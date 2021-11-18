@@ -180,6 +180,7 @@ namespace OOPGames
 
         private void PaintCanvas_KeyDown(object sender, KeyEventArgs e)
         {
+            if (_CurrentRules == null) return;
             int winner = _CurrentRules.CheckIfPLayerWon();
             if (winner > 0)
             {
@@ -207,6 +208,11 @@ namespace OOPGames
         {
             _PaintTimer.Stop();
             _PaintTimer = null;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            PaintCanvas_KeyDown(sender, e);
         }
     }
 }

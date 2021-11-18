@@ -355,6 +355,7 @@ namespace OOPGames
             {
                 IKeySelection keySelection = (IKeySelection)selection;
                 int x = -1, y = -1;
+                /*//
                 switch (keySelection.Key)
                 {
                     case (Key.D1):
@@ -374,6 +375,28 @@ namespace OOPGames
                     case (Key.D8):
                         x = 1; y = 0; break;
                     case (Key.D9):
+                        x = 2; y = 0; break;
+                }
+                //*/
+                switch (keySelection.Key)
+                {
+                    case (Key.NumPad1):
+                        x = 0; y = 2; break;
+                    case (Key.NumPad2):
+                        x = 1; y = 2; break;
+                    case (Key.NumPad3):
+                        x = 2; y = 2; break;
+                    case (Key.NumPad4):
+                        x = 0; y = 1; break;
+                    case (Key.NumPad5):
+                        x = 1; y = 1; break;
+                    case (Key.NumPad6):
+                        x = 2; y = 1; break;
+                    case (Key.NumPad7):
+                        x = 0; y = 0; break;
+                    case (Key.NumPad8):
+                        x = 1; y = 0; break;
+                    case (Key.NumPad9):
                         x = 2; y = 0; break;
                 }
                 return new TicTacToeMove(y, x, _PlayerNumber);
