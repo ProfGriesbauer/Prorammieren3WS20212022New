@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOPGames.Classes
 {
-    class Class1
+    class GA_Pong
     {
 
     }

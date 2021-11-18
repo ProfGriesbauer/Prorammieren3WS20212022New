@@ -247,11 +247,7 @@ namespace OOPGames
 
 
     }
-<<<<<<< .mine
 
-=======
-
->>>>>>> .theirs
     public class GA_TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
     {
         int _PlayerNumber = 0;
