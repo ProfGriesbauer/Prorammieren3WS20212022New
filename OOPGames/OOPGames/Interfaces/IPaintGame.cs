@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace OOPGames
 {
@@ -29,5 +30,10 @@ namespace OOPGames
 
         //Y Position of the mouse click
         int YClickPos { get; }
+    }
+
+    public interface IKeySelection //: IMoveSelection
+    {
+        Key Key { get; }
     }
 }
