@@ -140,6 +140,7 @@ namespace OOPGames
                     if (pm != null)
                     {
                         _CurrentRules.DoMove(pm);
+                        _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
                     }
 
                     winner = _CurrentRules.CheckIfPLayerWon();
@@ -148,7 +149,6 @@ namespace OOPGames
                         Status.Text = "Player" + winner + " Won!";
                     }
 
-                    _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
                     //Tenärer Operator("if-else-Block verkürzt") (if CP == CP1){CP=CP2}else{CP=CP1}
                 }
             }
@@ -170,9 +170,8 @@ namespace OOPGames
                     if (pm != null)
                     {
                         _CurrentRules.DoMove(pm);
+                        _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
                     }
-
-                    _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
 
                     DoComputerMoves();
                 }
