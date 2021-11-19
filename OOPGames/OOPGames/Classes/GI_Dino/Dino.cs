@@ -16,9 +16,9 @@ namespace OOPGames
 
     public class Dino_PaintGame : IDino_PaintGame
     {
-        public string Name { get { return "DinoPainter"; } }
+        public override string Name { get { return "DinoPainter"; } }
 
-        public void PaintGameField(Canvas canvas, IGameField currentField)
+        public override void PaintDinoGameField(Canvas canvas, IDino_GameField currentField)
         {
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
@@ -26,10 +26,15 @@ namespace OOPGames
             Color OColor = Color.FromRgb(0, 0, 255);
             Brush OStroke = new SolidColorBrush(OColor);
 
-            Ellipse OE = new Ellipse() { Margin = new Thickness(100, 100, 0, 0), Width = 100, Height = 100, Stroke = OStroke, StrokeThickness = 3.0 };
+            int i = currentField[1];
+
+            Console.WriteLine(i);
+
+            Ellipse OE = new Ellipse() { Margin = new Thickness(100 + i*100, 100, 0, 0), Width = 100, Height = 100, Stroke = OStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(OE);
                    
         }
+
     }
 
     /*  Implementieren der Spielregeln: Aufgaben:
@@ -46,33 +51,57 @@ namespace OOPGames
 
         public IGameField Dino_GameField { get { return _Field; } }
 
-        public string Name { get { return "Dino_GameRules"; } }
+        public override string Name { get { return "Dino_GameRules"; } }
 
         //public Dino_GameField CurrentField { get { return _Field; } }
 
-        public bool MovesPossible { get { return true; } }
+        public override bool MovesPossible { get { return true; } }
 
-        IGameField IGameRules.CurrentField { get { return _Field; } }
+        //IGameField IGameRules.CurrentField { get { return _Field; } }         //alt, wo IDino_GameRules noch Interface war
 
-        public int CheckIfPLayerWon()
+        public override IGameField CurrentField { get { return _Field; } }
+
+        public override int CheckIfPLayerWon()
         {
             return -1;
         }
 
-        public void ClearField()
+        public override void ClearField()
         {
             
         }
 
-        public void DoMove(IPlayMove move)
+        public override void DoMove(Dino_PlayMove move)
         {
-            
+            _Field[1] = _Field[1] + 1;
+            Console.WriteLine(_Field[1]+100);
         }
     }
 
-    public class Dino_GameField : IGameField
+    public class Dino_GameField : IDino_GameField
     {
         public int _Field = 1;
+
+        public int this [int i]
+        {
+            get
+            {
+                if (i == 1)
+                {
+                    return _Field;
+                }
+
+                return -1;
+            }
+
+            set
+            {
+                if (i == 1)
+                {
+                    _Field = value;
+                }
+            }
+        }
 
         public bool CanBePaintedBy(IPaintGame painter)
         {
@@ -87,15 +116,9 @@ namespace OOPGames
     {
         int _PlayerNumber = 0;
 
-        public string Name
-        {
-            get
-            {
-                return "Dino_GamePlayer";
-            }
-        }
+        public override string Name { get { return "Dino_GamePlayer"; } }
 
-        public bool CanBeRuledBy(IGameRules rules)
+        public override bool CanBeRuledBy(IGameRules rules)
         {
             if (rules is Dino_GameRules)
             {
@@ -105,21 +128,37 @@ namespace OOPGames
             return false;
         }
 
-        public IGamePlayer Clone()
+        public override IGamePlayer Clone()
         {
             Dino_GamePlayer ttthp = new Dino_GamePlayer();
             ttthp.SetPlayerNumber(_PlayerNumber);
             return ttthp;
         }
 
-        public void SetPlayerNumber(int playerNumber)
+        public override void SetPlayerNumber(int playerNumber)
         {
             _PlayerNumber = playerNumber;
+        }
+
+        public override Dino_PlayMove GetMove(IMoveSelection selection, Dino_GameField field)
+        {
+            if (selection.XClickPos > 0 && selection.XClickPos < 1000 &&
+                selection.YClickPos > 0 && selection.YClickPos < 1000)
+            {
+                return new Dino_PlayMove();
+            }
+
+            return null;
         }
     }
 
     public class Dino_PlayMove : IDino_PlayMove
     {
-        public int PlayerNumber => throw new NotImplementedException();
+        public int PlayerNumber { get { return 1; } }
+
+        public Dino_PlayMove()
+        {
+
+        }
     }
 }
