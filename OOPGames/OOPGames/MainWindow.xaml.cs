@@ -58,7 +58,8 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterRules(new Gh_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GI_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GG_TicTacToeRules());
-            
+            OOPGamesManager.Singleton.RegisterRules(new GF_TicTacToeRules());
+
 
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
@@ -81,7 +82,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeMensch());
             OOPGamesManager.Singleton.RegisterPlayer(new GG_HumanTicTacToePlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GG_ComputerTicTacToePlayer());
-
+            OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeComputerPlayer());
             InitializeComponent();
             PaintList.ItemsSource = OOPGamesManager.Singleton.Painters;
             Player1List.ItemsSource = OOPGamesManager.Singleton.Players;
