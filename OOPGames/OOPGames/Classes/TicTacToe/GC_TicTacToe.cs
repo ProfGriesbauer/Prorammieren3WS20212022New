@@ -3,7 +3,7 @@
 //Moritz Paint
 //Markus HumanPlayer
 //Raphi rules
-//Michi Move -> erledigt!
+//Michi Move
 using System;
 using System.Collections.Generic;
 using System.Linq;
