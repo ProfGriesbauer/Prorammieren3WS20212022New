@@ -57,7 +57,9 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPainter(new GB_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterRules(new Gh_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GI_TicTacToeRules());
-            
+            OOPGamesManager.Singleton.RegisterRules(new GG_TicTacToeRules());
+            OOPGamesManager.Singleton.RegisterRules(new GF_TicTacToeRules());
+
 
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
@@ -78,7 +80,9 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GA_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeMensch());
-
+            OOPGamesManager.Singleton.RegisterPlayer(new GG_HumanTicTacToePlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GG_ComputerTicTacToePlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeComputerPlayer());
             InitializeComponent();
             PaintList.ItemsSource = OOPGamesManager.Singleton.Painters;
             Player1List.ItemsSource = OOPGamesManager.Singleton.Players;
@@ -152,6 +156,7 @@ namespace OOPGames
                         _CurrentRules.DoMove(pm);
                         _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
                     }
+                    //Tenärer Operator("if-else-Block verkürzt") (if CP == CP1){CP=CP2}else{CP=CP1}
 
                     winner = _CurrentRules.CheckIfPLayerWon();
                     if (winner > 0)
@@ -159,7 +164,6 @@ namespace OOPGames
                         Status.Text = "Player" + winner + " Won!";
                     }
 
-                    //Tenärer Operator("if-else-Block verkürzt") (if CP == CP1){CP=CP2}else{CP=CP1}
                 }
             }
         }
