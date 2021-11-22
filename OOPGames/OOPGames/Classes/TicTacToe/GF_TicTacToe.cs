@@ -109,7 +109,7 @@ namespace OOPGames
 
 
     
-   /* public class TicTacToeRules : BaseTicTacToeRules
+   public class GF_TicTacToeRules : BaseTicTacToeRules
     {
         TicTacToeField _Field = new TicTacToeField();
 
@@ -134,7 +134,7 @@ namespace OOPGames
             } 
         }
 
-        public override string Name { get { return "GriesbauerTicTacToeRules"; } }
+        public override string Name { get { return "GruppeFTicTacToeRules"; } }
 
         public override int CheckIfPLayerWon()
         {
@@ -210,67 +210,13 @@ namespace OOPGames
         }
     }
 
-    public class TicTacToeMove : ITicTacToeMove
-    {
-        int _Row = 0;
-        int _Column = 0;
-        int _PlayerNumber = 0;
+   
 
-        public TicTacToeMove (int row, int column, int playerNumber)
-        {
-            _Row = row;
-            _Column = column;
-            _PlayerNumber = playerNumber;
-        }
-
-        public int Row { get { return _Row; } }
-
-        public int Column { get { return _Column; } }
-
-        public int PlayerNumber { get { return _PlayerNumber; } }
-    }
-
-    public class TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
+    public class GF_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "GriesbauerHumanTicTacToePlayer"; } }
-
-        public override IGamePlayer Clone()
-        {
-            TicTacToeHumanPlayer ttthp = new TicTacToeHumanPlayer();
-            ttthp.SetPlayerNumber(_PlayerNumber);
-            return ttthp;
-        }
-
-        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (selection.XClickPos > 20 + (j*100) && selection.XClickPos < 120 + (j*100) &&
-                        selection.YClickPos > 20 + (i*100) && selection.YClickPos < 120 + (i*100))
-                    {
-                        return new TicTacToeMove(i, j, _PlayerNumber);
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        public override void SetPlayerNumber(int playerNumber)
-        {
-            _PlayerNumber = playerNumber;
-        }
-    }
-
-    public class TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
-    {
-        int _PlayerNumber = 0;
-
-        public override string Name { get { return "GriesbauerComputerTicTacToePlayer"; } }
+        public override string Name { get { return "GF_ComputerTicTacToePlayer"; } }
 
         public override IGamePlayer Clone()
         {
@@ -304,5 +250,5 @@ namespace OOPGames
         {
             _PlayerNumber = playerNumber;
         }
-    }*/
+    }
 }
