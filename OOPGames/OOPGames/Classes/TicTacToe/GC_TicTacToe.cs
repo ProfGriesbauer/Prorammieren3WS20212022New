@@ -189,7 +189,7 @@ namespace OOPGames
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "GriesbauerHumanTicTacToePlayer"; } }
+        public override string Name { get { return "GC_HumanTicTacToePlayer"; } }
 
         public override IGamePlayer Clone()
         {
@@ -225,7 +225,7 @@ namespace OOPGames
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "GriesbauerComputerTicTacToePlayer"; } }
+        public override string Name { get { return "GC_ComputerTicTacToePlayer"; } }
 
         public override IGamePlayer Clone()
         {
@@ -244,7 +244,7 @@ namespace OOPGames
                 int r = ((f - c) / 3) % 3;
                 if (field[r, c] <= 0)
                 {
-                    return new TicTacToeMove(r, c, _PlayerNumber);
+                    return new GC_TicTacToeMove(r, c, _PlayerNumber);
                 }
                 else
                 {
