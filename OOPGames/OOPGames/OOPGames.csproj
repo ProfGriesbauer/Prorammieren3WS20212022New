@@ -92,11 +92,13 @@
     <Compile Include="Classes\Vorl_Bsps.cs" />
     <Compile Include="Classes\TicTacToe\BaseTicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\TicTacToe.cs" />
+	<Compile Include="Classes\GA_Pong.cs" />
     <Compile Include="Interfaces\IGamePlayer.cs" />
     <Compile Include="Interfaces\IGameRules.cs" />
     <Compile Include="Interfaces\IPaintGame.cs" />
     <Compile Include="Interfaces\IPlayMoves.cs" />
     <Compile Include="Interfaces\TicTacToe\ITicTacToe.cs" />
+	<Compile Include="Interfaces\GA_IPong.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
