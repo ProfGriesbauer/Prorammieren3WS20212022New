@@ -23,7 +23,7 @@ namespace OOPGames
             return ttthpg;
         }
         //GetMove in Abstrakter Klasse prüft nur, ob field== TicTacToeField
-        //Warum wird dann die Methode dieser Subklasse aufgerufen?
+        //Warum wird dann die Methode dieser Subklasse aufgerufen? -> Methode überladen, Methode mit passendem Parameter wird aufgerufen
         //Methode werden zwei Koordinaten übergeben, prüft, welches Feld aus 3x3 Matrix betroffen, gibt TTTMove zurück
         public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)
         {
