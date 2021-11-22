@@ -238,21 +238,244 @@ namespace OOPGames
             return ttthp;
         }
 
+        public class GI_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
+    {
+        int _PlayerNumber = 0;
+        int aa = 0;
+        int ab = 0;
+        int ac = 0;
+        int ad = 0;
+        int ae = 0;
+        int af = 0;
+        int ag = 0;
+        int ah = 0;
+        int ai = 0;
+        int aj = 0;
+        int ak = 0;
+        int al = 0;
+        int am = 0;
+        int an = 0;
+        int ao = 0;
+        int ap = 0;
+        int aq = 0;
+        int ar = 0;
+        int at = 0;
+        int au = 0;
+        int av = 0;
+        int aw = 0;
+        int ax = 0;
+        int ay = 0;
+
+        public override string Name { get { return "GI_ComputerTicTacToePlayer"; } }
+
+        public override IGamePlayer Clone()
+        {
+            GI_TicTacToeComputerPlayer ttthp = new GI_TicTacToeComputerPlayer();
+            ttthp.SetPlayerNumber(_PlayerNumber);
+            return ttthp;
+        }
+
         public override ITicTacToeMove GetMove(ITicTacToeField field)
         {
-            Random rand = new Random();
-            int f = rand.Next(0, 8);
-            for (int i = 0; i < 9; i++)
+            // 1. Zeile
+            if((field[0, 0] == field[0, 1]) && (field[0, 0] != 0) && (field[0, 2] == 0) && (aa == 0))
             {
-                int c = f % 3;
-                int r = ((f - c) / 3) % 3;
-                if (field[r, c] <= 0)
+                aa = 1;
+                return new TicTacToeMove(0, 2, _PlayerNumber);
+            }
+            else if ((field[0, 0] == field[0, 2]) && (field[0, 0] != 0) && (field[0, 1] == 0) && (ab == 0))
+            {
+                ab = 1;
+                return new TicTacToeMove(0, 1, _PlayerNumber);
+            }
+            else if ((field[0, 1] == field[0, 2]) && (field[0, 1] != 0) && (field[0, 0] == 0) && (ac == 0))
+            {
+                ac = 1;
+                return new TicTacToeMove(0, 0, _PlayerNumber);
+            }
+            // 2. Zeile
+            else if ((field[1, 0] == field[1, 1]) && (field[1, 0] != 0) && (field[1, 2] == 0) && (ad == 0))
+            {
+                ad = 1;
+                return new TicTacToeMove(1, 2, _PlayerNumber);
+            }
+            else if ((field[1, 0] == field[1, 2]) && (field[1, 0] != 0) && (field[1, 1] == 0) && (ae == 0))
+            {
+                ae = 1;
+                return new TicTacToeMove(1, 1, _PlayerNumber);
+            }
+            else if ((field[1, 1] == field[1, 2]) && (field[1, 1] != 0) && (field[1, 0] == 0) && (af == 0))
+            {
+                af = 1;
+                return new TicTacToeMove(1, 0, _PlayerNumber);
+            }
+            // 3. Zeile
+            else if ((field[2, 0] == field[2, 1]) && (field[2, 0] != 0) && (field[2, 2] == 0) && (ag == 0))
+            {
+                ag = 1;
+                return new TicTacToeMove(2, 2, _PlayerNumber);
+            }
+            else if ((field[2, 0] == field[2, 2]) && (field[2, 0] != 0) && (field[2, 1] == 0) && (ah == 0))
+            {
+                ah = 1;
+                return new TicTacToeMove(2, 1, _PlayerNumber);
+            }
+            else if ((field[2, 1] == field[2, 2]) && (field[2, 1] != 0) && (field[2, 0] == 0) && (ai == 0))
+            {
+                ai = 1;
+                return new TicTacToeMove(2, 0, _PlayerNumber);
+            }
+            // 1. Spalte
+            else if ((field[0, 0] == field[1, 0]) && (field[0, 0] != 0) && (field[2, 0] == 0) && (aj == 0))
+            {
+                aj = 1;
+                return new TicTacToeMove(2, 0, _PlayerNumber);
+            }
+            else if ((field[0, 0] == field[2, 0]) && (field[0, 0] != 0) && (field[1, 0] == 0) && (ak == 0))
+            {
+                ak = 1;
+                return new TicTacToeMove(1, 0, _PlayerNumber);
+            }
+            else if ((field[1, 0] == field[2, 0]) && (field[1, 0] != 0) && (field[0, 0] == 0) && (al == 0))
+            {
+                al = 1;
+                return new TicTacToeMove(0, 0, _PlayerNumber);
+            }
+            // 2. Spalte
+            else if ((field[0, 1] == field[1, 1]) && (field[0, 1] != 0) && (field[2, 1] == 0) && (am == 0))
+            {
+                am = 1;
+                return new TicTacToeMove(2, 1, _PlayerNumber);
+            }
+            else if ((field[0, 1] == field[2, 1]) && (field[0, 1] != 0) && (field[1, 1] == 0) && (an == 0))
+            {
+                an = 1;
+                return new TicTacToeMove(1, 1, _PlayerNumber);
+            }
+            else if ((field[1, 1] == field[2, 1]) && (field[1, 1] != 0) && (field[0, 1] == 0) && (ao == 0))
+            {
+                ao = 1;
+                return new TicTacToeMove(0, 1, _PlayerNumber);
+            }
+            // 3. Spalte
+            else if ((field[0, 2] == field[1, 2]) && (field[0, 2] != 0) && (field[2, 2] == 0) && (ap == 0))
+            {
+                ap = 1;
+                return new TicTacToeMove(2, 2, _PlayerNumber);
+            }
+            else if ((field[0, 2] == field[2, 2]) && (field[0, 2] != 0) && (field[1, 2] == 0) && (aq == 0))
+            {
+                aq = 1;
+                return new TicTacToeMove(1, 2, _PlayerNumber);
+            }
+            else if ((field[1, 2] == field[2, 2]) && (field[1, 2] != 0) && (field[0, 2] == 0) && (ar == 0))
+            {
+                ar = 1;
+                return new TicTacToeMove(0, 2, _PlayerNumber);
+            }
+            // Diagonale linksoben - rechtsunten
+            else if ((field[0, 0] == field[1, 1]) && (field[0, 0] != 0) && (field[2, 2] == 0) && (at == 0))
+            {
+                at = 1;
+                return new TicTacToeMove(2, 2, _PlayerNumber);
+            }
+            else if ((field[0, 0] == field[2, 2]) && (field[0, 0] != 0) && (field[1, 1] == 0) && (au == 0))
+            {
+                au = 1;
+                return new TicTacToeMove(1, 1, _PlayerNumber);
+            }
+            else if ((field[1, 1] == field[2, 2]) && (field[1, 1] != 0) && (field[0, 0] == 0) && (av == 0))
+            {
+                av = 1;
+                return new TicTacToeMove(0, 0, _PlayerNumber);
+            }
+            // Diagonale rechtsoben - linksunten
+            else if ((field[2, 0] == field[1, 1]) && (field[2, 0] != 0) && (field[0, 2] == 0) && (aw == 0))
+            {
+                aw = 1;
+                return new TicTacToeMove(0, 2, _PlayerNumber);
+            }
+            else if ((field[2, 0] == field[0, 2]) && (field[2, 0] != 0) && (field[1, 1] == 0) && (ax == 0))
+            {
+                ax = 1;
+                return new TicTacToeMove(1, 1, _PlayerNumber);
+            }
+            else if ((field[1, 1] == field[0, 2]) && (field[1, 1] != 0) && (field[2, 0] == 0) && (ay == 0))
+            {
+                ay = 1;
+                return new TicTacToeMove(2, 0, _PlayerNumber);
+            }
+
+            //Füllen der Felder nach Wertigkeit
+            Random rand = new Random();
+            int f = rand.Next(0, 4);
+            if (field[1, 1] <= 0)
+            {
+                return new TicTacToeMove(1, 1, _PlayerNumber);
+            }
+            else
+            {
+                int l = f;
+                for (int i = 0; i < 4; i++)
                 {
-                    return new TicTacToeMove(r, c, _PlayerNumber);
+                    if (l == 0 && (field[0, 0] <= 0))
+                    {
+                        return new TicTacToeMove(0, 0, _PlayerNumber);
+                    }
+                    else if (l == 1 && (field[2, 0] <= 0))
+                    {
+                        return new TicTacToeMove(2, 0, _PlayerNumber);
+                    }
+                    else if (l == 2 && (field[0, 2] <= 0))
+                    {
+                        return new TicTacToeMove(0, 2, _PlayerNumber);
+                    }
+                    else if (l == 3 && (field[2, 2] <= 0))
+                    {
+                        return new TicTacToeMove(2, 2, _PlayerNumber);
+                    }
+                    else
+                    {
+                        if (l == 3)
+                        {
+                            l = 0;
+                        }
+                        else
+                        {
+                            l++;
+                        }
+                    }
                 }
-                else
+
+                for (int j = 0; j < 4; j++)
                 {
-                    f++;
+                    if (f == 0 && (field[1, 0] <= 0))
+                    {
+                        return new TicTacToeMove(1, 0, _PlayerNumber);
+                    }
+                    else if (f == 1 && (field[0, 1] <= 0))
+                    {
+                        return new TicTacToeMove(0, 1, _PlayerNumber);
+                    }
+                    else if (f == 2 && (field[1, 2] <= 0))
+                    {
+                        return new TicTacToeMove(1, 2, _PlayerNumber);
+                    }
+                    else if (f == 3 && (field[2, 1] <= 0))
+                    {
+                        return new TicTacToeMove(2, 1, _PlayerNumber);
+                    }
+                    else
+                    {
+                        if (f == 3)
+                        {
+                            f = 0;
+                        }
+                        else
+                        {
+                            f++;
+                        }
+                    }
                 }
             }
 
