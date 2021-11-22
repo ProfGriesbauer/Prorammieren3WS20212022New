@@ -228,19 +228,6 @@ namespace OOPGames
     public class GI_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
-
-        public override string Name { get { return "GI_TicTacToePlayer"; } }
-
-        public override IGamePlayer Clone()
-        {
-            TicTacToeComputerPlayer ttthp = new TicTacToeComputerPlayer();
-            ttthp.SetPlayerNumber(_PlayerNumber);
-            return ttthp;
-        }
-
-        public class GI_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
-    {
-        int _PlayerNumber = 0;
         int aa = 0;
         int ab = 0;
         int ac = 0;
