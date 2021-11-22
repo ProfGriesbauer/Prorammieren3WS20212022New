@@ -66,7 +66,7 @@ namespace OOPGames
 
     public class GC_TicTacToeRules : BaseTicTacToeRules
     {
-        TicTacToeField _Field = new TicTacToeField();
+        GC_TicTacToeField _Field = new GC_TicTacToeField();
 
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
 
@@ -193,7 +193,7 @@ namespace OOPGames
 
         public override IGamePlayer Clone()
         {
-            TicTacToeHumanPlayer ttthp = new TicTacToeHumanPlayer();
+            GC_TicTacToeHumanPlayer ttthp = new GC_TicTacToeHumanPlayer();
             ttthp.SetPlayerNumber(_PlayerNumber);
             return ttthp;
         }
@@ -207,7 +207,7 @@ namespace OOPGames
                     if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
                         selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
                     {
-                        return new TicTacToeMove(i, j, _PlayerNumber);
+                        return new GC_TicTacToeMove(i, j, _PlayerNumber);
                     }
                 }
             }
@@ -229,7 +229,7 @@ namespace OOPGames
 
         public override IGamePlayer Clone()
         {
-            TicTacToeComputerPlayer ttthp = new TicTacToeComputerPlayer();
+            GC_TicTacToeComputerPlayer ttthp = new GC_TicTacToeComputerPlayer();
             ttthp.SetPlayerNumber(_PlayerNumber);
             return ttthp;
         }
