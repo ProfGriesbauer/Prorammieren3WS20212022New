@@ -88,7 +88,6 @@
     <Compile Include="Classes\TicTacToe\GG_TicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\Gh_TicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\GI_TicTacToe.cs" />
-    <Compile Include="Classes\TicTacToe\GA_TicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\GJ_TicTacToe.cs" />
     <Compile Include="Classes\Vorl_Bsps.cs" />
     <Compile Include="Classes\TicTacToe\BaseTicTacToe.cs" />

@@ -10,9 +10,9 @@ using System.Windows.Shapes;
 
 namespace OOPGames
 {
-    public class BiemelPainter : BaseTicTacToePaint
+    public class GA_TTTPainter : BaseTicTacToePaint
     {
-        public override string Name { get { return "BiemelPainter"; } }
+        public override string Name { get { return "GA_TicTacToePainter"; } }
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
@@ -66,9 +66,9 @@ namespace OOPGames
         }
     }
 
-    public class BiemelPainterAlt1 : BaseTicTacToePaint
+    public class GA_TTTPainterGlow : BaseTicTacToePaint
     {
-        public override string Name { get { return "BiemelPainterAlt1"; } }
+        public override string Name { get { return "GA_TicTacToePainterGlow"; } }
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
@@ -141,7 +141,7 @@ namespace OOPGames
         }
     }
 
-    public class BiemelRules : BaseTicTacToeRules
+    public class GA_TTTRules : BaseTicTacToeRules
     {
         TicTacToeField _Board = new TicTacToeField();
 
@@ -165,7 +165,7 @@ namespace OOPGames
                 return false;
             }
         }
-        public override string Name { get { return "BiemelRules"; } }
+        public override string Name { get { return "GA_TicTacToeRules"; } }
 
         public override int CheckIfPLayerWon()
         {
