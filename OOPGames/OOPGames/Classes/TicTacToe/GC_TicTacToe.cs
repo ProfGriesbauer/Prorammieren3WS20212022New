@@ -3,7 +3,7 @@
 //Moritz Paint
 //Markus HumanPlayer
 //Raphi rules
-//Michi Move
+//Michi Move ->
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace OOPGames
 {
     public class TicTacToePaint : GC_TicTacToePaint
     {
-        public override string Name { get { return "VorlesungTicTacToePaint"; } }
+        public override string Name { get { return "GC_TicTacToePaint"; } }
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
@@ -89,7 +89,7 @@ namespace OOPGames
             }
         }
 
-        public override string Name { get { return "GriesbauerTicTacToeRules"; } }
+        public override string Name { get { return "GC_TicTacToeRules"; } }
 
         public override int CheckIfPLayerWon()
         {
