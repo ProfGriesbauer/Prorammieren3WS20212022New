@@ -175,7 +175,7 @@ namespace OOPGames
 
     public class GA_Rules : BaseTicTacToeRules
     {
-        TicTacToeField _Board = new TicTacToeField();
+        TicTacToeFieldp _Board = new TicTacToeFieldp();
 
         public override ITicTacToeField TicTacToeField { get { return _Board; } }
 

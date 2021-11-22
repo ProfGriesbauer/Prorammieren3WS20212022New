@@ -144,11 +144,11 @@ namespace OOPGames
 
         public override void AskForGameSize()
         {
-            //int size = Prompt.ShowDialog("Test", "123");
+            int size = Prompt.ShowDialog("Test", "123");
 
         }
         //commentar
-        /*
+        
         public static class Prompt
         {
             public static int ShowDialog(string text, string caption)
@@ -168,8 +168,7 @@ namespace OOPGames
                 dropDown.Name = "ComboBox1";
                 dropDown.Size = new System.Drawing.Size(136, 81);
                 dropDown.TabIndex = 0;
-                dropDown.SelectedIndexChanged += 
-                    new System.EventHandler((e)=>Console.log("sdlkfj"));
+                dropDown.SelectedIndexChanged += DropDown_SelectedIndexChanged;
 
                 System.Windows.Forms.Button confirmation = new System.Windows.Forms.Button() { Text = "Ok", Left = 350, Width = 100, Top = 70 };
                 confirmation.Click += (sender, e) => { prompt.Close(); };
@@ -177,10 +176,15 @@ namespace OOPGames
                 prompt.Controls.Add(textLabel);
                 prompt.Controls.Add(dropDown);
                 prompt.ShowDialog();
-                return (int)dropDown.Value;
+                return (int)dropDown.SelectedIndex;
+            }
+
+            private static void DropDown_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                return;
             }
         }
-        */
+        
 
     }
 
