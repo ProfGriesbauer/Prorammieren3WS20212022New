@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace OOPGames
 {
@@ -29,10 +28,5 @@ namespace OOPGames
     {
         //Column of the move
         int Column { get; }
-    }
-
-    public interface IKeyMove : IPlayMove
-    {
-        Key Key { get; }
     }
 }

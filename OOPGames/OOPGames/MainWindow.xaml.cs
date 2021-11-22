@@ -40,50 +40,31 @@ namespace OOPGames
 
             //REGISTER YOUR CLASSES HERE
             //Painters
-            OOPGamesManager.Singleton.RegisterPainter(new Dino_PaintGame()); 
             OOPGamesManager.Singleton.RegisterPainter(new TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GE_TicTacToePaint());
-            //OOPGamesManager.Singleton.RegisterPainter(new GA_Painter());
-            //OOPGamesManager.Singleton.RegisterPainter(new GA_PainterGlow());
+            OOPGamesManager.Singleton.RegisterPainter(new BiemelPainter());
+            OOPGamesManager.Singleton.RegisterPainter(new BiemelPainterAlt1());
             OOPGamesManager.Singleton.RegisterPainter(new Gh_TicTacToePainter());
             OOPGamesManager.Singleton.RegisterPainter(new GI_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GF_TicTacToePaint());
-            
-
             //Rules
-            OOPGamesManager.Singleton.RegisterRules(new Dino_GameRules());
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GE_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterPainter(new GB_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterRules(new Gh_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GI_TicTacToeRules());
-            OOPGamesManager.Singleton.RegisterRules(new GG_TicTacToeRules());
-            OOPGamesManager.Singleton.RegisterRules(new GF_TicTacToeRules());
-
-
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GB_TicTacToeRules());
-           // OOPGamesManager.Singleton.RegisterRules(new GA_Rules());
+            OOPGamesManager.Singleton.RegisterRules(new BiemelRules());
             //Players
-
-            OOPGamesManager.Singleton.RegisterPlayer(new Dino_GamePlayer());
-
             OOPGamesManager.Singleton.RegisterPlayer(new TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new TicTacToeComputerPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GE_TicTacToeHumanPlayer());
-            OOPGamesManager.Singleton.RegisterPlayer(new GE_TicTacToeComputerPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GI_TicTacToeHumanPlayer());
-            OOPGamesManager.Singleton.RegisterPlayer(new Gh_TicTacToeHumanPlayer());
-            OOPGamesManager.Singleton.RegisterPlayer(new Gh_TicTacToeComputerPlayer());
-           // OOPGamesManager.Singleton.RegisterPlayer(new GA_TicTacToeComputerPlayer());
-            OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
-          //  OOPGamesManager.Singleton.RegisterPlayer(new GA_TicTacToeHumanPlayer());
-            OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeMensch());
-            OOPGamesManager.Singleton.RegisterPlayer(new GG_HumanTicTacToePlayer());
-            OOPGamesManager.Singleton.RegisterPlayer(new GG_ComputerTicTacToePlayer());
-            OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeComputerPlayer());
+            //OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
+
             InitializeComponent();
             PaintList.ItemsSource = OOPGamesManager.Singleton.Painters;
             Player1List.ItemsSource = OOPGamesManager.Singleton.Players;
@@ -128,7 +109,7 @@ namespace OOPGames
             {
                 ((ITicTacToeRules_GE)_CurrentRules).AskForGameSize();
             }
-                       
+
             if (_CurrentPainter != null && 
                 _CurrentRules != null && _CurrentRules.CurrentField.CanBePaintedBy(_CurrentPainter))
             {
@@ -155,9 +136,7 @@ namespace OOPGames
                     if (pm != null)
                     {
                         _CurrentRules.DoMove(pm);
-                        _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
                     }
-                    //Tenärer Operator("if-else-Block verkürzt") (if CP == CP1){CP=CP2}else{CP=CP1}
 
                     winner = _CurrentRules.CheckIfPLayerWon();
                     if (winner > 0)
@@ -165,6 +144,8 @@ namespace OOPGames
                         Status.Text = "Player" + winner + " Won!";
                     }
 
+                    _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
+                    //Tenärer Operator("if-else-Block verkürzt") (if CP == CP1){CP=CP2}else{CP=CP1}
                 }
             }
         }
@@ -185,34 +166,9 @@ namespace OOPGames
                     if (pm != null)
                     {
                         _CurrentRules.DoMove(pm);
-                        _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
                     }
 
-                    DoComputerMoves();
-                }
-            }
-        }
-
-        private void PaintCanvas_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (_CurrentRules == null) return;
-            int winner = _CurrentRules.CheckIfPLayerWon();
-            if (winner > 0)
-            {
-                Status.Text = "Player" + winner + " Won!";
-            }
-            else
-            {
-                if (_CurrentRules.MovesPossible &&
-                    _CurrentPlayer is IHumanGamePlayer)
-                {
-                    IPlayMove pm = ((IHumanGamePlayer)_CurrentPlayer).GetMove(new KeySelection(e.Key), _CurrentRules.CurrentField);
-                    if (pm != null)
-                    {
-                        _CurrentRules.DoMove(pm);
-                        _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
-                    }
-
+                    _CurrentPlayer = _CurrentPlayer == _CurrentPlayer1 ? _CurrentPlayer2 : _CurrentPlayer1;
 
                     DoComputerMoves();
                 }
@@ -223,11 +179,6 @@ namespace OOPGames
         {
             _PaintTimer.Stop();
             _PaintTimer = null;
-        }
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            PaintCanvas_KeyDown(sender, e);
         }
     }
 }

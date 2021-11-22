@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Shapes;
-//using System.Drawing.Point;
+
 //ToDo:
 /*
  Am montag den Griesbauer Fragen: 
@@ -144,11 +144,9 @@ namespace OOPGames
 
         public override void AskForGameSize()
         {
-            int size = Prompt.ShowDialog("Test", "123");
-
+            throw new NotImplementedException();
         }
-        //commentar
-        
+
         public static class Prompt
         {
             public static int ShowDialog(string text, string caption)
@@ -158,33 +156,19 @@ namespace OOPGames
                 prompt.Height = 100;
                 prompt.Text = caption;
                 System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 50, Top = 20, Text = text };
-                string[] auswahl = { "klein", "mittel", "groß"};
-                System.Windows.Forms.ComboBox dropDown = new System.Windows.Forms.ComboBox();
-                dropDown.Items.AddRange(auswahl);
-                dropDown.Location = new System.Drawing.Point(10, 30);
-                dropDown.IntegralHeight = false;
-                dropDown.MaxDropDownItems = 3;
-                dropDown.DropDownStyle = ComboBoxStyle.DropDownList;
-                dropDown.Name = "ComboBox1";
-                dropDown.Size = new System.Drawing.Size(136, 81);
-                dropDown.TabIndex = 0;
-                dropDown.SelectedIndexChanged += DropDown_SelectedIndexChanged;
-
+                NumericUpDown inputBox = new NumericUpDown() { Left = 50, Top = 50, Width = 400 };
                 System.Windows.Forms.Button confirmation = new System.Windows.Forms.Button() { Text = "Ok", Left = 350, Width = 100, Top = 70 };
                 confirmation.Click += (sender, e) => { prompt.Close(); };
                 prompt.Controls.Add(confirmation);
                 prompt.Controls.Add(textLabel);
-                prompt.Controls.Add(dropDown);
+                prompt.Controls.Add(inputBox);
                 prompt.ShowDialog();
-                return (int)dropDown.SelectedIndex;
+                return (int)inputBox.Value;
             }
 
-            private static void DropDown_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                return;
-            }
         }
-        
+
+        //int promptValue = Prompt.ShowDialog("Test", "123");
 
     }
 
@@ -266,7 +250,7 @@ namespace OOPGames
     }
     */
 
-    public abstract class BaseTicTacToeRules_GE : ITicTacToeRules_GE
+    public abstract class BaseTicTacToeRules_GE : ITicTacToeRules_GE 
     {
         public abstract ITicTacToeField TicTacToeField { get; }
 
@@ -291,11 +275,6 @@ namespace OOPGames
         }
 
         public abstract void AskForGameSize();
-        /*
-        {
-            //open window
-        }
-        */
     }
 
     public class GE_TicTacToeField : BaseTicTacToeField
@@ -401,20 +380,20 @@ namespace OOPGames
         }
     }
 
-   public class GE_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer //lege neuen computerspieler an
+   /* public class TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "GE_ComputerTicTacToePlayer"; } }
+        public override string Name { get { return "GriesbauerComputerTicTacToePlayer"; } }
 
         public override IGamePlayer Clone()
         {
-            GE_TicTacToeComputerPlayer ttthp = new GE_TicTacToeComputerPlayer(); //make new player
+            TicTacToeComputerPlayer ttthp = new TicTacToeComputerPlayer();
             ttthp.SetPlayerNumber(_PlayerNumber);
             return ttthp;
         }
 
-        public override ITicTacToeMove GetMove(ITicTacToeField field) //change auf unser spielfeld
+        public override ITicTacToeMove GetMove(ITicTacToeField field)
         {
             Random rand = new Random();
             int f = rand.Next(0, 8);
@@ -439,5 +418,87 @@ namespace OOPGames
         {
             _PlayerNumber = playerNumber;
         }
-    }
+    }*/
 }
+
+/*
+ Beispiele DialogWindow:
+
+
+    using System;
+using System.Windows;
+
+namespace WpfTutorialSamples.Dialogs
+{
+	public partial class InputDialogSample : Window
+	{
+		public InputDialogSample(string question, string defaultAnswer = "")
+		{
+			InitializeComponent();
+			lblQuestion.Content = question;
+			txtAnswer.Text = defaultAnswer;
+		}
+
+		private void btnDialogOk_Click(object sender, RoutedEventArgs e)
+		{
+			this.DialogResult = true;
+		}
+
+		private void Window_ContentRendered(object sender, EventArgs e)
+		{
+			txtAnswer.SelectAll();
+			txtAnswer.Focus();
+		}
+
+		public string Answer
+		{
+			get { return txtAnswer.Text; }
+		}
+	}
+}
+
+using System.Windows.Forms;
+using System.Drawing;
+
+public static DialogResult InputBox(string title, string promptText, ref string value)
+{
+  Form form = new Form();
+  Label label = new Label();
+  TextBox textBox = new TextBox();
+  Button buttonOk = new Button();
+  Button buttonCancel = new Button();
+
+  form.Text = title;
+  label.Text = promptText;
+  textBox.Text = value;
+
+  buttonOk.Text = "OK";
+  buttonCancel.Text = "Cancel";
+  buttonOk.DialogResult = DialogResult.OK;
+  buttonCancel.DialogResult = DialogResult.Cancel;
+
+  label.SetBounds(9, 20, 372, 13);
+  textBox.SetBounds(12, 36, 372, 20);
+  buttonOk.SetBounds(228, 72, 75, 23);
+  buttonCancel.SetBounds(309, 72, 75, 23);
+
+  label.AutoSize = true;
+  textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+  buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+  buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+  form.ClientSize = new Size(396, 107);
+  form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+  form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+  form.FormBorderStyle = FormBorderStyle.FixedDialog;
+  form.StartPosition = FormStartPosition.CenterScreen;
+  form.MinimizeBox = false;
+  form.MaximizeBox = false;
+  form.AcceptButton = buttonOk;
+  form.CancelButton = buttonCancel;
+
+  DialogResult dialogResult = form.ShowDialog();
+  value = textBox.Text;
+  return dialogResult;
+}
+*/

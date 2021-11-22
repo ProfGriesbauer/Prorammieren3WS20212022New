@@ -27,7 +27,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -35,10 +34,14 @@ using System.Windows.Shapes;
 
 namespace OOPGames
 {
-    //Name
+    class Gh_TicTacToe
+    {
+        //printf("Hello WOrld\n");
+    }
+
     public class Gh_TicTacToePainter : BaseTicTacToePaint
     {
-        public override String Name {  get { return "Gh_TicTacToePaint";  } }
+        public override String Name {  get { return "TicTacToePaint Gruppe H";  } }
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
@@ -63,7 +66,7 @@ namespace OOPGames
 
             for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 0; j++)
                 {
                     if (currentField[i, j] == 1)
                     {
@@ -82,8 +85,6 @@ namespace OOPGames
         }
     }
 
-
-    //Name
     public class Gh_TicTacToeField : BaseTicTacToeField
     {
 
@@ -133,8 +134,7 @@ namespace OOPGames
     }
 
 
-    //Michael
-    public class Gh_TicTacToeRules : BaseTicTacToeRules
+        public class Gh_TicTacToeRules : BaseTicTacToeRules
     {
         TicTacToeField _Field = new TicTacToeField();
 
@@ -361,89 +361,4 @@ namespace OOPGames
             }
         }
     }
-
-
-    // Julian & Fabian
-    public class Gh_TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
-    {
-        int _PlayerNumber = 0;
-
-        public override string Name { get { return "Gh_HumanTicTacToePlayer"; } }
-
-        public override IGamePlayer Clone()
-        {
-            TicTacToeHumanPlayer ttthp = new TicTacToeHumanPlayer();
-            ttthp.SetPlayerNumber(_PlayerNumber);
-            return ttthp;
-        }
-
-        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
-                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100) &&
-                        field[i, j] <= 0)
-                    {
-                        return new TicTacToeMove(i, j, _PlayerNumber);
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        public override void SetPlayerNumber(int playerNumber)
-        {
-            _PlayerNumber = playerNumber;
-        }
-    } 
-
-
-    //Julian
-    public class Gh_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
-    {
-        int _PlayerNumber = 0;
-
-        public override string Name { get { return "Gh_ComputerTicTacToePlayer"; } }
-
-        public override IGamePlayer Clone()
-        {
-            TicTacToeComputerPlayer ttthp = new TicTacToeComputerPlayer();
-            ttthp.SetPlayerNumber(_PlayerNumber);
-            return ttthp;
-        }
-
-        public override ITicTacToeMove GetMove(ITicTacToeField field)
-        {
-            // Antwort des Computers soll verzögert werden.
-            //Thread.Sleep(1000);  // Tut es aber noch nicht
-            //Task.Delay(1000); // geht auch nicht
-
-            Random rand = new Random();
-            int f = rand.Next(0, 8);
-            for (int i = 0; i < 9; i++)
-            {
-                int c = f % 3;
-                int r = ((f - c) / 3) % 3;
-                if (field[r, c] <= 0)
-                {
-                    return new TicTacToeMove(r, c, _PlayerNumber);
-                }
-                else
-                {
-                    f++;
-                }
-            }
-
-            return null;
-        }
-
-        public override void SetPlayerNumber(int playerNumber)
-        {
-            _PlayerNumber = playerNumber;
-        }
-    }   
 }
