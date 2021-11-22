@@ -46,6 +46,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPainter(new BiemelPainterAlt1());
             OOPGamesManager.Singleton.RegisterPainter(new Gh_TicTacToePainter());
             OOPGamesManager.Singleton.RegisterPainter(new GI_TicTacToePaint());
+            OOPGamesManager.Singleton.RegisterPainter(new GC_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GF_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GJ_TicTacToePaint());
             //Rules
@@ -54,6 +55,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPainter(new GB_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterRules(new Gh_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GI_TicTacToeRules());
+            OOPGamesManager.Singleton.RegisterRules(new GC_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GJ_TicTacToeRules());
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
@@ -62,11 +64,13 @@ namespace OOPGames
             //Players
             OOPGamesManager.Singleton.RegisterPlayer(new TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeHumanPlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GC_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new TicTacToeComputerPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GE_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GI_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GJ_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GJ_TicTacToeComputerPlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GC_TicTacToeComputerPlayer());
             //OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
 
             InitializeComponent();
