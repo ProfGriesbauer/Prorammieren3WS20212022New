@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 
 namespace OOPGames
 {
-    public class TicTacToePaint : GC_TicTacToePaint
+    public class GC_TicTacToePaint : BaseTicTacToePaint
     {
         public override string Name { get { return "GC_TicTacToePaint"; } }
 
@@ -64,7 +64,7 @@ namespace OOPGames
 
 
 
-    public class TicTacToeRules : GC_TicTacToeRules
+    public class GC_TicTacToeRules : BaseTicTacToeRules
     {
         TicTacToeField _Field = new TicTacToeField();
 
@@ -137,7 +137,7 @@ namespace OOPGames
         }
     }
 
-    public class TicTacToeField : GC_TicTacToeField
+    public class GC_TicTacToeField : BaseTicTacToeField
     {
         int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
 
@@ -165,13 +165,13 @@ namespace OOPGames
         }
     }
 
-    public class TicTacToeMove : GC_TicTacToeMove
+    public class GC_TicTacToeMove : ITicTacToeMove
     {
         int _Row = 0;
         int _Column = 0;
         int _PlayerNumber = 0;
 
-        public TicTacToeMove(int row, int column, int playerNumber)
+        public GC_TicTacToeMove(int row, int column, int playerNumber)
         {
             _Row = row;
             _Column = column;
@@ -185,7 +185,7 @@ namespace OOPGames
         public int PlayerNumber { get { return _PlayerNumber; } }
     }
 
-    public class TicTacToeHumanPlayer : GC_HumanTicTacToePlayer
+    public class GC_TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
     {
         int _PlayerNumber = 0;
 
@@ -221,7 +221,7 @@ namespace OOPGames
         }
     }
 
-    public class TicTacToeComputerPlayer : GC_ComputerTicTacToePlayer
+    public class GC_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
 
