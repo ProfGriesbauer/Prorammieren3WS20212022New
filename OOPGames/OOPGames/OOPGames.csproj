@@ -52,6 +52,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Reflection.Context" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -82,8 +83,6 @@
     </Compile>
     <Compile Include="Classes\GA_Pong.cs" />
     <Compile Include="Classes\GI_Dino\Dino.cs" />
-    <Compile Include="Classes\TicTacToe\GA_TicTacToe.cs" />
-    <Compile Include="Classes\TicTacToe\GC_TicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\GD_TicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\GE_TicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\GB_TicTacToe.cs" />

@@ -43,8 +43,8 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPainter(new Dino_PaintGame()); 
             OOPGamesManager.Singleton.RegisterPainter(new TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GE_TicTacToePaint());
-            OOPGamesManager.Singleton.RegisterPainter(new GA_Painter());
-            OOPGamesManager.Singleton.RegisterPainter(new GA_PainterGlow());
+            //OOPGamesManager.Singleton.RegisterPainter(new GA_Painter());
+            //OOPGamesManager.Singleton.RegisterPainter(new GA_PainterGlow());
             OOPGamesManager.Singleton.RegisterPainter(new Gh_TicTacToePainter());
             OOPGamesManager.Singleton.RegisterPainter(new GI_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GF_TicTacToePaint());
@@ -64,7 +64,7 @@ namespace OOPGames
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GB_TicTacToeRules());
-            OOPGamesManager.Singleton.RegisterRules(new GA_Rules());
+           // OOPGamesManager.Singleton.RegisterRules(new GA_Rules());
             //Players
 
             OOPGamesManager.Singleton.RegisterPlayer(new Dino_GamePlayer());
@@ -76,9 +76,9 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPlayer(new GI_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new Gh_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new Gh_TicTacToeComputerPlayer());
-            OOPGamesManager.Singleton.RegisterPlayer(new GA_TicTacToeComputerPlayer());
+           // OOPGamesManager.Singleton.RegisterPlayer(new GA_TicTacToeComputerPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
-            OOPGamesManager.Singleton.RegisterPlayer(new GA_TicTacToeHumanPlayer());
+          //  OOPGamesManager.Singleton.RegisterPlayer(new GA_TicTacToeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeMensch());
             OOPGamesManager.Singleton.RegisterPlayer(new GG_HumanTicTacToePlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GG_ComputerTicTacToePlayer());
