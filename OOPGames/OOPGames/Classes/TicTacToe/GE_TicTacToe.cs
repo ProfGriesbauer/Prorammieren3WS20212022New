@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
+//using System.Drawing.Point;
 //ToDo:
 /*
  Am montag den Griesbauer Fragen: 
@@ -69,16 +69,16 @@ namespace OOPGames
     }
 
 
-    
+
     public class GE_TicTacToeRules : BaseTicTacToeRules_GE
     {
         GE_TicTacToeField _Field = new GE_TicTacToeField(5);
 
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
 
-        public override bool MovesPossible 
-        { 
-            get 
+        public override bool MovesPossible
+        {
+            get
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -91,8 +91,8 @@ namespace OOPGames
                     }
                 }
 
-                return false; 
-            } 
+                return false;
+            }
         }
 
         public override string Name { get { return "GE_TicTacToeRules"; } }
@@ -144,31 +144,47 @@ namespace OOPGames
 
         public override void AskForGameSize()
         {
-            throw new NotImplementedException();
-        }
+         int size = Prompt.ShowDialog("Bitte GrÃ¶ÃŸe wÃ¤hlen:", "GrÃ¶ÃŸe Festlegen");
 
+        }
+        //commentar
+        
         public static class Prompt
         {
             public static int ShowDialog(string text, string caption)
             {
                 Form prompt = new Form();
                 prompt.Width = 500;
-                prompt.Height = 100;
+                prompt.Height = 150;
                 prompt.Text = caption;
-                System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 50, Top = 20, Text = text };
-                NumericUpDown inputBox = new NumericUpDown() { Left = 50, Top = 50, Width = 400 };
+                System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 10, Top = 20, Text = text };
+                string[] auswahl = { "klein", "mittel", "groÃŸ"};
+                System.Windows.Forms.ComboBox dropDown = new System.Windows.Forms.ComboBox();
+                dropDown.Items.AddRange(auswahl);
+                dropDown.Location = new System.Drawing.Point(10, 60);
+                dropDown.IntegralHeight = false;
+                dropDown.MaxDropDownItems = 3;
+                dropDown.DropDownStyle = ComboBoxStyle.DropDownList;
+                dropDown.Name = "ComboBox1";
+                dropDown.Size = new System.Drawing.Size(136, 81);
+                dropDown.TabIndex = 0;
+                dropDown.SelectedIndexChanged += DropDown_SelectedIndexChanged;
+
                 System.Windows.Forms.Button confirmation = new System.Windows.Forms.Button() { Text = "Ok", Left = 350, Width = 100, Top = 70 };
                 confirmation.Click += (sender, e) => { prompt.Close(); };
                 prompt.Controls.Add(confirmation);
                 prompt.Controls.Add(textLabel);
-                prompt.Controls.Add(inputBox);
+                prompt.Controls.Add(dropDown);
                 prompt.ShowDialog();
-                return (int)inputBox.Value;
+                return (int)dropDown.SelectedIndex;
             }
 
+            private static void DropDown_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                return;
+            }
         }
 
-        //int promptValue = Prompt.ShowDialog("Test", "123");
 
     }
 
@@ -183,7 +199,7 @@ namespace OOPGames
 
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
 
-        public override bool MovesPossible //muss auf die spielfeldgröße angepasst werden
+        public override bool MovesPossible //muss auf die spielfeldgrï¿½ï¿½e angepasst werden
         { 
             get 
             {
@@ -203,7 +219,7 @@ namespace OOPGames
 
         public override string Name { get { return "GE_TicTacToeRules"; } }
 
-        public override int CheckIfPLayerWon()//anpassen auf spielfeld größe; (vlt anpassen ab wie viel man gewinnt)
+        public override int CheckIfPLayerWon()//anpassen auf spielfeld grï¿½ï¿½e; (vlt anpassen ab wie viel man gewinnt)
         {
             for (int p = 1; p < 3; p++)
             {
@@ -250,7 +266,7 @@ namespace OOPGames
     }
     */
 
-    public abstract class BaseTicTacToeRules_GE : ITicTacToeRules_GE 
+    public abstract class BaseTicTacToeRules_GE : ITicTacToeRules_GE
     {
         public abstract ITicTacToeField TicTacToeField { get; }
 
@@ -275,6 +291,11 @@ namespace OOPGames
         }
 
         public abstract void AskForGameSize();
+        /*
+        {
+            //open window
+        }
+        */
     }
 
     public class GE_TicTacToeField : BaseTicTacToeField
@@ -285,11 +306,11 @@ namespace OOPGames
         {
             _Size = s;
             _Field = new int[s, s];
-            for(int i = 0; i < s; i++)
+            for (int i = 0; i < s; i++)
             {
-                for(int j = 0; j < s; j++)
+                for (int j = 0; j < s; j++)
                 {
-                    _Field[i,j] = 0;
+                    _Field[i, j] = 0;
                 }
             }
         }
@@ -323,14 +344,14 @@ namespace OOPGames
         }
 
     }
-    
+
     public class GE_TicTacToeMove : ITicTacToeMove
     {
         int _Row = 0;
         int _Column = 0;
         int _PlayerNumber = 0;
 
-        public GE_TicTacToeMove (int row, int column, int playerNumber)
+        public GE_TicTacToeMove(int row, int column, int playerNumber)
         {
             _Row = row;
             _Column = column;
@@ -357,14 +378,14 @@ namespace OOPGames
             return ttthp;
         }
 
-        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)//support für tasten und hidden modus
+        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)//support fï¿½r tasten und hidden modus
         {
             for (int i = 0; i < 3; i++)//anpassen
             {
                 for (int j = 0; j < 3; j++)//anpassen
                 {
-                    if (selection.XClickPos > 20 + (j*100) && selection.XClickPos < 120 + (j*100) &&
-                        selection.YClickPos > 20 + (i*100) && selection.YClickPos < 120 + (i*100))
+                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
+                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
                     {
                         return new GE_TicTacToeMove(i, j, _PlayerNumber);
                     }
@@ -380,20 +401,20 @@ namespace OOPGames
         }
     }
 
-   /* public class TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
+    public class GE_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer //lege neuen computerspieler an
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "GriesbauerComputerTicTacToePlayer"; } }
+        public override string Name { get { return "GE_ComputerTicTacToePlayer"; } }
 
         public override IGamePlayer Clone()
         {
-            TicTacToeComputerPlayer ttthp = new TicTacToeComputerPlayer();
+            GE_TicTacToeComputerPlayer ttthp = new GE_TicTacToeComputerPlayer(); //make new player
             ttthp.SetPlayerNumber(_PlayerNumber);
             return ttthp;
         }
 
-        public override ITicTacToeMove GetMove(ITicTacToeField field)
+        public override ITicTacToeMove GetMove(ITicTacToeField field) //change auf unser spielfeld
         {
             Random rand = new Random();
             int f = rand.Next(0, 8);
@@ -418,87 +439,5 @@ namespace OOPGames
         {
             _PlayerNumber = playerNumber;
         }
-    }*/
+    }
 }
-
-/*
- Beispiele DialogWindow:
-
-
-    using System;
-using System.Windows;
-
-namespace WpfTutorialSamples.Dialogs
-{
-	public partial class InputDialogSample : Window
-	{
-		public InputDialogSample(string question, string defaultAnswer = "")
-		{
-			InitializeComponent();
-			lblQuestion.Content = question;
-			txtAnswer.Text = defaultAnswer;
-		}
-
-		private void btnDialogOk_Click(object sender, RoutedEventArgs e)
-		{
-			this.DialogResult = true;
-		}
-
-		private void Window_ContentRendered(object sender, EventArgs e)
-		{
-			txtAnswer.SelectAll();
-			txtAnswer.Focus();
-		}
-
-		public string Answer
-		{
-			get { return txtAnswer.Text; }
-		}
-	}
-}
-
-using System.Windows.Forms;
-using System.Drawing;
-
-public static DialogResult InputBox(string title, string promptText, ref string value)
-{
-  Form form = new Form();
-  Label label = new Label();
-  TextBox textBox = new TextBox();
-  Button buttonOk = new Button();
-  Button buttonCancel = new Button();
-
-  form.Text = title;
-  label.Text = promptText;
-  textBox.Text = value;
-
-  buttonOk.Text = "OK";
-  buttonCancel.Text = "Cancel";
-  buttonOk.DialogResult = DialogResult.OK;
-  buttonCancel.DialogResult = DialogResult.Cancel;
-
-  label.SetBounds(9, 20, 372, 13);
-  textBox.SetBounds(12, 36, 372, 20);
-  buttonOk.SetBounds(228, 72, 75, 23);
-  buttonCancel.SetBounds(309, 72, 75, 23);
-
-  label.AutoSize = true;
-  textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
-  buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-  buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-
-  form.ClientSize = new Size(396, 107);
-  form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
-  form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
-  form.FormBorderStyle = FormBorderStyle.FixedDialog;
-  form.StartPosition = FormStartPosition.CenterScreen;
-  form.MinimizeBox = false;
-  form.MaximizeBox = false;
-  form.AcceptButton = buttonOk;
-  form.CancelButton = buttonCancel;
-
-  DialogResult dialogResult = form.ShowDialog();
-  value = textBox.Text;
-  return dialogResult;
-}
-*/
