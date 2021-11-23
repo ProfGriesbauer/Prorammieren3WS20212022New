@@ -53,7 +53,7 @@ namespace OOPGames
         //erzeugt Zufallswert für PositionColum und setzt Row auf 0
 
         //Erhöht PositionRow um 1
-        void UpdateMeteo();
+        void UpdatePos();
     }
 
 

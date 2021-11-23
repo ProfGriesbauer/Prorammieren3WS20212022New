@@ -27,7 +27,7 @@ namespace OOPGames
             _PositionColum = 0;//Zufallszahl ersetzen!
         }
 
-        public void UpdateMeteo()
+        public void UpdatePos()
         {
             _PositionRow++;
         }
