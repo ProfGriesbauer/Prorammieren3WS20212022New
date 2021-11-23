@@ -11,23 +11,52 @@ using System.Reflection;
 
 namespace OOPGames
 {
-    public class GA_TTTPainter : BaseTicTacToePaint
+    public class GA_Timer
     {
-        public int _TimeLimit = 30;
+        public int _TimeLimit;
         public int _TimeLeft;
         public long _LastChanged;
 
-        public override string Name { get { return "GA_TicTacToePainter"; } }
+        public GA_Timer(int limit)
+        {
+            _TimeLimit = limit;
+            _TimeLeft = _TimeLimit;
+        }
 
-        public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
+        public void check()
         {
             //Variable verringern um Zähler anzeigen zu lassen
             DateTime currentTime = DateTime.Now;
             long elapsedTicks = currentTime.Ticks - _LastChanged;
             if (elapsedTicks > 10000000)
             {
-                _TimeLimit--;
+                _TimeLeft--;
                 _LastChanged = currentTime.Ticks;
+            }
+        }
+
+        public int tLeft()
+        {
+            return _TimeLeft;
+        }
+    }
+
+    public class GA_TTTPainter : BaseTicTacToePaint
+    {
+        
+        GA_Timer _Tim;
+
+        public override string Name { get { return "GA_TicTacToePainter"; } }
+
+        public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
+        {
+            if(_Tim is GA_Timer)
+            {
+                _Tim.check();
+            }
+            else
+            {
+                _Tim = new GA_Timer(30);
             }
 
             canvas.Children.Clear();
@@ -62,7 +91,7 @@ namespace OOPGames
             //Anzeige der Verbleibenden Sekunden
             TextBlock textBlock = new TextBlock();
             TextBlock.SetFontSize(textBlock, 20);
-            textBlock.Text = "Time Left " + _TimeLimit;
+            textBlock.Text = "Time Left " + _Tim.tLeft();
             Color textColor = Color.FromRgb(0, 0, 0);
             textBlock.Foreground = new SolidColorBrush(textColor);
             Canvas.SetLeft(textBlock, 30);
