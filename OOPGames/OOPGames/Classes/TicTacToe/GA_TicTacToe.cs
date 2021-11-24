@@ -16,6 +16,8 @@ namespace OOPGames
         public int _TimeLimit;
         public int _TimeLeft;
         public long _LastChanged;
+        public int _Stopped = 0;
+        public bool _TimeOut = false;
 
         public GA_Timer(int limit)
         {
@@ -30,8 +32,16 @@ namespace OOPGames
             long elapsedTicks = currentTime.Ticks - _LastChanged;
             if (elapsedTicks > 10000000)
             {
-                _TimeLeft--;
+                if (_Stopped == 0)
+                {
+                    _TimeLeft--;
+                }
                 _LastChanged = currentTime.Ticks;
+            }
+            if(_TimeLeft <= 0)
+            {
+                TimerHelp.stop();
+                _TimeOut = true;
             }
         }
 
@@ -39,26 +49,95 @@ namespace OOPGames
         {
             return _TimeLeft;
         }
+
+        public void reset()
+        {
+            _TimeLeft = _TimeLimit;
+            _TimeOut = false;
+        }
+
+        public void stop()
+        {
+            _Stopped = 1;
+        }
+
+        public void start()
+        {
+            _Stopped = 0;
+        }
+        public bool timeout()
+        {
+            return _TimeOut;
+        }
+
+    }
+
+    public static class TimerHelp
+    {
+        public static GA_Timer _Tim;
+
+        public static void create(int time)
+        {
+            _Tim = new GA_Timer(time);
+        }
+
+        public static GA_Timer state()
+        {
+            return _Tim;
+        }
+
+        public static void check()
+        {
+            _Tim.check();
+        }
+
+        public static int tLeft()
+        {
+            return _Tim.tLeft();
+        }
+
+        public static void reset()
+        {
+            _Tim.reset();
+        }
+
+        public static void start()
+        {
+            _Tim.start();
+        }
+
+        public static void stop()
+        {
+            _Tim.stop();
+        }
+
+        public static bool timeout()
+        {
+            if (_Tim is GA_Timer)
+            {
+                return _Tim.timeout();
+            }
+            return false;
+        }
+
     }
 
     public class GA_TTTPainter : BaseTicTacToePaint
     {
         
-        GA_Timer _Tim;
-
         public override string Name { get { return "GA_TicTacToePainter"; } }
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
-            if(_Tim is GA_Timer)
+            if(TimerHelp.state() is GA_Timer)
             {
-                _Tim.check();
+                TimerHelp.check();
             }
             else
             {
-                _Tim = new GA_Timer(30);
+                TimerHelp.create(10);
             }
-
+            
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
             canvas.Background = new SolidColorBrush(bgColor);
@@ -91,7 +170,7 @@ namespace OOPGames
             //Anzeige der Verbleibenden Sekunden
             TextBlock textBlock = new TextBlock();
             TextBlock.SetFontSize(textBlock, 20);
-            textBlock.Text = "Time Left " + _Tim.tLeft();
+            textBlock.Text = "Time Left " + TimerHelp.tLeft();
             Color textColor = Color.FromRgb(0, 0, 0);
             textBlock.Foreground = new SolidColorBrush(textColor);
             Canvas.SetLeft(textBlock, 30);
@@ -202,7 +281,7 @@ namespace OOPGames
 
     public class GA_TTTRules : BaseTicTacToeRules
     {
-        TicTacToeField _Board = new TicTacToeField();
+        public TicTacToeField _Board = new TicTacToeField();
 
         public override ITicTacToeField TicTacToeField { get { return _Board; } }
 
@@ -210,18 +289,29 @@ namespace OOPGames
         {
             get
             {
-                for (int i = 0; i < 3; i++)
+                if (TimerHelp.timeout())
                 {
-                    for (int j = 0; j < 3; j++)
+                    return false;
+                }
+                else
+                {
+
+                    for (int i = 0; i < 3; i++)
                     {
-                        if (_Board[i, j] == 0)
+                        for (int j = 0; j < 3; j++)
                         {
-                            return true;
+                            if (_Board[i, j] == 0)
+                            {
+                                return true;
+                            }
                         }
                     }
+                    if (TimerHelp.state() is GA_Timer)
+                    {
+                        TimerHelp.stop();
+                    }
+                    return false;
                 }
-
-                return false;
             }
         }
         public override string Name { get { return "GA_TicTacToeRules"; } }
@@ -234,10 +324,18 @@ namespace OOPGames
                 {
                     if (_Board[i, 0] == p && _Board[i, 1] == p && _Board[i, 2] == p)
                     {
+                        if (TimerHelp.state() is GA_Timer)
+                        {
+                            TimerHelp.stop();
+                        }
                         return p;
                     }
                     else if (_Board[0, i] == p && _Board[1, i] == p && _Board[2, i] == p)
                     {
+                        if (TimerHelp.state() is GA_Timer)
+                        {
+                            TimerHelp.stop();
+                        }
                         return p;
                     }
                 }
@@ -245,10 +343,40 @@ namespace OOPGames
                 if (_Board[0, 0] == p && _Board[1, 1] == p && _Board[2, 2] == p ||
                     _Board[0, 2] == p && _Board[1, 1] == p && _Board[2, 0] == p)
                 {
+                    if (TimerHelp.state() is GA_Timer)
+                    {
+                        TimerHelp.stop();
+                    }
                     return p;
                 }
             }
-
+            if (TimerHelp.timeout())
+            {
+                int n1 = 0;
+                int n2 = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (_Board[i, j] == 1)
+                        {
+                            n1++;
+                        }
+                        else if (_Board[i, j] == 2)
+                        {
+                            n2++;
+                        }
+                    }
+                }
+                if (n1 > n2)
+                {
+                    return 1;
+                }
+                else if (n1 == n2)
+                {
+                    return 2;
+                }
+            }
             return -1;
         }
 
@@ -261,6 +389,11 @@ namespace OOPGames
                     _Board[i, j] = 0;
                 }
             }
+            if (TimerHelp.state() is GA_Timer)
+            {
+                TimerHelp.reset();
+                TimerHelp.start();
+            }
         }
 
         public override void DoTicTacToeMove(ITicTacToeMove move)
@@ -269,11 +402,14 @@ namespace OOPGames
             {
                 _Board[move.Row, move.Column] = move.PlayerNumber;
             }
-          
+            if (TimerHelp.state() is GA_Timer)
+            {
+                TimerHelp.reset();
+            }
         }
 
-
     }
+    
     public class GA_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
