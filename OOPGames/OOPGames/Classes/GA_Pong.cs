@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using System.Reflection;
 
 namespace OOPGames
 {
@@ -136,67 +140,67 @@ namespace OOPGames
             _Val.updateBall(bx, by, br, vxb, vyb);
         }
 
-        public int p1x()
+        public static int p1x()
         {
             return _Val.p1x();
         }
 
-        public int p1y()
+        public static int p1y()
         {
             return _Val.p1y();
         }
 
-        public int p1w()
+        public static int p1w()
         {
             return _Val.p1w();
         }
 
-        public int p1h()
+        public static int p1h()
         {
             return _Val.p1h();
         }
 
-        public int p2x()
+        public static int p2x()
         {
             return _Val.p2x();
         }
 
-        public int p2y()
+        public static int p2y()
         {
             return _Val.p2y();
         }
 
-        public int p2w()
+        public static int p2w()
         {
             return _Val.p2w();
         }
 
-        public int p2h()
+        public static int p2h()
         {
             return _Val.p2h();
         }
 
-        public int bx()
+        public static int bx()
         {
             return _Val.bx();
         }
 
-        public int by()
+        public static int by()
         {
             return _Val.by();
         }
 
-        public int br()
+        public static int br()
         {
             return _Val.br();
         }
 
-        public int vxb()
+        public static int vxb()
         {
             return _Val.vxb();
         }
 
-        public int vyb()
+        public static int vyb()
         {
             return _Val.vyb();
         }
@@ -207,8 +211,24 @@ namespace OOPGames
         public string Name { get { return "GA_PongPainter"; } }
 
         public void PaintPongField(Canvas canvas, IPongField currentField)
-        {
+        { 
+            //Paint GameField
+            canvas.Children.Clear();
+            Color bgColor = Color.FromRgb(0, 0, 0);
+            canvas.Background = new SolidColorBrush(bgColor);
+            Color lineColor = Color.FromRgb(0, 0, 0);
+            Brush lineStroke = new SolidColorBrush(lineColor);
+            Line l1 = new Line() { X1 = 0, Y1 = 0, X2 = 0, Y2 = 459, Stroke = lineStroke, StrokeThickness = 5.0 };
+            canvas.Children.Add(l1);
+            Line l2 = new Line() { X1 = 0, Y1 = 459, X2 = 376, Y2 = 459, Stroke = lineStroke, StrokeThickness = 5.0 };
+            canvas.Children.Add(l2);
+            Line l3 = new Line() { X1 = 376, Y1 = 459, X2 = 376, Y2 = 0, Stroke = lineStroke, StrokeThickness = 5.0 };
+            canvas.Children.Add(l3);
+            Line l4 = new Line() { X1 = 376, Y1 = 0, X2 = 0, Y2 = 0, Stroke = lineStroke, StrokeThickness = 5.0 };
+            canvas.Children.Add(l4);
+            //Paint Player
 
+            //Paint Ball
         }
 
         public void PaintGameField(Canvas canvas, IGameField currentField)
