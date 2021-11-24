@@ -49,6 +49,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPainter(new GC_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GF_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new GJ_TicTacToePaint());
+            OOPGamesManager.Singleton.RegisterPainter(new Dino_PaintGame());
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GE_TicTacToeRules());
@@ -57,6 +58,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterRules(new GI_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GC_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GJ_TicTacToeRules());
+            OOPGamesManager.Singleton.RegisterRules(new Dino_GameRules());
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GB_TicTacToeRules());
@@ -76,6 +78,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeComputerPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GI_TicTacToeComputerPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeMensch());
+            OOPGamesManager.Singleton.RegisterPlayer(new Dino_GamePlayer());
             //OOPGamesManager.Singleton.RegisterPlayer(new GB_TicTacToeComputerPlayer());
 
             InitializeComponent();
