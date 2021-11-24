@@ -18,21 +18,73 @@ namespace OOPGames
     {
         public override string Name { get { return "DinoPainter"; } }
 
+
         public override void PaintDinoGameField(Canvas canvas, IDino_GameField currentField)
         {
+            currentField[0]++;
+            int counter = currentField[0] ;
+            currentField[2] += currentField[3];
+
+            if (currentField[2]!=0) 
+            {
+                currentField[3] -= 2;
+            }
+            else
+            {
+                currentField[3] = 0;
+            }
+
+            
+
+
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
             canvas.Background = new SolidColorBrush(bgColor);
             Color OColor = Color.FromRgb(0, 0, 255);
             Brush OStroke = new SolidColorBrush(OColor);
+            Color lineColor = Color.FromRgb(0, 0, 0);
+            Brush lineStroke = new SolidColorBrush(lineColor);
 
-            int i = currentField[1];
-
-            Console.WriteLine(i);
-
-            Ellipse OE = new Ellipse() { Margin = new Thickness(100 + i*100, 100, 0, 0), Width = 100, Height = 100, Stroke = OStroke, StrokeThickness = 3.0 };
+            Ellipse OE = new Ellipse() { Margin = new Thickness(100, 300 - currentField[2], 0, 0), Width = 10, Height = 10, Stroke = OStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(OE);
+            
+
+            int[] obstacles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 };
+
+            int vobst = 5;
+            
+            for (int i = -100; i < 400; i = i + vobst)
+            {
+                if (obstacles.Length > counter + i / vobst && counter + i / vobst > 0)
+                {
+                    if (obstacles[counter + i / vobst] == 1)
+                    {
+                        int plc = i+100;
+
+                        Line obst = new Line() { X1 = plc, Y1 = 280, X2 = plc, Y2 = 310, Stroke = lineStroke, StrokeThickness = 3.0 };
+                        canvas.Children.Add(obst);
+                    }
+
+                    if (obstacles[counter + i / vobst] == 1 && i == 0)
+                    {
+                        currentField[1] = obstacles[counter + i / vobst] *20;
+                    }
+                    else
+                    {
+                        currentField[1] = 0;
+                    }
+
+                    if (currentField[1] > currentField[2] && currentField[1] != 0)
+                    {
+                        currentField[4] = 1;
+                        Console.WriteLine("Verloren");
+                    }
                    
+
+                }
+                
+            }
+
         }
 
     }
@@ -63,32 +115,43 @@ namespace OOPGames
 
         public override int CheckIfPLayerWon()
         {
+            if (_Field[4] == 1 )
+            {
+                return 1;
+            }
+
             return -1;
         }
 
         public override void ClearField()
         {
-            _Field[1] = 1;
+            for (int i = 0; i < 5; i++)
+            {
+                _Field[i] = 0;
+            }
+            
         }
 
         public override void DoMove(Dino_PlayMove move)
         {
-            _Field[1] = _Field[1] + 1;
-            Console.WriteLine(_Field[1]+100);
+            if (_Field[2] == 0)
+            {
+                _Field[3] = 20;
+            }
         }
     }
 
     public class Dino_GameField : IDino_GameField
     {
-        public int _Field = 1;
+        public int[] _Field = new int[5]{ 0, 0, 0, 0, 0 };
 
         public int this [int i]
         {
             get
             {
-                if (i == 1)
+                if (i >= 0 && i <= 4)
                 {
-                    return _Field;
+                    return _Field[i];
                 }
 
                 return -1;
@@ -96,9 +159,9 @@ namespace OOPGames
 
             set
             {
-                if (i == 1)
+                if (i >= 0 && i <= 4)
                 {
-                    _Field = value;
+                    _Field[i] = value;
                 }
             }
         }
