@@ -7,6 +7,201 @@ using System.Windows.Controls;
 
 namespace OOPGames
 {
+    public class ManageValues
+    {
+        public int _BallXPos;
+        public int _BallYPos;
+        public int _BallRad;
+        public int _vXBall;
+        public int _vYBall;
+        //Values Player 1
+        public int _p1ULXPos;       //X Pos of Upper Left Corner of Player 1 Design
+        public int _p1ULYPos;       //Y Pos of Upper Left Corner of Player 1 Design
+        public int _p1Width;        //Width (Length in X Dir.) of Player 1 Design
+        public int _p1Height;       //Height (Length in Y Dir.) of Player 1 Design
+        //Values Player 2
+        public int _p2ULXPos;       //X Pos of Upper Left Corner of Player 2 Design
+        public int _p2ULYPos;       //Y Pos of Upper Left Corner of Player 2 Design
+        public int _p2Width;        //Width (Length in X Dir.) of Player 2 Design
+        public int _p2Height;       //Height (Length in Y Dir.) of Player 2 Design
+
+        public void setP1(int p1x, int p1y, int p1w, int p1h)
+        {
+            _p1ULXPos = p1x;
+            _p1ULYPos = p1y; 
+            _p1Width = p1w; 
+            _p1Height = p1h;  
+        }
+
+        public void setP2(int p2x, int p2y, int p2w, int p2h)
+        {
+            _p2ULXPos = p2x;
+            _p2ULYPos = p2y; 
+            _p2Width = p2w; 
+            _p2Height = p2h;  
+        }
+
+        public void updateBall(int bx, int by, int br, int vxb, int vyb)
+        {
+            _BallXPos = bx;
+            _BallYPos = by;
+            _BallRad = br;
+            _vXBall = vxb;
+            _vYBall = vyb;
+        }
+
+        public int p1x()
+        {
+            return _p1ULXPos;
+        }
+
+        public int p1y()
+        {
+            return _p1ULYPos;
+        }
+
+        public int p1w()
+        {
+            return _p1Width;
+        }
+
+        public int p1h()
+        {
+            return _p1Height;
+        }
+
+        public int p2x()
+        {
+            return _p2ULXPos;
+        }
+
+        public int p2y()
+        {
+            return _p2ULYPos;
+        }
+
+        public int p2w()
+        {
+            return _p2Width;
+        }
+
+        public int p2h()
+        {
+            return _p2Height;
+        }
+
+        public int bx()
+        {
+            return _BallXPos;
+        }
+
+        public int by()
+        {
+            return _BallYPos;
+        }
+
+        public int br()
+        {
+            return _BallRad;
+        }
+
+        public int vxb()
+        {
+            return _vXBall;
+        }
+
+        public int vyb()
+        {
+            return _vYBall;
+        }
+    }
+
+
+    public static class Values
+    {
+        public static ManageValues _Val = new ManageValues();
+
+        public static void setP1(int p1x, int p1y, int p1w, int p1h)
+        {
+            _Val.setP1(p1x, p1y, p1w, p1h);
+        }
+
+        public static void setP2(int p2x, int p2y, int p2w, int p2h)
+        {
+            _Val.setP2(p2x, p2y, p2w, p2h);
+        }
+
+        public static void updateBall(int bx, int by, int br, int vxb, int vyb)
+        {
+            _Val.updateBall(bx, by, br, vxb, vyb);
+        }
+
+        public int p1x()
+        {
+            return _Val.p1x();
+        }
+
+        public int p1y()
+        {
+            return _Val.p1y();
+        }
+
+        public int p1w()
+        {
+            return _Val.p1w();
+        }
+
+        public int p1h()
+        {
+            return _Val.p1h();
+        }
+
+        public int p2x()
+        {
+            return _Val.p2x();
+        }
+
+        public int p2y()
+        {
+            return _Val.p2y();
+        }
+
+        public int p2w()
+        {
+            return _Val.p2w();
+        }
+
+        public int p2h()
+        {
+            return _Val.p2h();
+        }
+
+        public int bx()
+        {
+            return _Val.bx();
+        }
+
+        public int by()
+        {
+            return _Val.by();
+        }
+
+        public int br()
+        {
+            return _Val.br();
+        }
+
+        public int vxb()
+        {
+            return _Val.vxb();
+        }
+
+        public int vyb()
+        {
+            return _Val.vyb();
+        }
+    }
+
     public class GA_PongPaint : IPaintPong
     {
         public string Name { get { return "GA_PongPainter"; } }
@@ -23,6 +218,8 @@ namespace OOPGames
                 PaintPongField(canvas, (IPongField)currentField);
             }
         }
+
+        
     }
     /*
      * 
