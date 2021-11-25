@@ -95,8 +95,8 @@
     <Compile Include="Classes\TicTacToe\BaseTicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\TicTacToe.cs" />
     <Compile Include="Classes\GA_Pong.cs" />
-    <Compile Include="Classes\Dino.cs" />
-    <Compile Include="Interfaces\IDino.cs" />
+    <Compile Include="Classes\GI_Dino.cs" />
+    <Compile Include="Interfaces\GI_IDino.cs" />
     <Compile Include="Interfaces\IGamePlayer.cs" />
     <Compile Include="Interfaces\IGameRules.cs" />
     <Compile Include="Interfaces\GG_IStartrek.cs" />
