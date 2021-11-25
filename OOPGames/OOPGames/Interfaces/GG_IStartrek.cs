@@ -11,8 +11,8 @@ namespace OOPGames
     //Überprüft Kollisionen
     //Zeichnet Spielfeld
     //Methode _CurrentPainter.PaintGameField() wird alle 40ms abgerufen (MainWindow.xaml.cs Zeile 97)
-    public interface GG_IStartrekPainter
-    {
+    public interface GG_IStartrekPainter : IPaintGame
+    {   bool Collison { get; }
         //ToDo:
         //-Erbung von entsprechenden Framework-Interfaces
         //-Implementierung der IPaintGame Methoden
@@ -20,14 +20,22 @@ namespace OOPGames
         //für neue Meteoritenerzeugung und das Weiterbewegen der Meteoriten bestimmt werden
 
         //PaintGameField muss der reihenach:
-        //-Spielfeld zeichnen (Matrix auswerten, entsprechende Symbole setzen)
+        //-Spielfeld zeichnen (Matrix auswerten, entsprechende Symbole setzen), siehe IPaintGame
+        //--> PaintGameField-Methode, in dieser dann die folgenden Methoden bei bestimmter Anzahl
+        //von Aufrufen, aufrufen:
         //-nach bestimmten Rythmus neue Meteoobjekte erzeugen und in einer Liste gehalten werden 
+        void spawnMeteos();
+
         //-nach bestimmten Rythmus alle Meteoobjekte aktuallisieren
+        void moveMetos();
+
         //-bei allen Meteoobjekten die Position abrufen und entsprechend im Spielfeld eintragen
         //  wenn Meteorit das Spielfeld damit verlässt aus Liste löschen https://www.csharp-examples.net/foreach/
         //-auf Kollision prüfen und im Fall von Kollision entsprechende Bildschirmausgabe erzeugen 
+        void checkCollison();
         //  Kollison muss dann den Wert von CheckifPlayerWon in der Rulesklasse auf true setzen, dann wurd nach Playerinteraktion(Mausklick)
         // das Spiel wirklich beendet und die Anzeige entsprechend gestalltet
+
     }
 
 
@@ -40,7 +48,7 @@ namespace OOPGames
     public interface GG_IStartrekRules : IGameRules
     {
         //Hält Gamefield!
-        //Muss bei Painter abfragen, ob Kollision vorliegt
+        //Muss bei Painter abfragen, ob Kollision vorliegt --> Collsion-Variable
 
     }
 
