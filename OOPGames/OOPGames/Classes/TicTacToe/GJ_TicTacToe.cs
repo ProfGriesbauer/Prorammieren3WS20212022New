@@ -26,13 +26,13 @@ namespace OOPGames
             Color OColor = Color.FromRgb(255, 255, 255);
             Brush OStroke = new SolidColorBrush(OColor);
 
-            Line l1 = new Line() { X1 = 120, Y1 = 20, X2 = 120, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
+            Line l1 = new Line() { X1 = canvas.ActualWidth/3*1 , Y1 = 20, X2 = canvas.ActualWidth / 3 * 1, Y2 = canvas.ActualHeight -20, Stroke = lineStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(l1);
-            Line l2 = new Line() { X1 = 220, Y1 = 20, X2 = 220, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
+            Line l2 = new Line() { X1 = canvas.ActualWidth / 3*2, Y1 = 20, X2 = canvas.ActualWidth / 3 * 2, Y2 = canvas.ActualHeight - 20, Stroke = lineStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(l2);
-            Line l3 = new Line() { X1 = 20, Y1 = 120, X2 = 320, Y2 = 120, Stroke = lineStroke, StrokeThickness = 3.0 };
+            Line l3 = new Line() { X1 = 20, Y1 = canvas.ActualHeight/3*1, X2 = canvas.ActualWidth-20, Y2 = canvas.ActualHeight / 3 * 1, Stroke = lineStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(l3);
-            Line l4 = new Line() { X1 = 20, Y1 = 220, X2 = 320, Y2 = 220, Stroke = lineStroke, StrokeThickness = 3.0 };
+            Line l4 = new Line() { X1 = 20, Y1 = canvas.ActualHeight / 3 * 2, X2 = canvas.ActualWidth - 20, Y2 = canvas.ActualHeight / 3 * 2, Stroke = lineStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(l4);
 
             for (int i = 0; i < 3; i++)

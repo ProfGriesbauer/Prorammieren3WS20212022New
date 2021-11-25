@@ -203,13 +203,24 @@ namespace OOPGames
             }
         }
     }
-
+    
     public class GA_TTTPainterGlow : BaseTicTacToePaint
     {
+
         public override string Name { get { return "GA_TicTacToePainterGlow"; } }
+
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
+            if (TimerHelp.state() is GA_Timer)
+            {
+                TimerHelp.check();
+            }
+            else
+            {
+                TimerHelp.create(10);
+            }
+
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
             canvas.Background = new SolidColorBrush(bgColor);
@@ -236,6 +247,21 @@ namespace OOPGames
             Rectangle Board = new Rectangle() { Margin = new Thickness(20, 20, 0, 0), Width = 300, Height = 300, Stroke = boardStroke, StrokeThickness = 3.0 };
             Board.Fill = boardStroke;
             canvas.Children.Add(Board);
+
+            //Anzeige der Verbleibenden Sekunden
+            Rectangle timerField = new Rectangle() { Margin = new Thickness(20, 320, 0, 0), Width = 130, Height = 30, Stroke = boardStroke, StrokeThickness = 3.0 };
+            timerField.Fill = boardStroke;
+            canvas.Children.Add(timerField);
+            TextBlock textBlock = new TextBlock();
+            TextBlock.SetFontSize(textBlock, 20);
+            textBlock.Text = "Time Left " + TimerHelp.tLeft();
+            Color textColor = Color.FromRgb(255, 255, 255);
+            textBlock.Foreground = new SolidColorBrush(textColor);
+            Canvas.SetLeft(textBlock, 30);
+            Canvas.SetTop(textBlock, 320);
+            canvas.Children.Add(textBlock);
+            
+
             for(int i = 0; i < 3; i++)
             {
                 for(int j = 0; j < 3; j++)
@@ -278,7 +304,7 @@ namespace OOPGames
             }
         }
     }
-
+    
     public class GA_TTTRules : BaseTicTacToeRules
     {
         public TicTacToeField _Board = new TicTacToeField();
@@ -409,7 +435,7 @@ namespace OOPGames
         }
 
     }
-    
+
     public class GA_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
@@ -438,6 +464,42 @@ namespace OOPGames
                 else
                 {
                     f++;
+                }
+            }
+
+            return null;
+        }
+
+        public override void SetPlayerNumber(int playerNumber)
+        {
+            _PlayerNumber = playerNumber;
+        }
+    }
+
+    public class GA_TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
+    {
+        int _PlayerNumber = 0;
+
+        public override string Name { get { return "Gruppe A HumanTicTacToePlayer"; } }
+
+        public override IGamePlayer Clone()
+        {
+            GA_TicTacToeHumanPlayer ttthp = new GA_TicTacToeHumanPlayer();
+            ttthp.SetPlayerNumber(_PlayerNumber);
+            return ttthp;
+        }
+
+        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field) //evtl Eigene funktion (Wie bei Gruppe B)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
+                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
+                    {
+                        return new TicTacToeMove(i, j, _PlayerNumber);
+                    }
                 }
             }
 
