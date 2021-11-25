@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace OOPGames
 {
@@ -13,14 +14,14 @@ namespace OOPGames
         IList<IGamePlayer> _Players;
         IList<IGameRules> _Rules;
 
-        public OOPGamesManager ()
+        public OOPGamesManager()
         {
             _Painters = new List<IPaintGame>();
             _Players = new List<IGamePlayer>();
             _Rules = new List<IGameRules>();
         }
 
-        public void RegisterPainter (IPaintGame painter)
+        public void RegisterPainter(IPaintGame painter)
         {
             _Painters.Add(painter);
         }
@@ -52,7 +53,7 @@ namespace OOPGames
 
         public IEnumerable<IPaintGame> Painters { get { return _Painters; } }
 
-        public IEnumerable<IGamePlayer> Players {  get { return _Players; } }
+        public IEnumerable<IGamePlayer> Players { get { return _Players; } }
 
         public IEnumerable<IGameRules> Rules { get { return _Rules; } }
 
@@ -75,7 +76,7 @@ namespace OOPGames
         int _ClickX;
         int _ClickY;
 
-        public MoveSelection (int clickX, int clickY)
+        public MoveSelection(int clickX, int clickY)
         {
             _ClickX = clickX;
             _ClickY = clickY;
@@ -84,5 +85,24 @@ namespace OOPGames
         public int XClickPos { get { return _ClickX; } }
 
         public int YClickPos { get { return _ClickY; } }
+    }
+
+    public class KeySelection : IKeySelection, IMoveSelection
+    {
+        Key _Key;
+        int _ClickX;
+        int _ClickY;
+
+        public KeySelection(Key key)
+        {
+            //MoveSelection(0, 0);
+            _Key = key;
+        }
+
+        public int XClickPos { get { return _ClickX; } }
+
+        public int YClickPos { get { return _ClickY; } }
+
+        public Key Key { get { return _Key; } }
     }
 }
