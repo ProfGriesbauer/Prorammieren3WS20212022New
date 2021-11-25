@@ -16,7 +16,7 @@ namespace OOPGames
 
     public class Dino_PaintGame : IDino_PaintGame
     {
-        public override string Name { get { return "DinoPainter"; } }
+        public override string Name { get { return "GI_Dino_Painter"; } }
 
 
         public override void PaintDinoGameField(Canvas canvas, IDino_GameField currentField)
@@ -79,7 +79,7 @@ namespace OOPGames
                         currentField[4] = 1;
                         Console.WriteLine("Verloren");
                     }
-                   
+
 
                 }
                 
@@ -103,7 +103,7 @@ namespace OOPGames
 
         public IGameField Dino_GameField { get { return _Field; } }
 
-        public override string Name { get { return "Dino_GameRules"; } }
+        public override string Name { get { return "GI_Dino_GameRules"; } }
 
         //public Dino_GameField CurrentField { get { return _Field; } }
 
@@ -179,7 +179,7 @@ namespace OOPGames
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "Dino_GamePlayer"; } }
+        public override string Name { get { return "GI_Dino_GamePlayer"; } }
 
         public override bool CanBeRuledBy(IGameRules rules)
         {
