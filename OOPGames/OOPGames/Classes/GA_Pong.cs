@@ -216,16 +216,11 @@ namespace OOPGames
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(0, 0, 0);
             canvas.Background = new SolidColorBrush(bgColor);
-            Color lineColor = Color.FromRgb(0, 0, 0);
+            Color lineColor = Color.FromRgb(255, 255, 255);
             Brush lineStroke = new SolidColorBrush(lineColor);
-            Line l1 = new Line() { X1 = 0, Y1 = 0, X2 = 0, Y2 = 459, Stroke = lineStroke, StrokeThickness = 5.0 };
+            Line l1 = new Line() { X1 = 300, Y1 = 0, X2 = 376, Y2 = 919, Stroke = lineStroke, StrokeThickness = 5.0 };
             canvas.Children.Add(l1);
-            Line l2 = new Line() { X1 = 0, Y1 = 459, X2 = 376, Y2 = 459, Stroke = lineStroke, StrokeThickness = 5.0 };
-            canvas.Children.Add(l2);
-            Line l3 = new Line() { X1 = 376, Y1 = 459, X2 = 376, Y2 = 0, Stroke = lineStroke, StrokeThickness = 5.0 };
-            canvas.Children.Add(l3);
-            Line l4 = new Line() { X1 = 376, Y1 = 0, X2 = 0, Y2 = 0, Stroke = lineStroke, StrokeThickness = 5.0 };
-            canvas.Children.Add(l4);
+            
             //Paint Player
 
             //Paint Ball
@@ -262,11 +257,13 @@ namespace OOPGames
 
     public class GA_PongRules : IPongRules
     {
-        public IPongField PongField { get; }
+        public string Name { get { return "GA_PongRules"; } }
+
+        PongField _Field = new PongField();
+
+        public IPongField PongField { get { return _Field; } }
 
         public bool MovesPossible { get; }
-
-        public string Name { get; }
 
         public int CheckIfPLayerWon()
         {
@@ -307,7 +304,7 @@ namespace OOPGames
 
         }
 
-        public IGameField CurrentField { get { return PongField; } }
+        public IGameField CurrentField { get { return _Field; } }
 
         public void DoMove(IPlayMove move)
         {
@@ -315,6 +312,26 @@ namespace OOPGames
             {
                 DoPongMove((IPongMove)move);
             }
+        }
+    }
+
+    public class PongField : IPongField
+    {
+        int[,] _Field = new int[3, 3];
+        public int this[int i, int j]
+        {
+            get
+            {
+                return _Field[0, 0];
+            }
+            set
+            {
+                _Field[0, 0] = 0;
+            }
+        }
+        public bool CanBePaintedBy(IPaintGame painter)
+        {
+            return painter is IPaintPong;
         }
     }
 
