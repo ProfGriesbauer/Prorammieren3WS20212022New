@@ -11,62 +11,133 @@ using System.Reflection;
 
 namespace OOPGames
 {
-    /*
     public class GA_Timer
     {
-        public bool _GaRulesActive = 0;      //Gets High if GA_Rules == _CurrentRules
-        public int _timeLeft;                //Saves the Time the current Player has left for its turn
-        public int _timeLimit = 30;          //Gives the Opportunity to change the Time Limit for each turn
-        public DateTime _lastChange;            //Saves the Date of the Last Change of _TimeLeft
-
-        public void start()
-        {
-            _timeLeft = _timeLimit;
-            _lastChange = DateTime.Now;
-        }
-
-        public void update()
-        {
-            DateTime _currentTime = DateTime.Now;
-            double elapsedTicks = _currentTime.Ticks - _lastChange.Ticks;
-            if(elapsedTicks >= 10000000)
-            {
-                _timeLeft--;
-                _lastChange = _currentTime;
-            }
-        }
-    }
-
-    public class GA_TimerAssistant
-    {
-        public GA_Timer Tim = new GA_Timer;
-
-        public void startTimer()
-        {
-            Tim._GaRulesActive = true;
-            Tim.start();
-        }
-    }*/
-
-    public class GA_Painter : BaseTicTacToePaint
-    {
-        public int _TimeLimit = 30;
+        public int _TimeLimit;
         public int _TimeLeft;
         public long _LastChanged;
+        public int _Stopped = 0;
+        public bool _TimeOut = false;
 
-        public override string Name { get { return "GA_Painter"; } }
+        public GA_Timer(int limit)
+        {
+            _TimeLimit = limit;
+            _TimeLeft = _TimeLimit;
+        }
 
-        public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
+        public void check()
         {
             //Variable verringern um Zähler anzeigen zu lassen
             DateTime currentTime = DateTime.Now;
             long elapsedTicks = currentTime.Ticks - _LastChanged;
             if (elapsedTicks > 10000000)
             {
-                _TimeLimit--;
+                if (_Stopped == 0)
+                {
+                    _TimeLeft--;
+                }
                 _LastChanged = currentTime.Ticks;
             }
+            if(_TimeLeft <= 0)
+            {
+                TimerHelp.stop();
+                _TimeOut = true;
+            }
+        }
 
+        public int tLeft()
+        {
+            return _TimeLeft;
+        }
+
+        public void reset()
+        {
+            _TimeLeft = _TimeLimit;
+            _TimeOut = false;
+        }
+
+        public void stop()
+        {
+            _Stopped = 1;
+        }
+
+        public void start()
+        {
+            _Stopped = 0;
+        }
+        public bool timeout()
+        {
+            return _TimeOut;
+        }
+
+    }
+
+    public static class TimerHelp
+    {
+        public static GA_Timer _Tim;
+
+        public static void create(int time)
+        {
+            _Tim = new GA_Timer(time);
+        }
+
+        public static GA_Timer state()
+        {
+            return _Tim;
+        }
+
+        public static void check()
+        {
+            _Tim.check();
+        }
+
+        public static int tLeft()
+        {
+            return _Tim.tLeft();
+        }
+
+        public static void reset()
+        {
+            _Tim.reset();
+        }
+
+        public static void start()
+        {
+            _Tim.start();
+        }
+
+        public static void stop()
+        {
+            _Tim.stop();
+        }
+
+        public static bool timeout()
+        {
+            if (_Tim is GA_Timer)
+            {
+                return _Tim.timeout();
+            }
+            return false;
+        }
+
+    }
+
+    public class GA_TTTPainter : BaseTicTacToePaint
+    {
+        
+        public override string Name { get { return "GA_TicTacToePainter"; } }
+
+        public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
+        {
+            if(TimerHelp.state() is GA_Timer)
+            {
+                TimerHelp.check();
+            }
+            else
+            {
+                TimerHelp.create(10);
+            }
+            
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
             canvas.Background = new SolidColorBrush(bgColor);
@@ -99,7 +170,7 @@ namespace OOPGames
             //Anzeige der Verbleibenden Sekunden
             TextBlock textBlock = new TextBlock();
             TextBlock.SetFontSize(textBlock, 20);
-            textBlock.Text = "Time Left " + _TimeLimit;
+            textBlock.Text = "Time Left " + TimerHelp.tLeft();
             Color textColor = Color.FromRgb(0, 0, 0);
             textBlock.Foreground = new SolidColorBrush(textColor);
             Canvas.SetLeft(textBlock, 30);
@@ -130,16 +201,26 @@ namespace OOPGames
                     }
                 }
             }
-            
         }
     }
-
-    public class GA_PainterGlow : BaseTicTacToePaint
+    
+    public class GA_TTTPainterGlow : BaseTicTacToePaint
     {
-        public override string Name { get { return "GA_PainterGlow"; } }
+
+        public override string Name { get { return "GA_TicTacToePainterGlow"; } }
+
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
+            if (TimerHelp.state() is GA_Timer)
+            {
+                TimerHelp.check();
+            }
+            else
+            {
+                TimerHelp.create(10);
+            }
+
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
             canvas.Background = new SolidColorBrush(bgColor);
@@ -166,6 +247,21 @@ namespace OOPGames
             Rectangle Board = new Rectangle() { Margin = new Thickness(20, 20, 0, 0), Width = 300, Height = 300, Stroke = boardStroke, StrokeThickness = 3.0 };
             Board.Fill = boardStroke;
             canvas.Children.Add(Board);
+
+            //Anzeige der Verbleibenden Sekunden
+            Rectangle timerField = new Rectangle() { Margin = new Thickness(20, 320, 0, 0), Width = 130, Height = 30, Stroke = boardStroke, StrokeThickness = 3.0 };
+            timerField.Fill = boardStroke;
+            canvas.Children.Add(timerField);
+            TextBlock textBlock = new TextBlock();
+            TextBlock.SetFontSize(textBlock, 20);
+            textBlock.Text = "Time Left " + TimerHelp.tLeft();
+            Color textColor = Color.FromRgb(255, 255, 255);
+            textBlock.Foreground = new SolidColorBrush(textColor);
+            Canvas.SetLeft(textBlock, 30);
+            Canvas.SetTop(textBlock, 320);
+            canvas.Children.Add(textBlock);
+            
+
             for(int i = 0; i < 3; i++)
             {
                 for(int j = 0; j < 3; j++)
@@ -208,10 +304,10 @@ namespace OOPGames
             }
         }
     }
-
-    public class GA_Rules : BaseTicTacToeRules
+    
+    public class GA_TTTRules : BaseTicTacToeRules
     {
-        TicTacToeField _Board = new TicTacToeField();
+        public TicTacToeField _Board = new TicTacToeField();
 
         public override ITicTacToeField TicTacToeField { get { return _Board; } }
 
@@ -219,21 +315,32 @@ namespace OOPGames
         {
             get
             {
-                for (int i = 0; i < 3; i++)
+                if (TimerHelp.timeout())
                 {
-                    for (int j = 0; j < 3; j++)
+                    return false;
+                }
+                else
+                {
+
+                    for (int i = 0; i < 3; i++)
                     {
-                        if (_Board[i, j] == 0)
+                        for (int j = 0; j < 3; j++)
                         {
-                            return true;
+                            if (_Board[i, j] == 0)
+                            {
+                                return true;
+                            }
                         }
                     }
+                    if (TimerHelp.state() is GA_Timer)
+                    {
+                        TimerHelp.stop();
+                    }
+                    return false;
                 }
-
-                return false;
             }
         }
-        public override string Name { get { return "GA_Rules"; } }
+        public override string Name { get { return "GA_TicTacToeRules"; } }
 
         public override int CheckIfPLayerWon()
         {
@@ -243,10 +350,18 @@ namespace OOPGames
                 {
                     if (_Board[i, 0] == p && _Board[i, 1] == p && _Board[i, 2] == p)
                     {
+                        if (TimerHelp.state() is GA_Timer)
+                        {
+                            TimerHelp.stop();
+                        }
                         return p;
                     }
                     else if (_Board[0, i] == p && _Board[1, i] == p && _Board[2, i] == p)
                     {
+                        if (TimerHelp.state() is GA_Timer)
+                        {
+                            TimerHelp.stop();
+                        }
                         return p;
                     }
                 }
@@ -254,10 +369,40 @@ namespace OOPGames
                 if (_Board[0, 0] == p && _Board[1, 1] == p && _Board[2, 2] == p ||
                     _Board[0, 2] == p && _Board[1, 1] == p && _Board[2, 0] == p)
                 {
+                    if (TimerHelp.state() is GA_Timer)
+                    {
+                        TimerHelp.stop();
+                    }
                     return p;
                 }
             }
-
+            if (TimerHelp.timeout())
+            {
+                int n1 = 0;
+                int n2 = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (_Board[i, j] == 1)
+                        {
+                            n1++;
+                        }
+                        else if (_Board[i, j] == 2)
+                        {
+                            n2++;
+                        }
+                    }
+                }
+                if (n1 > n2)
+                {
+                    return 1;
+                }
+                else if (n1 == n2)
+                {
+                    return 2;
+                }
+            }
             return -1;
         }
 
@@ -270,6 +415,11 @@ namespace OOPGames
                     _Board[i, j] = 0;
                 }
             }
+            if (TimerHelp.state() is GA_Timer)
+            {
+                TimerHelp.reset();
+                TimerHelp.start();
+            }
         }
 
         public override void DoTicTacToeMove(ITicTacToeMove move)
@@ -278,9 +428,11 @@ namespace OOPGames
             {
                 _Board[move.Row, move.Column] = move.PlayerNumber;
             }
-            
+            if (TimerHelp.state() is GA_Timer)
+            {
+                TimerHelp.reset();
+            }
         }
-
 
     }
 
@@ -312,6 +464,42 @@ namespace OOPGames
                 else
                 {
                     f++;
+                }
+            }
+
+            return null;
+        }
+
+        public override void SetPlayerNumber(int playerNumber)
+        {
+            _PlayerNumber = playerNumber;
+        }
+    }
+
+    public class GA_TicTacToeHumanPlayer : BaseHumanTicTacToePlayer
+    {
+        int _PlayerNumber = 0;
+
+        public override string Name { get { return "Gruppe A HumanTicTacToePlayer"; } }
+
+        public override IGamePlayer Clone()
+        {
+            GA_TicTacToeHumanPlayer ttthp = new GA_TicTacToeHumanPlayer();
+            ttthp.SetPlayerNumber(_PlayerNumber);
+            return ttthp;
+        }
+
+        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field) //evtl Eigene funktion (Wie bei Gruppe B)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
+                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
+                    {
+                        return new TicTacToeMove(i, j, _PlayerNumber);
+                    }
                 }
             }
 

@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Windows.Input;
 
 namespace OOPGames
 {
@@ -351,38 +350,8 @@ namespace OOPGames
 
         public ITicTacToeMove GetMove_B(IMoveSelection selection, ITicTacToeField field)
         {
-            if (selection is IKeySelection)
-            {
-                IKeySelection keySelection = (IKeySelection)selection;
-                int x = -1, y = -1;
-                switch (keySelection.Key)
-                {
-                    case (Key.D1):
-                        x = 0; y = 2; break;
-                    case (Key.D2):
-                        x = 1; y = 2; break;
-                    case (Key.D3):
-                        x = 2; y = 2; break;
-                    case (Key.D4):
-                        x = 0; y = 1; break;
-                    case (Key.D5):
-                        x = 1; y = 1; break;
-                    case (Key.D6):
-                        x = 2; y = 1; break;
-                    case (Key.D7):
-                        x = 0; y = 0; break;
-                    case (Key.D8):
-                        x = 1; y = 0; break;
-                    case (Key.D9):
-                        x = 2; y = 0; break;
-                }
-                return new TicTacToeMove(y, x, _PlayerNumber);
-            }
-            else
-            {
-                int x = (selection.XClickPos - 20) / 100, y = (selection.YClickPos - 20) / 100;
-                return new TicTacToeMove(y, x, _PlayerNumber);
-            }
+            int x = (selection.XClickPos - 20) / 100, y = (selection.YClickPos - 20) / 100;
+            return new TicTacToeMove(y, x, _PlayerNumber);
         }
 
         public override void SetPlayerNumber(int playerNumber)
@@ -391,7 +360,9 @@ namespace OOPGames
         }
     }
 
-    
+    /*//
+    //Den Computerspieler wollten wir noch nicht implementieren
+
     public class GB_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
@@ -406,11 +377,6 @@ namespace OOPGames
         }
 
         public override ITicTacToeMove GetMove(ITicTacToeField field)
-        {
-            return GetMove_A(field);
-        }
-
-        public ITicTacToeMove GetMove_A(ITicTacToeField field)
         {
             Random rand = new Random();
             int f = rand.Next(0, 8);
@@ -431,16 +397,10 @@ namespace OOPGames
             return null;
         }
 
-        public ITicTacToeMove GetMove_B(ITicTacToeField field)
-        {
-            //intelligenter ComputerPlayer für 3
-            return null;
-        }
-
         public override void SetPlayerNumber(int playerNumber)
         {
             _PlayerNumber = playerNumber;
         }
     }
-
+    //*/
 }

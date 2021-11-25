@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -69,16 +69,16 @@ namespace OOPGames
     }
 
 
-    
+
     public class GE_TicTacToeRules : BaseTicTacToeRules_GE
     {
         GE_TicTacToeField _Field = new GE_TicTacToeField(5);
 
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
 
-        public override bool MovesPossible 
-        { 
-            get 
+        public override bool MovesPossible
+        {
+            get
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -91,8 +91,8 @@ namespace OOPGames
                     }
                 }
 
-                return false; 
-            } 
+                return false;
+            }
         }
 
         public override string Name { get { return "GE_TicTacToeRules"; } }
@@ -144,32 +144,31 @@ namespace OOPGames
 
         public override void AskForGameSize()
         {
-            //int size = Prompt.ShowDialog("Test", "123");
+         int size = Prompt.ShowDialog("Bitte GrÃ¶ÃŸe wÃ¤hlen:", "GrÃ¶ÃŸe Festlegen");
 
         }
         //commentar
-        /*
+        
         public static class Prompt
         {
             public static int ShowDialog(string text, string caption)
             {
                 Form prompt = new Form();
                 prompt.Width = 500;
-                prompt.Height = 100;
+                prompt.Height = 150;
                 prompt.Text = caption;
-                System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 50, Top = 20, Text = text };
-                string[] auswahl = { "klein", "mittel", "groß"};
+                System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 10, Top = 20, Text = text };
+                string[] auswahl = { "klein", "mittel", "groÃŸ"};
                 System.Windows.Forms.ComboBox dropDown = new System.Windows.Forms.ComboBox();
                 dropDown.Items.AddRange(auswahl);
-                dropDown.Location = new System.Drawing.Point(10, 30);
+                dropDown.Location = new System.Drawing.Point(10, 60);
                 dropDown.IntegralHeight = false;
                 dropDown.MaxDropDownItems = 3;
                 dropDown.DropDownStyle = ComboBoxStyle.DropDownList;
                 dropDown.Name = "ComboBox1";
                 dropDown.Size = new System.Drawing.Size(136, 81);
                 dropDown.TabIndex = 0;
-                dropDown.SelectedIndexChanged += 
-                    new System.EventHandler((e)=>Console.log("sdlkfj"));
+                dropDown.SelectedIndexChanged += DropDown_SelectedIndexChanged;
 
                 System.Windows.Forms.Button confirmation = new System.Windows.Forms.Button() { Text = "Ok", Left = 350, Width = 100, Top = 70 };
                 confirmation.Click += (sender, e) => { prompt.Close(); };
@@ -177,10 +176,15 @@ namespace OOPGames
                 prompt.Controls.Add(textLabel);
                 prompt.Controls.Add(dropDown);
                 prompt.ShowDialog();
-                return (int)dropDown.Value;
+                return (int)dropDown.SelectedIndex;
+            }
+
+            private static void DropDown_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                return;
             }
         }
-        */
+
 
     }
 
@@ -195,7 +199,7 @@ namespace OOPGames
 
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
 
-        public override bool MovesPossible //muss auf die spielfeldgröße angepasst werden
+        public override bool MovesPossible //muss auf die spielfeldgrï¿½ï¿½e angepasst werden
         { 
             get 
             {
@@ -215,7 +219,7 @@ namespace OOPGames
 
         public override string Name { get { return "GE_TicTacToeRules"; } }
 
-        public override int CheckIfPLayerWon()//anpassen auf spielfeld größe; (vlt anpassen ab wie viel man gewinnt)
+        public override int CheckIfPLayerWon()//anpassen auf spielfeld grï¿½ï¿½e; (vlt anpassen ab wie viel man gewinnt)
         {
             for (int p = 1; p < 3; p++)
             {
@@ -302,11 +306,11 @@ namespace OOPGames
         {
             _Size = s;
             _Field = new int[s, s];
-            for(int i = 0; i < s; i++)
+            for (int i = 0; i < s; i++)
             {
-                for(int j = 0; j < s; j++)
+                for (int j = 0; j < s; j++)
                 {
-                    _Field[i,j] = 0;
+                    _Field[i, j] = 0;
                 }
             }
         }
@@ -340,14 +344,14 @@ namespace OOPGames
         }
 
     }
-    
+
     public class GE_TicTacToeMove : ITicTacToeMove
     {
         int _Row = 0;
         int _Column = 0;
         int _PlayerNumber = 0;
 
-        public GE_TicTacToeMove (int row, int column, int playerNumber)
+        public GE_TicTacToeMove(int row, int column, int playerNumber)
         {
             _Row = row;
             _Column = column;
@@ -374,14 +378,14 @@ namespace OOPGames
             return ttthp;
         }
 
-        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)//support für tasten und hidden modus
+        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)//support fï¿½r tasten und hidden modus
         {
             for (int i = 0; i < 3; i++)//anpassen
             {
                 for (int j = 0; j < 3; j++)//anpassen
                 {
-                    if (selection.XClickPos > 20 + (j*100) && selection.XClickPos < 120 + (j*100) &&
-                        selection.YClickPos > 20 + (i*100) && selection.YClickPos < 120 + (i*100))
+                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
+                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
                     {
                         return new GE_TicTacToeMove(i, j, _PlayerNumber);
                     }
@@ -397,7 +401,7 @@ namespace OOPGames
         }
     }
 
-   public class GE_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer //lege neuen computerspieler an
+    public class GE_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer //lege neuen computerspieler an
     {
         int _PlayerNumber = 0;
 
