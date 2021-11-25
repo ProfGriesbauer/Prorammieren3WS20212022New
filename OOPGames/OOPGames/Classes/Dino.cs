@@ -9,6 +9,14 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace OOPGames
+
+    /*  -Anna:  Hindernisse automatisch generieren (verschiedene Schwierigkeitslevel mit wachsendem Cunter)
+     *  -Benni: Counter anzeigen, Grafische Oberfläche Tunen
+     *  -Lukas: Verlieren ausgeben
+     *  -Jakob: Verlieren sofort erkennen, Spielfeld soll stehen bleiben
+     *  
+     */
+
 {
     /*  Implementieren des Painters:Painter hat die Aufgaben:
      *  -Abhängig von Zustand des currentField eine Grafik auszugeben
@@ -49,7 +57,7 @@ namespace OOPGames
             canvas.Children.Add(OE);
             
 
-            int[] obstacles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 };
+            int[] obstacles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 14, 19, 0, 0, 0, 0, 0, 0, 0 };
 
             int vobst = 5;
             
@@ -57,17 +65,17 @@ namespace OOPGames
             {
                 if (obstacles.Length > counter + i / vobst && counter + i / vobst > 0)
                 {
-                    if (obstacles[counter + i / vobst] == 1)
+                    if (obstacles[counter + i / vobst] >= 1)
                     {
                         int plc = i+100;
 
-                        Line obst = new Line() { X1 = plc, Y1 = 280, X2 = plc, Y2 = 310, Stroke = lineStroke, StrokeThickness = 3.0 };
+                        Line obst = new Line() { X1 = plc, Y1 = 300 - obstacles[counter + i / vobst], X2 = plc, Y2 = 310, Stroke = lineStroke, StrokeThickness = 3.0 };
                         canvas.Children.Add(obst);
                     }
 
-                    if (obstacles[counter + i / vobst] == 1 && i == 0)
+                    if (obstacles[counter + i / vobst] >= 1 && i == 0)
                     {
-                        currentField[1] = obstacles[counter + i / vobst] *20;
+                        currentField[1] = obstacles[counter + i / vobst] ;
                     }
                     else
                     {
@@ -77,7 +85,6 @@ namespace OOPGames
                     if (currentField[1] > currentField[2] && currentField[1] != 0)
                     {
                         currentField[4] = 1;
-                        Console.WriteLine("Verloren");
                     }
                    
 
