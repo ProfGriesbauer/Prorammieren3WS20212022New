@@ -39,8 +39,9 @@ namespace OOPGames
     }
 
 
-    public interface GG_IStartrekGamefield
+    public interface GG_IStartrekGamefield : IGameField
     {
+        int this[int r, int c] { get; set; }
         //ToDo: Vererbung
         // 6x6 Matrix
     }

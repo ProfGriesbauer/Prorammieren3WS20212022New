@@ -9,8 +9,8 @@ using System.Windows.Controls;
 namespace OOPGames
 {
     public class GG_StartrekPainter : GG_IStartrekPainter
-    {  
-        List<GG_Meteo> _Meteos = new List<GG_Meteo>();  
+    {
+        List<GG_Meteo> _Meteos = new List<GG_Meteo>();
         uint _aufrufe = 0;
         int _spawnspeed = 20; //Takt der Meteoerzeugung
         int _spawnnum = 2; //Anzahl der je Spawn erzeugten Meteos
@@ -44,7 +44,7 @@ namespace OOPGames
             {
                 meteo.UpdatePos();
                 //Wenn Meteo aus Spielfeld -> Löschen
-                if(meteo.PositionRow > 6)
+                if (meteo.PositionRow > 6)
                 {
                     _Meteos.Remove(meteo);
                 }
@@ -55,14 +55,15 @@ namespace OOPGames
         {
             _aufrufe++;
 
-            if((_aufrufe+_spawnspeed)%_spawnspeed == 0) //+spwanspeed dass bei Spielstart gleich gespawnd wird
-            {   for(int i = 0; i<_spawnnum; i++)
+            if ((_aufrufe + _spawnspeed) % _spawnspeed == 0) //+spwanspeed dass bei Spielstart gleich gespawnd wird
+            {
+                for (int i = 0; i < _spawnnum; i++)
                 {
                     spawnMeteos();
                 }
-                
+
             }
-            if(_aufrufe%_movespeed == 0)
+            if (_aufrufe % _movespeed == 0)
             {
                 moveMetos();
             }
@@ -83,12 +84,45 @@ namespace OOPGames
             //0 gesetzt
             Random rand = new Random();
             _PositionRow = 0;
-            _PositionColum = rand.Next(0,5);
+            _PositionColum = rand.Next(0, 5);
         }
 
         public void UpdatePos()
         {
             _PositionRow++;
+        }
+    }
+    public class GG_StartrekField : GG_IStartrekGamefield
+    {
+        int[,] _Field = new int[6, 6] { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
+
+        public int this[int r, int c]
+        {
+            get
+            {
+                if (r >= 0 && r < 6 && c >= 0 && c < 6)
+                {
+                    return _Field[r, c];
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+
+            set
+            {
+                if (r >= 0 && r < 6 && c >= 0 && c < 6)
+                {
+                    _Field[r, c] = value;
+                }
+            }
+        }
+
+        // Vorläufige nichtimplementierung der Funktion bis der Painter steht
+        bool IGameField.CanBePaintedBy(IPaintGame painter)
+        {
+            throw new NotImplementedException();
         }
     }
 }
