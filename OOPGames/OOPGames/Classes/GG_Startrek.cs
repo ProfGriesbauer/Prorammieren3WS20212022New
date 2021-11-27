@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace OOPGames
 {
@@ -19,7 +20,7 @@ namespace OOPGames
         bool _collision = false;
 
 
-        bool GG_IStartrekPainter.Collison { get { return _collision; } }
+        public bool Collison { get { return _collision; } }
 
         public string Name => throw new NotImplementedException();
 
@@ -52,8 +53,16 @@ namespace OOPGames
                 }
             }
         }
-
+        //Übergibt PaintStartrekGameField currentField als passenden Typ GG_IStartrekGamefield
         public void PaintGameField(Canvas canvas, IGameField currentField)
+        {
+            if (currentField is GG_IStartrekGamefield)
+            {
+                PaintStartrekGameField(canvas, (GG_IStartrekGamefield)currentField);
+            }
+        }
+
+        public void PaintStartrekGameField(Canvas canvas, GG_IStartrekGamefield currentField)
         {
             _aufrufe++;
 
@@ -80,11 +89,11 @@ namespace OOPGames
             Brush XStroke = new SolidColorBrush(SpaceshipColor);
 
             // Matrix auswerten und Meteos an entsprechende Stelle zeichnen
- /*           for (int i = 0; i < 6; i++)
+           for (int i = 0; i < 6; i++)
            {
                for (int j = 0; j < 6; j++)
                {
-                   if (currentField[j, i] == 1)     // falsche Variable!?
+                   if (currentField[j, i] == 1)    
                    {
                        Line X1 = new Line() { X1 = 20 + (j * 60), Y1 = 20 + (i * 60), X2 = 80 + (j * 60), Y2 = 80 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
                        canvas.Children.Add(X1);
@@ -95,8 +104,6 @@ namespace OOPGames
                    }
                }
            }
- */
-
         }
     }
 
@@ -147,11 +154,9 @@ namespace OOPGames
                 }
             }
         }
-
-        // Vorläufige nichtimplementierung der Funktion bis der Painter steht
-        bool IGameField.CanBePaintedBy(IPaintGame painter)
+        public bool CanBePaintedBy(IPaintGame painter)
         {
-            throw new NotImplementedException();
+            return painter is GG_IStartrekPainter;
         }
 
         public class GG_StartrekRules : GG_IStartrekRules
