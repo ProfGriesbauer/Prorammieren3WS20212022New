@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace OOPGames
 {
@@ -24,6 +25,7 @@ namespace OOPGames
 
         public void checkCollison()
         {
+            //Kollision prüfen
             throw new NotImplementedException();
         }
 
@@ -67,6 +69,33 @@ namespace OOPGames
             {
                 moveMetos();
             }
+
+            //Tatsächliches Zeichnen:
+            canvas.Children.Clear();
+            Color bgColor = Color.FromRgb(255, 255, 255);
+            canvas.Background = new SolidColorBrush(bgColor);
+            Color MeteoColor = Color.FromRgb(0, 255, 0);
+            Brush lineStroke = new SolidColorBrush(MeteoColor);
+            Color SpaceshipColor = Color.FromRgb(0, 255, 0);
+            Brush XStroke = new SolidColorBrush(SpaceshipColor);
+
+            // Matrix auswerten und Meteos an entsprechende Stelle zeichnen
+ /*           for (int i = 0; i < 6; i++)
+           {
+               for (int j = 0; j < 6; j++)
+               {
+                   if (currentField[j, i] == 1)     // falsche Variable!?
+                   {
+                       Line X1 = new Line() { X1 = 20 + (j * 60), Y1 = 20 + (i * 60), X2 = 80 + (j * 60), Y2 = 80 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
+                       canvas.Children.Add(X1);
+                       Line X2 = new Line() { X1 = 20 + (j * 60), Y1 = 80 + (i * 60), X2 = 80 + (j * 60), Y2 = 20 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
+                       canvas.Children.Add(X2);
+                       Line X3 = new Line() { X1 = 20 + (j * 60), Y1 = 50 + (i * 60), X2 = 80 + (j * 60), Y2 = 50 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
+                       canvas.Children.Add(X3);
+                   }
+               }
+           }
+ */
 
         }
     }
@@ -123,6 +152,39 @@ namespace OOPGames
         bool IGameField.CanBePaintedBy(IPaintGame painter)
         {
             throw new NotImplementedException();
+        }
+
+        public class GG_StartrekRules : GG_IStartrekRules
+        {
+            GG_StartrekField _Field = new GG_StartrekField();
+
+            public string Name { get { return "StartrekRules"; } }
+
+
+            public IGameField CurrentField { get { return _Field; } }
+
+            public bool MovesPossible { get { return true; } }
+
+            public int CheckIfPLayerWon()
+            {
+                return -1;
+            }
+
+            public void ClearField()
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    for (int j = 0; j < 6; j++)
+                    {
+                        _Field[i, j] = 0;
+                    }
+                }
+            }
+
+            public void DoMove(IPlayMove move)
+            {
+
+            }
         }
     }
 }
