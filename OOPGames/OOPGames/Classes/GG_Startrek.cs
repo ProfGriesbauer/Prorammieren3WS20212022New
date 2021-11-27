@@ -14,15 +14,15 @@ namespace OOPGames
     {
         List<GG_Meteo> _Meteos = new List<GG_Meteo>();
         uint _aufrufe = 0;
-        int _spawnspeed = 20; //Takt der Meteoerzeugung
+        int _spawnspeed = 40; //Takt der Meteoerzeugung
         int _spawnnum = 2; //Anzahl der je Spawn erzeugten Meteos
-        int _movespeed = 20; //Takt der Bewegung 
+        int _movespeed = 40; //Takt der Bewegung 
         bool _collision = false;
 
 
         public bool Collison { get { return _collision; } }
 
-        public string Name => throw new NotImplementedException();
+        public string Name { get { return "StartrekPainter"; } }
 
         public void checkCollison()
         {
@@ -34,10 +34,10 @@ namespace OOPGames
         {
             GG_Meteo meteo = new GG_Meteo();
             //Gegen Meteos an gleicher Posititon absichern
-            while (meteo.PositionColum == _Meteos[_Meteos.Count].PositionColum)
+           /* while (meteo.PositionColum == _Meteos[_Meteos.Count-1].PositionColum)
             {
                 meteo = new GG_Meteo();
-            }
+            } */
             _Meteos.Add(meteo);
         }
 
@@ -47,17 +47,37 @@ namespace OOPGames
             {
                 meteo.UpdatePos();
                 //Wenn Meteo aus Spielfeld -> Löschen
-                if (meteo.PositionRow > 6)
+                //Führt zu Fehler, da während foreach nicht gelöscht werden darf
+                //Evtl Meteos zwischenspeichern und dann löschen?
+                /*if (meteo.PositionRow > 6)
                 {
                     _Meteos.Remove(meteo);
-                }
+                }*/
             }
         }
+        //Schreibt Positionen der Meteos in Matrix
+        public void updateField(GG_IStartrekGamefield currentField)
+        {
+            foreach (GG_Meteo meteo in _Meteos)
+            {
+                //eig += um Bedingung für Collision zu setzen, aber Probleme mit Spawn am gleichen Ort
+                currentField[meteo.PositionRow, meteo.PositionColum] = 1; 
+            }
+        }
+        //Löscht bisherige Positionen aus Matrix, dass fallende MEteos keine Striche hinterlassen
+        public void removeOldPositions(GG_IStartrekGamefield currentField)
+        {
+            foreach (GG_Meteo meteo in _Meteos)
+            {
+                currentField[meteo.PositionRow, meteo.PositionColum] = 0;
+            }
+        }
+
         //Übergibt PaintStartrekGameField currentField als passenden Typ GG_IStartrekGamefield
         public void PaintGameField(Canvas canvas, IGameField currentField)
         {
             if (currentField is GG_IStartrekGamefield)
-            {
+            {   
                 PaintStartrekGameField(canvas, (GG_IStartrekGamefield)currentField);
             }
         }
@@ -65,11 +85,12 @@ namespace OOPGames
         public void PaintStartrekGameField(Canvas canvas, GG_IStartrekGamefield currentField)
         {
             _aufrufe++;
+            removeOldPositions(currentField);
 
             if ((_aufrufe + _spawnspeed) % _spawnspeed == 0) //+spwanspeed dass bei Spielstart gleich gespawnd wird
-            {
+            {   
                 for (int i = 0; i < _spawnnum; i++)
-                {
+                { 
                     spawnMeteos();
                 }
 
@@ -77,7 +98,11 @@ namespace OOPGames
             if (_aufrufe % _movespeed == 0)
             {
                 moveMetos();
+              
             }
+            
+            updateField(currentField);
+
 
             //Tatsächliches Zeichnen:
             canvas.Children.Clear();
@@ -93,7 +118,7 @@ namespace OOPGames
            {
                for (int j = 0; j < 6; j++)
                {
-                   if (currentField[j, i] == 1)    
+                   if (currentField[i, j] == 1)    
                    {
                        Line X1 = new Line() { X1 = 20 + (j * 60), Y1 = 20 + (i * 60), X2 = 80 + (j * 60), Y2 = 80 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
                        canvas.Children.Add(X1);
@@ -158,38 +183,37 @@ namespace OOPGames
         {
             return painter is GG_IStartrekPainter;
         }
+    }
+    public class GG_StartrekRules : GG_IStartrekRules
+    {
+        GG_StartrekField _Field = new GG_StartrekField();
 
-        public class GG_StartrekRules : GG_IStartrekRules
+        public string Name { get { return "StartrekRules"; } }
+
+
+        public IGameField CurrentField { get { return _Field; } }
+
+        public bool MovesPossible { get { return true; } }
+
+        public int CheckIfPLayerWon()
         {
-            GG_StartrekField _Field = new GG_StartrekField();
+            return -1;
+        }
 
-            public string Name { get { return "StartrekRules"; } }
-
-
-            public IGameField CurrentField { get { return _Field; } }
-
-            public bool MovesPossible { get { return true; } }
-
-            public int CheckIfPLayerWon()
+        public void ClearField()
+        {
+            for (int i = 0; i < 6; i++)
             {
-                return -1;
-            }
-
-            public void ClearField()
-            {
-                for (int i = 0; i < 6; i++)
+                for (int j = 0; j < 6; j++)
                 {
-                    for (int j = 0; j < 6; j++)
-                    {
-                        _Field[i, j] = 0;
-                    }
+                    _Field[i, j] = 0;
                 }
             }
+        }
 
-            public void DoMove(IPlayMove move)
-            {
+        public void DoMove(IPlayMove move)
+        {
 
-            }
         }
     }
 }

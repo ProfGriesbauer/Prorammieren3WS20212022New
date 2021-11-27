@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace OOPGames
 {   //StartrekPainter
@@ -35,6 +36,8 @@ namespace OOPGames
         void checkCollison();
         //  Kollison muss dann den Wert von CheckifPlayerWon in der Rulesklasse auf true setzen, dann wurd nach Playerinteraktion(Mausklick)
         // das Spiel wirklich beendet und die Anzeige entsprechend gestalltet
+        //Methode muss durch PaintGameField mit entsprechendem Cast auf GG_IStartrekGamefield aufgerufen werden 
+        void PaintStartrekGameField(Canvas canvas, GG_IStartrekGamefield currentField);
 
     }
 
