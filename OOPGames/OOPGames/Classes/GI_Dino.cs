@@ -56,7 +56,6 @@ namespace OOPGames
             Ellipse OE = new Ellipse() { Margin = new Thickness(100, 300 - currentField[2], 0, 0), Width = 10, Height = 10, Stroke = OStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(OE);
 
-
             int[] obstacles = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 14, 19, 0, 0, 0, 0, 0, 0, 0 };
 
             int vobst = 5;
@@ -92,6 +91,32 @@ namespace OOPGames
 
             }
 
+            //Spielfeldrahmen
+            Color floorColor = Color.FromRgb(0, 255, 0);
+            Brush floorStroke = new SolidColorBrush(floorColor);
+            Line floor = new Line() { X1 = 0, Y1 = 310, X2 = 400, Y2 = 310, Stroke = floorStroke, StrokeThickness = 5.0 };
+            canvas.Children.Add(floor);
+
+            Color skyColor = Color.FromRgb(0, 0, 255);
+            Brush skyStroke = new SolidColorBrush(skyColor);
+            Line roof = new Line() { X1 = 0, Y1 = 110, X2 = 400, Y2 = 110, Stroke = skyStroke, StrokeThickness = 5.0 };
+            canvas.Children.Add(roof);
+
+            //Anzeige Counter (kopiert von Gruppe A)
+            TextBlock textBlock = new TextBlock();
+            TextBlock.SetFontSize(textBlock, 20);
+            textBlock.Text = "Counter: " + counter;
+            Color textColor = Color.FromRgb(0, 0, 0);
+            textBlock.Foreground = new SolidColorBrush(textColor);
+            Canvas.SetLeft(textBlock, 30);
+            Canvas.SetTop(textBlock, 320);
+            canvas.Children.Add(textBlock);
+            Line l9 = new Line() { X1 = 20, Y1 = 320, X2 = 20, Y2 = 350, Stroke = lineStroke, StrokeThickness = 3.0 };
+            canvas.Children.Add(l9);
+            Line l10 = new Line() { X1 = 20, Y1 = 350, X2 = 150, Y2 = 350, Stroke = lineStroke, StrokeThickness = 3.0 };
+            canvas.Children.Add(l10);
+            Line l11 = new Line() { X1 = 150, Y1 = 350, X2 = 150, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
+            canvas.Children.Add(l11);
         }
 
     }
