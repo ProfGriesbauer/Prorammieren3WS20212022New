@@ -26,6 +26,44 @@ namespace OOPGames
     {
         public override string Name { get { return "DinoPainter"; } }
 
+        int[] obstacles = new int[1000];
+
+        public void ObstaclesPosition()
+        {
+            var rand = new Random();
+
+            int zeros = 30;
+
+            /* for (int n=30; n<obstacles.Length; n=n+zeros)
+            {
+              obstacles[n] = 1;
+              if (zeros > 10) zeros--;
+             }
+
+             */
+            obstacles = new int[1000];
+
+            for (int n = 30; n < obstacles.Length; n = n + zeros)
+            {
+                if (n < 400)
+                {
+                    zeros = rand.Next(30, 50);
+                }
+                else
+                if (n < 600)
+                {
+                    zeros = rand.Next(20, 30);
+                }
+                else
+                if (n < 800)
+                {
+                    zeros = rand.Next(15, 25);
+                }
+                else zeros = 20;
+
+                obstacles[n] = rand.Next(1, 25);
+            }
+        }
 
         public override void PaintDinoGameField(Canvas canvas, IDino_GameField currentField)
         {
@@ -56,7 +94,12 @@ namespace OOPGames
             Ellipse OE = new Ellipse() { Margin = new Thickness(100, 300 - currentField[2], 0, 0), Width = 10, Height = 10, Stroke = OStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(OE);
 
-            int[] obstacles = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 14, 19, 0, 0, 0, 0, 0, 0, 0 };
+            if (counter == 1)
+            {
+                ObstaclesPosition();
+            }
+
+            //int[] obstacles = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 14, 19, 0, 0, 0, 0, 0, 0, 0 };
 
             int vobst = 5;
 
