@@ -220,7 +220,7 @@ namespace OOPGames
         }
     }
 
-    /*public class GC_VierGewinntComputerPlayer : BaseComputerVierGewinntPlayer
+   public class GC_VierGewinntComputerPlayer : BaseComputerVierGewinntPlayer
     {
         int _PlayerNumber = 0;
 
@@ -237,10 +237,10 @@ namespace OOPGames
         {
             Random rand = new Random();
             int f = rand.Next(0, 8);
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 42; i++)
             {
-                int c = f % 3;
-                int r = ((f - c) / 3) % 3;
+                int c = f % 6;
+                int r = ((f - c) / 6) % 7;
                 if (field[r, c] <= 0)
                 {
                     return new GC_VierGewinntMove(r, c, _PlayerNumber);
@@ -259,5 +259,5 @@ namespace OOPGames
             _PlayerNumber = playerNumber;
         }
     }
-    */
+ 
 }
