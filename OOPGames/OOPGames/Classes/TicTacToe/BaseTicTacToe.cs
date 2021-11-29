@@ -37,7 +37,7 @@ namespace OOPGames
         public abstract ITicTacToeField TicTacToeField { get; }
 
         public abstract bool MovesPossible { get; }
-
+     
         public abstract string Name { get; }
 
         public abstract int CheckIfPLayerWon();

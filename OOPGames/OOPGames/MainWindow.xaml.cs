@@ -103,7 +103,9 @@ namespace OOPGames
         private void _PaintTimer_Tick(object sender, EventArgs e)
         {
             if (_CurrentPainter != null &&
-                   _CurrentRules != null && _CurrentRules.CurrentField.CanBePaintedBy(_CurrentPainter))
+                   _CurrentRules != null && 
+                   _CurrentRules.CurrentField != null &&
+                   _CurrentRules.CurrentField.CanBePaintedBy(_CurrentPainter))
             {
                 _CurrentPainter.PaintGameField(PaintCanvas, _CurrentRules.CurrentField);
             }
