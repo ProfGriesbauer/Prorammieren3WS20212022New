@@ -7,11 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-//rules -> Raphi
-//paint -> Moritz
-//humanplayer -> Markus
-//field -> Lena
-//move -> Michi
 
 namespace OOPGames
 {
@@ -138,13 +133,13 @@ namespace OOPGames
 
     public class GC_VierGewinntField : BaseVierGewinntField
     {
-        int[,] _Field = new int[6, 7] { { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 } };
+        int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
 
         public override int this[int r, int c]
         {
             get
             {
-                if (r >= 0 && r < 6 && c >= 0 && c < 7)
+                if (r >= 0 && r < 3 && c >= 0 && c < 3)
                 {
                     return _Field[r, c];
                 }
@@ -156,7 +151,7 @@ namespace OOPGames
 
             set
             {
-                if (r >= 0 && r < 6 && c >= 0 && c < 7)
+                if (r >= 0 && r < 3 && c >= 0 && c < 3)
                 {
                     _Field[r, c] = value;
                 }
@@ -199,12 +194,12 @@ namespace OOPGames
 
         public override IVierGewinntMove GetMove(IMoveSelection selection, IVierGewinntField field)
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 6; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    if (selection.XClickPos > 20 + (j * 50) && selection.XClickPos < 120 + (j * 50) &&
-                        selection.YClickPos > 20 + (i * 42) && selection.YClickPos < 120 + (i * 42))
+                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
+                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
                     {
                         return new GC_VierGewinntMove(i, j, _PlayerNumber);
                     }
@@ -220,7 +215,7 @@ namespace OOPGames
         }
     }
 
-   public class GC_VierGewinntComputerPlayer : BaseComputerVierGewinntPlayer
+    public class GC_VierGewinntComputerPlayer : BaseComputerVierGewinntPlayer
     {
         int _PlayerNumber = 0;
 
@@ -237,10 +232,10 @@ namespace OOPGames
         {
             Random rand = new Random();
             int f = rand.Next(0, 8);
-            for (int i = 0; i < 42; i++)
+            for (int i = 0; i < 9; i++)
             {
-                int c = f % 6;
-                int r = ((f - c) / 6) % 7;
+                int c = f % 3;
+                int r = ((f - c) / 3) % 3;
                 if (field[r, c] <= 0)
                 {
                     return new GC_VierGewinntMove(r, c, _PlayerNumber);
@@ -259,5 +254,4 @@ namespace OOPGames
             _PlayerNumber = playerNumber;
         }
     }
- 
 }
