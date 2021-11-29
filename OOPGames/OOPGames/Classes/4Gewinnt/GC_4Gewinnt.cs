@@ -73,9 +73,9 @@ namespace OOPGames
         {
             get
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i <  6;i++)
                 {
-                    for (int j = 0; j < 3; j++)
+                    for (int j = 0; j < 7; j++)
                     {
                         if (_Field[i, j] == 0)
                         {
@@ -94,33 +94,56 @@ namespace OOPGames
         {
             for (int p = 1; p < 3; p++)
             {
-                for (int i = 0; i < 3; i++)
+                for (int j = 0, j < 7; j++) // Checke Senkrecht 
                 {
-                    if (_Field[i, 0] > 0 && _Field[i, 0] == _Field[i, 1] && _Field[i, 1] == _Field[i, 2])
+                    for (int i = 0; i < 3; i++)
                     {
-                        return p;
+                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i + 1, j] && _Field[i + 1, j] == _Field[i + 2, j] && _Field[i + 2, j] == _Field[i + 3, j])
+                        {
+                            return p;
+                        }
                     }
-                    else if (_Field[0, i] > 0 && _Field[0, i] == _Field[1, i] && _Field[1, i] == _Field[2, i])
+                }
+                for (int i = 0, i < 6; i++) // Checke Waagrecht
+                {
+                    for (int j = 0; j < 4; j++)
                     {
-                        return p;
+                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i, j + 1] && _Field[i, j + 1] == _Field[i, j + 2] && _Field[i, j + 2] == _Field[i, j + 3])
+                        {
+                            return p;
+                        }
+                    }
+                }
+                for (int i = 0, i < 3; i++) // Checke links unten nach rechts oben 
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i + 1, j + 1] && _Field[i + 1, j + 1] == _Field[i + 2, j + 2] && _Field[i + 2, j + 2] == _Field[i + 3, j + 3])
+                        {
+                            return p;
+                        }
+                    }
+                }
+                for (int i = 5, i > 2; i--) // Checke links oben nach recht unten 
+                {
+                    for (int j = 0; j > 2; j++)
+                    {
+                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i - 1, j - 1] && _Field[i - 1, j - 1] == _Field[i - 2, j - 2] && _Field[i - 2, j - 2] == _Field[i - 3, j - 3])
+                        {
+                            return p;
+                        }
                     }
                 }
 
-                if ((_Field[0, 0] > 0 && _Field[0, 0] == _Field[1, 1] && _Field[1, 1] == _Field[2, 2]) ||
-                    (_Field[0, 2] > 0 && _Field[0, 2] == _Field[1, 1] && _Field[1, 1] == _Field[2, 0]))
-                {
-                    return p;
-                }
+                return -1;
             }
-
-            return -1;
         }
 
         public override void ClearField()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 6; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 7; j++)
                 {
                     _Field[i, j] = 0;
                 }
@@ -129,7 +152,7 @@ namespace OOPGames
 
         public override void DoVierGewinntMove(IVierGewinntMove move)
         {
-            if (move.Row >= 0 && move.Row < 3 && move.Column >= 0 && move.Column < 3)
+            if (move.Row >= 0 && move.Row < 6 && move.Column >= 0 && move.Column < 7)
             {
                 _Field[move.Row, move.Column] = move.PlayerNumber;
             }
