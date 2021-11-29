@@ -1,6 +1,6 @@
 //Aufgaben:
 //Lena Field
-//Moritz Paint
+//Moritz Paints
 //Markus HumanPlayer
 //Raphi rules
 //Michi Move ->
