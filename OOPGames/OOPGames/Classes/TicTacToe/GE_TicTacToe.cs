@@ -28,40 +28,79 @@ namespace OOPGames
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
-            canvas.Children.Clear();
-            Color bgColor = Color.FromRgb(255, 255, 255);
-            canvas.Background = new SolidColorBrush(bgColor);
-            Color lineColor = Color.FromRgb(0, 255, 255);
-            Brush lineStroke = new SolidColorBrush(lineColor);
-            Color XColor = Color.FromRgb(0, 255, 0);
-            Brush XStroke = new SolidColorBrush(XColor);
-            Color OColor = Color.FromRgb(0, 0, 255);
-            Brush OStroke = new SolidColorBrush(OColor);
-
-            Line l1 = new Line() { X1 = 120, Y1 = 20, X2 = 120, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
-            canvas.Children.Add(l1);
-            Line l2 = new Line() { X1 = 220, Y1 = 20, X2 = 220, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
-            canvas.Children.Add(l2);
-            Line l3 = new Line() { X1 = 20, Y1 = 120, X2 = 320, Y2 = 120, Stroke = lineStroke, StrokeThickness = 3.0 };
-            canvas.Children.Add(l3);
-            Line l4 = new Line() { X1 = 20, Y1 = 220, X2 = 320, Y2 = 220, Stroke = lineStroke, StrokeThickness = 3.0 };
-            canvas.Children.Add(l4);
-
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (currentField[i, j] == 1)
-                    {
-                        Line X1 = new Line() { X1 = 20 + (j * 100), Y1 = 20 + (i * 100), X2 = 120 + (j * 100), Y2 = 120 + (i * 100), Stroke = XStroke, StrokeThickness = 3.0 };
-                        canvas.Children.Add(X1);
-                        Line X2 = new Line() { X1 = 20 + (j * 100), Y1 = 120 + (i * 100), X2 = 120 + (j * 100), Y2 = 20 + (i * 100), Stroke = XStroke, StrokeThickness = 3.0 };
-                        canvas.Children.Add(X2);
+            if(currentField is ITicTacToeField_GE){
+                int width = 500;
+                int height = 500;
+                ITicTacToeField_GE myField = (ITicTacToeField_GE)currentField;
+                canvas.Children.Clear();
+                Color bgColor = Color.FromRgb(255, 255, 255);
+                canvas.Background = new SolidColorBrush(bgColor);
+                Color lineColor = Color.FromRgb(0, 255, 255);
+                Brush lineStroke = new SolidColorBrush(lineColor);
+                Color XColor = Color.FromRgb(0, 255, 0);
+                Brush XStroke = new SolidColorBrush(XColor);
+                Color OColor = Color.FromRgb(0, 0, 255);
+                Brush OStroke = new SolidColorBrush(OColor);
+                for (int i = 0; i < width; i+=width/myField.GameSize) {
+                    Line l1 = new Line() { X1 = i, Y1 = 0, X2 = i, Y2 = height, Stroke = lineStroke, StrokeThickness = 3.0 };
+                    canvas.Children.Add(l1);
+                }
+                    for (int i = 0; i < height; i+=height/myField.GameSize) {
+                    Line l2 = new Line() { X1 = 0, Y1 = i, X2 = width, Y2 = i, Stroke = lineStroke, StrokeThickness = 3.0 };
+                    canvas.Children.Add(l2);
+                }
+                for (int x = 0; x < myField.GameSize; x++) {
+                    for (int y = 0; y < myField.GameSize; y++) {
+                        if(currentField[y, x] == 1) {
+                            Line X1 = new Line() { X1 = x * width / myField.GameSize, Y1 = y * height / myField.GameSize, X2 = x * width / myField.GameSize + width / myField.GameSize, Y2 = y * height / myField.GameSize + height / myField.GameSize, Stroke = XStroke, StrokeThickness = 3.0 };
+                            canvas.Children.Add(X1);
+                            Line X2 = new Line() { X1 = x * width / myField.GameSize, Y1 = y * height / myField.GameSize + height / myField.GameSize, X2 = x * width / myField.GameSize + width / myField.GameSize, Y2 = y * height / myField.GameSize, Stroke = XStroke, StrokeThickness = 3.0 };
+                            canvas.Children.Add(X2);
+                        } else if(currentField[y, x] == 2)
+                        { 
+                            Ellipse OE = new Ellipse() { Margin = new Thickness(x * width / myField.GameSize, y * height / myField.GameSize, 0, 0), Width = width / myField.GameSize, Height = height / myField.GameSize, Stroke = OStroke, StrokeThickness = 3.0 };
+                            canvas.Children.Add(OE);
+                        }
                     }
-                    else if (currentField[i, j] == 2)
+                }
+            }
+            else
+            {
+                canvas.Children.Clear();
+                Color bgColor = Color.FromRgb(255, 255, 255);
+                canvas.Background = new SolidColorBrush(bgColor);
+                Color lineColor = Color.FromRgb(0, 255, 255);
+                Brush lineStroke = new SolidColorBrush(lineColor);
+                Color XColor = Color.FromRgb(0, 255, 0);
+                Brush XStroke = new SolidColorBrush(XColor);
+                Color OColor = Color.FromRgb(0, 0, 255);
+                Brush OStroke = new SolidColorBrush(OColor);
+
+                Line l1 = new Line() { X1 = 120, Y1 = 20, X2 = 120, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
+                canvas.Children.Add(l1);
+                Line l2 = new Line() { X1 = 220, Y1 = 20, X2 = 220, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
+                canvas.Children.Add(l2);
+                Line l3 = new Line() { X1 = 20, Y1 = 120, X2 = 320, Y2 = 120, Stroke = lineStroke, StrokeThickness = 3.0 };
+                canvas.Children.Add(l3);
+                Line l4 = new Line() { X1 = 20, Y1 = 220, X2 = 320, Y2 = 220, Stroke = lineStroke, StrokeThickness = 3.0 };
+                canvas.Children.Add(l4);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
                     {
-                        Ellipse OE = new Ellipse() { Margin = new Thickness(20 + (j * 100), 20 + (i * 100), 0, 0), Width = 100, Height = 100, Stroke = OStroke, StrokeThickness = 3.0 };
-                        canvas.Children.Add(OE);
+                        if (currentField[i, j] == 1)
+                        {
+                            Line X1 = new Line() { X1 = 20 + (j * 100), Y1 = 20 + (i * 100), X2 = 120 + (j * 100), Y2 = 120 + (i * 100), Stroke = XStroke, StrokeThickness = 3.0 };
+                            canvas.Children.Add(X1);
+                            Line X2 = new Line() { X1 = 20 + (j * 100), Y1 = 120 + (i * 100), X2 = 120 + (j * 100), Y2 = 20 + (i * 100), Stroke = XStroke, StrokeThickness = 3.0 };
+                            canvas.Children.Add(X2);
+                        }
+                        else if (currentField[i, j] == 2)
+                        {
+                            Ellipse OE = new Ellipse() { Margin = new Thickness(20 + (j * 100), 20 + (i * 100), 0, 0), Width = 100, Height = 100, Stroke = OStroke, StrokeThickness = 3.0 };
+                            canvas.Children.Add(OE);
+                        }
                     }
                 }
             }
@@ -72,7 +111,7 @@ namespace OOPGames
 
     public class GE_TicTacToeRules : BaseTicTacToeRules_GE
     {
-        GE_TicTacToeField _Field = new GE_TicTacToeField(5);
+        GE_TicTacToeField _Field;
 
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
 
@@ -80,9 +119,9 @@ namespace OOPGames
         {
             get
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < _Field.GameSize; i++)
                 {
-                    for (int j = 0; j < 3; j++)
+                    for (int j = 0; j < _Field.GameSize; j++)
                     {
                         if (_Field[i, j] == 0)
                         {
@@ -99,35 +138,98 @@ namespace OOPGames
 
         public override int CheckIfPLayerWon()
         {
-            for (int p = 1; p < 3; p++)
+            
+            for (int cols = 0; cols < _Field.GameSize; cols++) 
             {
-                for (int i = 0; i < 3; i++)
+                for (int rows = 0; rows < _Field.GameSize-2; rows++) 
                 {
-                    if (_Field[i, 0] > 0 && _Field[i, 0] == _Field[i, 1] && _Field[i, 1] == _Field[i, 2])
-                    {
-                        return p;
-                    }
-                    else if (_Field[0, i] > 0 && _Field[0, i] == _Field[1, i] && _Field[1, i] == _Field[2, i])
-                    {
-                        return p;
-                    }
-                }
-
-                if ((_Field[0, 0] > 0 && _Field[0, 0] == _Field[1, 1] && _Field[1, 1] == _Field[2, 2]) ||
-                    (_Field[0, 2] > 0 && _Field[0, 2] == _Field[1, 1] && _Field[1, 1] == _Field[2, 0]))
-                {
-                    return p;
+                    if(_Field[cols,rows] == 1) {
+                        if(_Field[cols, rows] == _Field[cols, rows+1] &&
+                            _Field[cols, rows] == _Field[cols, rows+2])
+                            {
+                            return 1;
+                            }
+                        }
+                    else if(_Field[cols, rows] == 2) {
+                        if(_Field[cols, rows] == _Field[cols, rows+1] &&
+                            _Field[cols, rows] == _Field[cols, rows+2])
+                            {
+                            return 2;
+                            }
+                        }
                 }
             }
-
+            //horizontal
+            for (int cols = 0; cols < _Field.GameSize-2; cols++) 
+            {
+            for (int rows = 0; rows < _Field.GameSize; rows++) 
+            {
+                if(_Field[cols, rows] == 1) {
+                if(_Field[cols, rows] == _Field[cols+1, rows] &&
+                    _Field[cols, rows] == _Field[cols+2, rows])
+                    {
+                    return 1;
+                    }
+                }
+                else if(_Field[cols, rows] == 2) {
+                if(_Field[cols, rows] == _Field[cols+1, rows] &&
+                    _Field[cols, rows] == _Field[cols+2, rows])
+                    {
+                    return 2;
+                    }
+                }
+            }
+            }
+            //diagonal up
+            for (int cols = 0; cols < _Field.GameSize-2; cols++) 
+            {
+            for (int rows = 3; rows < _Field.GameSize; rows++) 
+            {
+                if(_Field[cols, rows] == 1) {
+                if(_Field[cols, rows] == _Field[cols+1, rows-1] &&
+                    _Field[cols, rows] == _Field[cols+2, rows-2])
+                    {
+                    return 1;
+                    }
+                }
+                else if(_Field[cols, rows] == 2) {
+                if(_Field[cols, rows] == _Field[cols+1, rows-1] && 
+                    _Field[cols, rows] == _Field[cols+2, rows-2])
+                    {
+                    return 2;
+                    }
+                }
+            }
+            }
+            //diagonal down
+            for (int cols = 0; cols < _Field.GameSize-2; cols++) 
+            {
+            for (int rows = 0; rows < _Field.GameSize-2; rows++) 
+            {
+                if(_Field[cols, rows]== 1) {
+                if(_Field[cols, rows] == _Field[cols+1, rows+1] && 
+                    _Field[cols, rows] == _Field[cols+2, rows+2])
+                    {
+                        return 1;
+                    }
+                }
+                else if(_Field[cols, rows] == 2) {
+                if(_Field[cols, rows] == _Field[cols+1, rows+1] && 
+                    _Field[cols, rows] == _Field[cols+2, rows+2])
+                    {
+                        return 2;
+                    }
+                }
+            }
+            }
             return -1;
         }
 
         public override void ClearField()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < _Field.GameSize; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < _Field.GameSize; j++)
                 {
                     _Field[i, j] = 0;
                 }
@@ -136,7 +238,7 @@ namespace OOPGames
 
         public override void DoTicTacToeMove(ITicTacToeMove move)
         {
-            if (move.Row >= 0 && move.Row < 3 && move.Column >= 0 && move.Column < 3)
+            if (move.Row >= 0 && move.Row < _Field.GameSize && move.Column >= 0 && move.Column < _Field.GameSize)
             {
                 _Field[move.Row, move.Column] = move.PlayerNumber;
             }
@@ -145,7 +247,7 @@ namespace OOPGames
         public override void AskForGameSize()
         {
          int size = Prompt.ShowDialog("Bitte Größe wählen:", "Größe Festlegen");
-
+         _Field = new GE_TicTacToeField((size+1)*3);
         }
         //commentar
         
@@ -298,10 +400,11 @@ namespace OOPGames
         */
     }
 
-    public class GE_TicTacToeField : BaseTicTacToeField
+    public class GE_TicTacToeField : ITicTacToeField_GE
     {
         int _Size;
         int[,] _Field;
+        public int GameSize { get { return _Size;} }
         public GE_TicTacToeField(int s)
         {
             _Size = s;
@@ -315,11 +418,11 @@ namespace OOPGames
             }
         }
 
-        public override int this[int r, int c]
+        public int this[int r, int c]
         {
             get
             {
-                if (r >= 0 && r < 3 && c >= 0 && c < 3)//anpassen
+                if (r >= 0 && r < _Size && c >= 0 && c < _Size)
                 {
                     return _Field[r, c];
                 }
@@ -331,18 +434,17 @@ namespace OOPGames
 
             set
             {
-                if (r >= 0 && r < 3 && c >= 0 && c < 3)//anpassen
+                if (r >= 0 && r < _Size && c >= 0 && c < _Size)
                 {
                     _Field[r, c] = value;
                 }
             }
         }
 
-        public void AskForGameSize()
+        public bool CanBePaintedBy(IPaintGame painter)
         {
-            throw new NotImplementedException();
+            return painter is GE_TicTacToePaint;
         }
-
     }
 
     public class GE_TicTacToeMove : ITicTacToeMove
@@ -380,18 +482,21 @@ namespace OOPGames
 
         public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)//support f�r tasten und hidden modus
         {
-            for (int i = 0; i < 3; i++)//anpassen
+            if (field is ITicTacToeField_GE)
             {
-                for (int j = 0; j < 3; j++)//anpassen
+                ITicTacToeField_GE myField = (ITicTacToeField_GE)field;
+                for (int i = 0; i < myField.GameSize; i++)//anpassen
                 {
-                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
-                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
+                    for (int j = 0; j < myField.GameSize; j++)//anpassen
                     {
-                        return new GE_TicTacToeMove(i, j, _PlayerNumber);
+                        if (selection.XClickPos > j*500/myField.GameSize && selection.XClickPos < (j+1) * 500 / myField.GameSize &&
+                            selection.YClickPos > i * 500 / myField.GameSize && selection.YClickPos < (i + 1) * 500 / myField.GameSize)
+                        {
+                            return new GE_TicTacToeMove(i, j, _PlayerNumber);
+                        }
                     }
                 }
             }
-
             return null;
         }
 
@@ -416,22 +521,25 @@ namespace OOPGames
 
         public override ITicTacToeMove GetMove(ITicTacToeField field) //change auf unser spielfeld
         {
-            Random rand = new Random();
-            int f = rand.Next(0, 8);
-            for (int i = 0; i < 9; i++)
+            if (field is ITicTacToeField_GE)
             {
-                int c = f % 3;
-                int r = ((f - c) / 3) % 3;
-                if (field[r, c] <= 0)
+                ITicTacToeField_GE myField = (ITicTacToeField_GE)field;
+                Random rand = new Random();
+                int f = rand.Next(0, myField.GameSize*myField.GameSize-1);
+                for (int i = 0; i < myField.GameSize*myField.GameSize; i++)
                 {
-                    return new TicTacToeMove(r, c, _PlayerNumber);
-                }
-                else
-                {
-                    f++;
+                    int c = f % myField.GameSize;
+                    int r = ((f - c) / myField.GameSize) % myField.GameSize;
+                    if (field[r, c] <= 0)
+                    {
+                        return new TicTacToeMove(r, c, _PlayerNumber);
+                    }
+                    else
+                    {
+                        f++;
+                    }
                 }
             }
-
             return null;
         }
 

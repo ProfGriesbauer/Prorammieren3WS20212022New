@@ -1,6 +1,6 @@
 //Aufgaben:
 //Lena Field
-//Moritz Paint
+//Moritz Paints
 //Markus HumanPlayer
 //Raphi rules
 //Michi Move ->
@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 
 namespace OOPGames
 {
-    public class GC_TicTacToePaint : BaseTicTacToePaint
+    public class GC_VierGewinntPaint : BaseVierGewinntPaint
     {
-        public override string Name { get { return "GC_TicTacToePaint"; } }
+        public override string Name { get { return "GC_VierGewinntPaint"; } }
 
-        public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
+        public override void PaintVierGewinntField(Canvas canvas, IVierGewinntField currentField)
         {
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
@@ -29,33 +29,33 @@ namespace OOPGames
             Brush lineStroke = new SolidColorBrush(lineColor);
             Color XColor = Color.FromRgb(0, 255, 0);
             Brush XStroke = new SolidColorBrush(XColor);
-            Color OColor = Color.FromRgb(0, 0, 255);
-            Brush OStroke = new SolidColorBrush(OColor);
-
-            Line l1 = new Line() { X1 = 120, Y1 = 20, X2 = 120, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
-            canvas.Children.Add(l1);
-            Line l2 = new Line() { X1 = 220, Y1 = 20, X2 = 220, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
-            canvas.Children.Add(l2);
-            Line l3 = new Line() { X1 = 20, Y1 = 120, X2 = 320, Y2 = 120, Stroke = lineStroke, StrokeThickness = 3.0 };
-            canvas.Children.Add(l3);
-            Line l4 = new Line() { X1 = 20, Y1 = 220, X2 = 320, Y2 = 220, Stroke = lineStroke, StrokeThickness = 3.0 };
-            canvas.Children.Add(l4);
-
-            for (int i = 0; i < 3; i++)
+            Color O1Color = Color.FromRgb(255, 0, 0);
+            Color O2Color = Color.FromRgb(0, 255, 0);
+            Brush O1Stroke = new SolidColorBrush(O1Color);
+            Brush O2Stroke = new SolidColorBrush(O2Color);
+            for (int i = 0; i < 7; i++)
             {
-                for (int j = 0; j < 3; j++)
+                Line Z1 = new Line() { X1 = 20, Y1 = 20 + i * 50, X2 = 320, Y2 = 20 + i * 50, Stroke = lineStroke, StrokeThickness = 3.0 };
+                canvas.Children.Add(Z1)
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                Line S1 = new Line() { X1 = 20 + i * 37, 5, Y1 = 20, X2 = 20 + i * 37, 5, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
+                canvas.Children.Add(S1);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
                 {
                     if (currentField[i, j] == 1)
                     {
-                        Line X1 = new Line() { X1 = 20 + (j * 100), Y1 = 20 + (i * 100), X2 = 120 + (j * 100), Y2 = 120 + (i * 100), Stroke = XStroke, StrokeThickness = 3.0 };
-                        canvas.Children.Add(X1);
-                        Line X2 = new Line() { X1 = 20 + (j * 100), Y1 = 120 + (i * 100), X2 = 120 + (j * 100), Y2 = 20 + (i * 100), Stroke = XStroke, StrokeThickness = 3.0 };
-                        canvas.Children.Add(X2);
+                        Ellipse O1 = new Ellipse() { Margin = new Thickness(20 + (i * 50), 20 + (j * 300 / 7), 0, 0), Width = 100, Height = 100, Stroke = O1Stroke, StrokeThickness = 3.0 };
+                        canvas.Children.Add(O1);
                     }
                     else if (currentField[i, j] == 2)
                     {
-                        Ellipse OE = new Ellipse() { Margin = new Thickness(20 + (j * 100), 20 + (i * 100), 0, 0), Width = 100, Height = 100, Stroke = OStroke, StrokeThickness = 3.0 };
-                        canvas.Children.Add(OE);
+                        Ellipse O2 = new Ellipse() { Margin = new Thickness(20 + (i * 50), 20 + (j * 300 / 7), 0, 0), Width = 100, Height = 100, Stroke = O2Stroke, StrokeThickness = 3.0 };
+                        canvas.Children.Add(O2);
                     }
                 }
             }

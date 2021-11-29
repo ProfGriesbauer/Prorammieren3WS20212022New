@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 
 namespace OOPGames
 {
+   
     public class GF_TicTacToePaint : BaseTicTacToePaint
     {
         
@@ -17,7 +18,11 @@ namespace OOPGames
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
-
+            if (currentField is GFTicTacToeField)
+            {
+                check((GFTicTacToeField)currentField);      //polymorphie
+            }
+            
             canvas.Children.Clear();
             Color Hintergrund = Color.FromRgb(1, 1, 1);
             canvas.Background = new SolidColorBrush(Hintergrund);
@@ -47,8 +52,11 @@ namespace OOPGames
             canvas.Children.Add(c3);
             Line c4 = new Line() { X1 = 125, Y1 = 65, X2 = 125, Y2 = 15, Stroke = clockStroke, StrokeThickness = 2.0 };
             canvas.Children.Add(c4);
-
             
+
+
+
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -67,6 +75,24 @@ namespace OOPGames
                     }
                 }
             }
+        }
+       
+        public void check(GFTicTacToeField meinfeld)
+        {
+            int result;
+            DateTime now = DateTime.Now;
+            result = DateTime.Compare((meinfeld.startetimer.AddSeconds(4)), now);
+
+
+            if (result > 0)
+            {
+                meinfeld.läuftdasspiel = true;
+            }
+            else
+            {
+                meinfeld.läuftdasspiel = false;
+            }
+
         }
     }
 
@@ -107,14 +133,18 @@ namespace OOPGames
 
     }
 
-
     
    public class GF_TicTacToeRules : BaseTicTacToeRules
     {
-        TicTacToeField _Field = new TicTacToeField();
-
+      
+        
+        GFTicTacToeField _Field = new GFTicTacToeField();
+        
+        int result;
+   
+            
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
-
+       
         public override bool MovesPossible 
         { 
             get 
@@ -123,7 +153,7 @@ namespace OOPGames
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        if (_Field[i, j] == 0)
+                        if (_Field[i, j] == 0 && _Field.läuftdasspiel)
                         {
                             return true;
                         }
@@ -151,7 +181,10 @@ namespace OOPGames
                         return p;
                     }
                 }
-
+                if (_Field.verbleibendezeit<1)
+                {
+                    return p;
+                }
                 if ((_Field[0, 0] > 0 && _Field[0, 0] == _Field[1, 1] && _Field[1, 1] == _Field[2, 2]) ||
                     (_Field[0, 2] > 0 && _Field[0, 2] == _Field[1, 1] && _Field[1, 1] == _Field[2, 0]))
                 {
@@ -160,7 +193,12 @@ namespace OOPGames
             }
 
             return -1;
+
+
         }
+        
+
+
 
         public override void ClearField()
         {
@@ -169,6 +207,8 @@ namespace OOPGames
                 for (int j = 0; j < 3; j++)
                 {
                     _Field[i, j] = 0;
+                    _Field.startetimer = DateTime.Now;
+                   // _Field.läuftdasspiel = true;
                 }
             }
         }
@@ -178,13 +218,17 @@ namespace OOPGames
             if (move.Row >= 0 && move.Row < 3 && move.Column >= 0 && move.Column < 3)
             {
                 _Field[move.Row, move.Column] = move.PlayerNumber;
+                _Field.startetimer = DateTime.Now;
             }
         }
     }
 
-    public class GFTicTacToeField : BaseTicTacToeField
+    public class GFTicTacToeField : BaseTicTacToeField_GF
     {
         int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
+
+       
+
 
         public override int this[int r, int c]
         {
@@ -212,7 +256,7 @@ namespace OOPGames
 
    
 
-    public class GF_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
+  /*  public class GF_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
 
@@ -250,5 +294,5 @@ namespace OOPGames
         {
             _PlayerNumber = playerNumber;
         }
-    }
+    }*/
 }
