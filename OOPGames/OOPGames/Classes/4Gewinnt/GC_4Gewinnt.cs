@@ -94,7 +94,7 @@ namespace OOPGames
         {
             for (int p = 1; p < 3; p++)
             {
-                for (int j = 0, j < 7; j++) // Checke Senkrecht 
+                for (int j = 0; j < 7; j++) // Checke Senkrecht 
                 {
                     for (int i = 0; i < 3; i++)
                     {
@@ -104,7 +104,7 @@ namespace OOPGames
                         }
                     }
                 }
-                for (int i = 0, i < 6; i++) // Checke Waagrecht
+                for (int i = 0; i < 6; i++) // Checke Waagrecht
                 {
                     for (int j = 0; j < 4; j++)
                     {
@@ -114,7 +114,7 @@ namespace OOPGames
                         }
                     }
                 }
-                for (int i = 0, i < 3; i++) // Checke links unten nach rechts oben 
+                for (int i = 0; i < 3; i++) // Checke links unten nach rechts oben 
                 {
                     for (int j = 0; j < 4; j++)
                     {
@@ -124,7 +124,7 @@ namespace OOPGames
                         }
                     }
                 }
-                for (int i = 5, i > 2; i--) // Checke links oben nach recht unten 
+                for (int i = 5; i > 2; i--) // Checke links oben nach recht unten 
                 {
                     for (int j = 0; j > 2; j++)
                     {
