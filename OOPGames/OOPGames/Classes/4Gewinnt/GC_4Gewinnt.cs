@@ -7,6 +7,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+//rules -> Raphi
+//paint -> Moritz
+//humanplayer -> Markus
+//field -> Lena
+//move -> Michi
 
 namespace OOPGames
 {
@@ -215,7 +220,7 @@ namespace OOPGames
         }
     }
 
-    public class GC_VierGewinntComputerPlayer : BaseComputerVierGewinntPlayer
+    /*public class GC_VierGewinntComputerPlayer : BaseComputerVierGewinntPlayer
     {
         int _PlayerNumber = 0;
 
@@ -254,4 +259,5 @@ namespace OOPGames
             _PlayerNumber = playerNumber;
         }
     }
+    */
 }
