@@ -99,6 +99,18 @@ namespace OOPGames
             _PaintTimer.Tick += _PaintTimer_Tick;
             _PaintTimer.Start();
         }
+        private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            
+            if (_CurrentPainter != null &&
+               _CurrentRules != null && _CurrentRules.CurrentField.CanBePaintedBy(_CurrentPainter))
+            {
+                //Status.Text = "Update Gamefield";
+                _CurrentPainter.PaintGameField(PaintCanvas, _CurrentRules.CurrentField);
+                DoComputerMoves();
+            }
+            
+        }
 
         private void _PaintTimer_Tick(object sender, EventArgs e)
         {
