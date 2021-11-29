@@ -68,6 +68,9 @@ namespace OOPGames
         void UpdatePos();
     }
 
-
+    //ToDO: 
+    //Interface: neues für GG_IStartrekMove erbt von IPlaymove und IKeymove
+    //Hat Methode mit getter für direction( int direction{get;})
+    //Evtl auch gleich Klasse GG_StartrekMove mitimplementieren
 
 }

@@ -10,12 +10,20 @@ using System.Windows.Shapes;
 
 namespace OOPGames
 {
+    //JO:in GG_Startrek.cs: CheckCollison() Methode implementieren + in PaintStartrekGameField() Anzeige, wenn Spiel verloren impementieren
+
+    //Magnus: in GG_Startrek.cs in PaintStartrekGameField() Spaceship zeichnen implemenieren
+
+    //Linus + Jannik:in GG_Startrek.cs Methode DoMove() von Rulesklasse implementieren
+    // in GG_Istartrek.cs Interface GG_Istartrekmove definieren (und evtl noch zugehörige Klasse inGG_Startrek.cs implementieren)
+
+    //Philipp: Auskommentierte Fehler im Code ausbessern + Humanplayer Klasse Interface+Klassenimplementierung
     public class GG_StartrekPainter : GG_IStartrekPainter
     {
         List<GG_Meteo> _Meteos = new List<GG_Meteo>();
         uint _aufrufe = 0;
         int _spawnspeed = 40; //Takt der Meteoerzeugung
-        int _spawnnum = 2; //Anzahl der je Spawn erzeugten Meteos
+        int _spawnnum = 1; //Anzahl der je Spawn erzeugten Meteos
         int _movespeed = 40; //Takt der Bewegung 
         bool _collision = false;
 
@@ -26,7 +34,7 @@ namespace OOPGames
 
         public void checkCollison()
         {
-            //Kollision prüfen
+            //ToDo: Kollision prüfen: untere Reihe in currentfield auswerten (if == 3) =>true
             throw new NotImplementedException();
         }
 
@@ -34,10 +42,13 @@ namespace OOPGames
         {
             GG_Meteo meteo = new GG_Meteo();
             //Gegen Meteos an gleicher Posititon absichern
-           /* while (meteo.PositionColum == _Meteos[_Meteos.Count-1].PositionColum)
+            if (_Meteos.Count > 0) //Gegen Fehler bei erstem Aufruf absicher, dort ist Liste noch leer
             {
-                meteo = new GG_Meteo();
-            } */
+                while (meteo.PositionColum == _Meteos[_Meteos.Count-1].PositionColum)
+                {
+                    meteo = new GG_Meteo();
+                }
+            }
             _Meteos.Add(meteo);
         }
 
@@ -49,6 +60,8 @@ namespace OOPGames
                 //Wenn Meteo aus Spielfeld -> Löschen
                 //Führt zu Fehler, da während foreach nicht gelöscht werden darf
                 //Evtl Meteos zwischenspeichern und dann löschen?
+                //https://thedeveloperblog.com/removeall
+                //https://mycsharp.de/forum/threads/84026/faq-listenelemente-suchen-und-entfernen
                 /*if (meteo.PositionRow > 6)
                 {
                     _Meteos.Remove(meteo);
@@ -60,11 +73,10 @@ namespace OOPGames
         {
             foreach (GG_Meteo meteo in _Meteos)
             {
-                //eig += um Bedingung für Collision zu setzen, aber Probleme mit Spawn am gleichen Ort
-                currentField[meteo.PositionRow, meteo.PositionColum] = 1; 
+                currentField[meteo.PositionRow, meteo.PositionColum] += 1; 
             }
         }
-        //Löscht bisherige Positionen aus Matrix, dass fallende MEteos keine Striche hinterlassen
+        //Löscht bisherige Positionen aus Matrix, dass fallende Meteos keine Striche hinterlassen
         public void removeOldPositions(GG_IStartrekGamefield currentField)
         {
             foreach (GG_Meteo meteo in _Meteos)
@@ -113,6 +125,8 @@ namespace OOPGames
             Color SpaceshipColor = Color.FromRgb(0, 255, 0);
             Brush XStroke = new SolidColorBrush(SpaceshipColor);
 
+            //ToDO: if collision == true => Anzeige, dass Spiel verloren
+
             // Matrix auswerten und Meteos an entsprechende Stelle zeichnen
            for (int i = 0; i < 6; i++)
            {
@@ -127,8 +141,9 @@ namespace OOPGames
                        Line X3 = new Line() { X1 = 20 + (j * 60), Y1 = 50 + (i * 60), X2 = 80 + (j * 60), Y2 = 50 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
                        canvas.Children.Add(X3);
                    }
-               }
-           }
+                    //ToDo: (currentField[i, j] == 3) Spaceship zeichnen
+                }
+            }
         }
     }
 
@@ -213,7 +228,10 @@ namespace OOPGames
 
         public void DoMove(IPlayMove move)
         {
-
+            //ToDo:
+            //Cast auf IStartrekmove
+            //move in currentfield übertragen 
+            //move hat direction => negativ für links positiv für rechts            
         }
     }
 }
