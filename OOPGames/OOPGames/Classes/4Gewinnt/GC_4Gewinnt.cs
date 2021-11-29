@@ -199,12 +199,12 @@ namespace OOPGames
 
         public override IVierGewinntMove GetMove(IMoveSelection selection, IVierGewinntField field)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 7; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 6; j++)
                 {
-                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
-                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
+                    if (selection.XClickPos > 20 + (j * 50) && selection.XClickPos < 120 + (j * 50) &&
+                        selection.YClickPos > 20 + (i * 42) && selection.YClickPos < 120 + (i * 42))
                     {
                         return new GC_VierGewinntMove(i, j, _PlayerNumber);
                     }
