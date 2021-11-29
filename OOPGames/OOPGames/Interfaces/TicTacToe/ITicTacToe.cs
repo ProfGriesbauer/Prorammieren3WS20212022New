@@ -24,7 +24,10 @@ namespace OOPGames
         //indexed by the row r and column c
         int this[int r, int c] { get; set; }
     }
-
+    public interface ITicTacToeField_GE : ITicTacToeField
+    {
+        int GameSize { get; }
+    }
     //TicTacToe specific game rules
     //DIESES INTERFACE NICHT ÄNDERN!
     public interface ITicTacToeRules : IGameRules
@@ -42,7 +45,6 @@ namespace OOPGames
     {
         void AskForGameSize();
     }
-
     //TicTacToeMove which is derived from row and column
     //DIESES INTERFACE NICHT ÄNDERN!
     public interface ITicTacToeMove : IRowMove, IColumnMove
