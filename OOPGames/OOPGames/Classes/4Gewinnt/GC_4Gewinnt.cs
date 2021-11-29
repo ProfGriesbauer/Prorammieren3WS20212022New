@@ -24,12 +24,12 @@ namespace OOPGames
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
             canvas.Background = new SolidColorBrush(bgColor);
-            Color lineColor = Color.FromRgb(0, 255, 0);
+            Color lineColor = Color.FromRgb(0, 0, 0);
             Brush lineStroke = new SolidColorBrush(lineColor);
             Color XColor = Color.FromRgb(0, 255, 0);
             Brush XStroke = new SolidColorBrush(XColor);
             Color O1Color = Color.FromRgb(255, 0, 0);
-            Color O2Color = Color.FromRgb(0, 255, 0);
+            Color O2Color = Color.FromRgb(255, 255, 0);
             Brush O1Stroke = new SolidColorBrush(O1Color);
             Brush O2Stroke = new SolidColorBrush(O2Color);
             for (int i = 0; i < 7; i++)
@@ -39,7 +39,7 @@ namespace OOPGames
             }
             for (int i = 0; i < 8; i++)
             {
-                Line S1 = new Line() { X1 = 20 + i * 37.55, Y1 = 20, X2 = 20 + i * 37.5, Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
+                Line S1 = new Line() { X1 = 20 + i * (300/7), Y1 = 20, X2 = 20 + i * (300/7), Y2 = 320, Stroke = lineStroke, StrokeThickness = 3.0 };
                 canvas.Children.Add(S1);
             }
             for (int i = 0; i < 6; i++)
@@ -48,12 +48,12 @@ namespace OOPGames
                 {
                     if (currentField[i, j] == 1)
                     {
-                        Ellipse O1 = new Ellipse() { Margin = new Thickness(20 + (i * 50), 20 + (j * 300 / 7), 0, 0), Width = 100, Height = 100, Stroke = O1Stroke, StrokeThickness = 3.0 };
+                        Ellipse O1 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 20 + (i * 50), 0, 0), Width = (42), Height = 42, Stroke = O1Stroke, StrokeThickness = 3.0 };
                         canvas.Children.Add(O1);
                     }
                     else if (currentField[i, j] == 2)
                     {
-                        Ellipse O2 = new Ellipse() { Margin = new Thickness(20 + (i * 50), 20 + (j * 300 / 7), 0, 0), Width = 100, Height = 100, Stroke = O2Stroke, StrokeThickness = 3.0 };
+                        Ellipse O2 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 20 + (i * 50), 0, 0), Width = 42, Height = 42, Stroke = O2Stroke, StrokeThickness = 3.0 };
                         canvas.Children.Add(O2);
                     }
                 }
@@ -114,7 +114,7 @@ namespace OOPGames
                         }
                     }
                 }
-                for (int i = 0; i < 3; i++) // Checke links unten nach rechts oben 
+               for (int i = 0; i < 3; i++) // Checke links oben nach rechts unten 
                 {
                     for (int j = 0; j < 4; j++)
                     {
@@ -126,9 +126,9 @@ namespace OOPGames
                 }
                 for (int i = 5; i > 2; i--) // Checke links oben nach recht unten 
                 {
-                    for (int j = 0; j > 2; j++)
+                    for (int j = 0; j < 4; j++)
                     {
-                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i - 1, j - 1] && _Field[i - 1, j - 1] == _Field[i - 2, j - 2] && _Field[i - 2, j - 2] == _Field[i - 3, j - 3])
+                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i - 1, j + 1] && _Field[i - 1, j + 1] == _Field[i - 2, j + 2] && _Field[i - 2, j + 2] == _Field[i - 3, j + 3])
                         {
                             return p;
                         }
@@ -225,8 +225,8 @@ namespace OOPGames
             {
                 for (int j = 0; j < 7; j++)
                 {
-                    if (selection.XClickPos > 20 + (j * (300/7)) && selection.XClickPos < 120 + (j * (300/7)) &&
-                        selection.YClickPos > 20 + (i * 50) && selection.YClickPos < 120 + (i * 50))
+                    if (selection.XClickPos > 20 + (j * (300/7)) && selection.XClickPos < (20+300/7) + (j * (300/7)) &&
+                        selection.YClickPos > 20 + (i * 50) && selection.YClickPos < 70 + (i * 50))
                     {
                         return new GC_VierGewinntMove(i, j, _PlayerNumber);
                     }
