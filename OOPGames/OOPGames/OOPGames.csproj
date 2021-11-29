@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="Classes\4Gewinnt\GC_4Gewinnt.cs" />
     <Compile Include="Classes\4Gewinnt\GC_Base4Gewinnt.cs" />
+    <Compile Include="Classes\GC_4Gewinnt.cs" />
     <Compile Include="Classes\GG_Startrek.cs" />
     <Compile Include="Classes\TicTacToe\GA_TicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\GC_TicTacToe.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Classes\GA_Pong.cs" />
     <Compile Include="Classes\GI_Dino.cs" />
     <Compile Include="Interfaces\4Gewinnt\GC_I4Gewinnt.cs" />
+    <Compile Include="Interfaces\GC_I4Gewinnt.cs" />
     <Compile Include="Interfaces\GI_IDino.cs" />
     <Compile Include="Interfaces\IGamePlayer.cs" />
     <Compile Include="Interfaces\IGameRules.cs" />

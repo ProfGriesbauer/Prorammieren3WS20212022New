@@ -18,7 +18,11 @@ namespace OOPGames
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
-
+            if (currentField is GFTicTacToeField)
+            {
+                check((GFTicTacToeField)currentField);      //polymorphie
+            }
+            
             canvas.Children.Clear();
             Color Hintergrund = Color.FromRgb(1, 1, 1);
             canvas.Background = new SolidColorBrush(Hintergrund);
@@ -48,14 +52,10 @@ namespace OOPGames
             canvas.Children.Add(c3);
             Line c4 = new Line() { X1 = 125, Y1 = 65, X2 = 125, Y2 = 15, Stroke = clockStroke, StrokeThickness = 2.0 };
             canvas.Children.Add(c4);
-            TextBlock textBlock = new TextBlock();
-            TextBlock.SetFontSize(textBlock, 20);
-            textBlock.Text = "Time Left ";
-            Color textColor = Color.FromRgb(255, 255, 255);
-            textBlock.Foreground = new SolidColorBrush(textColor);
-            Canvas.SetLeft(textBlock, 30);
-            Canvas.SetTop(textBlock, 320);
-            canvas.Children.Add(textBlock);
+            
+
+
+
 
             for (int i = 0; i < 3; i++)
             {
@@ -75,6 +75,24 @@ namespace OOPGames
                     }
                 }
             }
+        }
+       
+        public void check(GFTicTacToeField meinfeld)
+        {
+            int result;
+            DateTime now = DateTime.Now;
+            result = DateTime.Compare((meinfeld.startetimer.AddSeconds(4)), now);
+
+
+            if (result > 0)
+            {
+                meinfeld.läuftdasspiel = true;
+            }
+            else
+            {
+                meinfeld.läuftdasspiel = false;
+            }
+
         }
     }
 
@@ -178,22 +196,7 @@ namespace OOPGames
 
 
         }
-        public  void check()
-        {
-            DateTime now = DateTime.Now;
-            result = DateTime.Compare((_Field.startetimer.AddSeconds(10)), now);
-            _Field.läuftdasspiel = true;
-            Console.WriteLine("hallo");
-            if (result>0)
-            {
-                _Field.läuftdasspiel = true;
-            }
-            else
-            {
-                _Field.läuftdasspiel = false;
-            }
-            
-        }
+        
 
 
 
@@ -205,7 +208,7 @@ namespace OOPGames
                 {
                     _Field[i, j] = 0;
                     _Field.startetimer = DateTime.Now;
-                    _Field.läuftdasspiel = true;
+                   // _Field.läuftdasspiel = true;
                 }
             }
         }
@@ -215,6 +218,7 @@ namespace OOPGames
             if (move.Row >= 0 && move.Row < 3 && move.Column >= 0 && move.Column < 3)
             {
                 _Field[move.Row, move.Column] = move.PlayerNumber;
+                _Field.startetimer = DateTime.Now;
             }
         }
     }
@@ -222,8 +226,6 @@ namespace OOPGames
     public class GFTicTacToeField : BaseTicTacToeField_GF
     {
         int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
-
-       
 
        
 
