@@ -12,10 +12,23 @@ namespace OOPGames
 {
     public class GJ_TicTacToePaint : BaseTicTacToePaint
     {
-        public override string Name { get { return "Gruppe J TicTacToePainter"; } }
+        public override string Name { get { return "TicTacToePainter GJ"; } }
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
+
+            int Border = 20;
+            int Tilesize = 100;
+           
+            if (currentField is ITicTacToeField_GJ)
+            {
+                ITicTacToeField_GJ currentField_GJ = (ITicTacToeField_GJ)currentField;
+                currentField_GJ.Set_Tile_and_Border(canvas);
+                Border = currentField_GJ.Border;
+                Tilesize = currentField_GJ.Tile;
+            }
+
+
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(64, 224, 208);
             canvas.Background = new SolidColorBrush(bgColor);
@@ -26,13 +39,14 @@ namespace OOPGames
             Color OColor = Color.FromRgb(255, 255, 255);
             Brush OStroke = new SolidColorBrush(OColor);
 
-            Line l1 = new Line() { X1 = canvas.ActualWidth/3*1 , Y1 = 20, X2 = canvas.ActualWidth / 3 * 1, Y2 = canvas.ActualHeight -20, Stroke = lineStroke, StrokeThickness = 3.0 };
+            // These are the deviding lines which cut the field in its squares
+            Line l1 = new Line() { X1 = Tilesize + Border, Y1 = Border, X2 = Tilesize + Border, Y2 = 3 * Tilesize + Border, Stroke = lineStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(l1);
-            Line l2 = new Line() { X1 = canvas.ActualWidth / 3*2, Y1 = 20, X2 = canvas.ActualWidth / 3 * 2, Y2 = canvas.ActualHeight - 20, Stroke = lineStroke, StrokeThickness = 3.0 };
+            Line l2 = new Line() { X1 = (2 * Tilesize) + Border, Y1 = Border, X2 = (2 * Tilesize) + Border, Y2 = (3 * Tilesize) + Border, Stroke = lineStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(l2);
-            Line l3 = new Line() { X1 = 20, Y1 = canvas.ActualHeight/3*1, X2 = canvas.ActualWidth-20, Y2 = canvas.ActualHeight / 3 * 1, Stroke = lineStroke, StrokeThickness = 3.0 };
+            Line l3 = new Line() { X1 = Border, Y1 = Tilesize + Border, X2 = (3 * Tilesize) + Border, Y2 = Tilesize + Border, Stroke = lineStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(l3);
-            Line l4 = new Line() { X1 = 20, Y1 = canvas.ActualHeight / 3 * 2, X2 = canvas.ActualWidth - 20, Y2 = canvas.ActualHeight / 3 * 2, Stroke = lineStroke, StrokeThickness = 3.0 };
+            Line l4 = new Line() { X1 = Border, Y1 = (2 * Tilesize) + Border, X2 = (3 * Tilesize) + Border, Y2 = (2 * Tilesize) + Border, Stroke = lineStroke, StrokeThickness = 3.0 };
             canvas.Children.Add(l4);
 
             for (int i = 0; i < 3; i++)
@@ -41,14 +55,25 @@ namespace OOPGames
                 {
                     if (currentField[i, j] == 1)
                     {
-                        Line X1 = new Line() { X1 = 20 + (j * 100), Y1 = 20 + (i * 100), X2 = 120 + (j * 100), Y2 = 120 + (i * 100), Stroke = XStroke, StrokeThickness = 3.0 };
+                        int x11 = Border + (j * Tilesize);
+                        int y11 = Border + (i * Tilesize);
+                        int x21 = Tilesize + Border + (j * Tilesize);
+                        int y21 = Tilesize + Border + (i * Tilesize);
+                        Line X1 = new Line() { X1 = x11, Y1 = y11, X2 = x21, Y2 = y21, Stroke = XStroke, StrokeThickness = 3.0 };
+
                         canvas.Children.Add(X1);
-                        Line X2 = new Line() { X1 = 20 + (j * 100), Y1 = 120 + (i * 100), X2 = 120 + (j * 100), Y2 = 20 + (i * 100), Stroke = XStroke, StrokeThickness = 3.0 };
+                        int x12 = Border + (j * Tilesize);
+                        int y12 = Tilesize + Border + (i * Tilesize);
+                        int x22 = Tilesize + Border + (j * Tilesize);
+                        int y22 = Border + (i * Tilesize);
+                        Line X2 = new Line() { X1 = x12, Y1 = y12, X2 = x22, Y2 = y22, Stroke = XStroke, StrokeThickness = 3.0 };
                         canvas.Children.Add(X2);
                     }
                     else if (currentField[i, j] == 2)
                     {
-                        Ellipse OE = new Ellipse() { Margin = new Thickness(20 + (j * 100), 20 + (i * 100), 0, 0), Width = 100, Height = 100, Stroke = OStroke, StrokeThickness = 3.0 };
+                        int left = Border + (j * Tilesize);
+                        int right = Border + (i * Tilesize);
+                        Ellipse OE = new Ellipse() { Margin = new Thickness(left, right, 0, 0), Width = Tilesize, Height = Tilesize, Stroke = OStroke, StrokeThickness = 3.0 };
                         canvas.Children.Add(OE);
                     }
                 }
@@ -83,7 +108,7 @@ namespace OOPGames
             } 
         }
 
-        public override string Name { get { return "Gruppe J TicTacToeRules"; } }
+        public override string Name { get { return "TicTacToeRules GJ"; } }
 
         public override int CheckIfPLayerWon()
         {
@@ -131,9 +156,12 @@ namespace OOPGames
         }
     }
 
-    public class GJ_TicTacToeField : BaseTicTacToeField
+    public class GJ_TicTacToeField : BaseTicTacToeField, ITicTacToeField_GJ
     {
         int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
+
+        public int _Border = 10;
+        public int _Tile = 100;
 
         public override int this[int r, int c]
         {
@@ -156,6 +184,43 @@ namespace OOPGames
                     _Field[r, c] = value;
                 }
             }
+        }
+    
+        public int Border
+        {
+            get
+            {
+                return _Border;
+            }
+        }
+
+        public int Tile
+        {
+            get
+            {
+                return _Tile;
+            }
+        }
+   
+        public void Set_Tile_and_Border(Canvas canvas)
+        {
+            int width = (int)Math.Round(canvas.ActualWidth);
+            int hight = (int)Math.Round(canvas.ActualHeight);
+            int Fieldsize = 0;
+
+            if (width < hight)
+            {
+                Fieldsize = width;
+            }
+            else
+            {
+                Fieldsize = hight;
+            }
+
+            _Border = (int)Math.Round(Fieldsize * 0.1);
+            int Tilespace = Fieldsize - _Border;
+            _Border = _Border / 2;
+            _Tile = Tilespace / 3;
         }
     }
 
@@ -183,7 +248,7 @@ namespace OOPGames
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "Gruppe J HumanTicTacToePlayer"; } }
+        public override string Name { get { return "HumanTicTacToePlayer GJ"; } }
 
         public override IGamePlayer Clone()
         {
@@ -194,12 +259,21 @@ namespace OOPGames
 
         public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)
         {
+            int Border = 20;
+            int Tilesize = 100;
+
+            if (field is ITicTacToeField_GJ)
+            {
+                ITicTacToeField_GJ field_GJ = (ITicTacToeField_GJ)field;
+                Border = field_GJ.Border;
+                Tilesize = field_GJ.Tile;
+            }
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (selection.XClickPos > 20 + (j*100) && selection.XClickPos < 120 + (j*100) &&
-                        selection.YClickPos > 20 + (i*100) && selection.YClickPos < 120 + (i*100) &&
+                    if (selection.XClickPos > Border + (j*Tilesize) && selection.XClickPos < Tilesize+Border + (j*Tilesize) &&
+                        selection.YClickPos > Border + (i*Tilesize) && selection.YClickPos < Tilesize+Border + (i*Tilesize) &&
                         field[i, j] <= 0)
                     {
                         return new TicTacToeMove(i, j, _PlayerNumber);
@@ -220,7 +294,7 @@ namespace OOPGames
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "Gruppe J ComputerTicTacToePlayer"; } }
+        public override string Name { get { return "ComputerTicTacToePlayer GJ"; } }
 
         public override IGamePlayer Clone()
         {

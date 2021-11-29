@@ -25,6 +25,15 @@ namespace OOPGames
         int this[int r, int c] { get; set; }
     }
 
+    public interface ITicTacToeField_GJ : ITicTacToeField
+    {
+        int Border { get; }
+        int Tile { get; }
+
+        void Set_Tile_and_Border(Canvas canvas);
+    }
+
+
     //TicTacToe specific game rules
     //DIESES INTERFACE NICHT ÄNDERN!
     public interface ITicTacToeRules : IGameRules
