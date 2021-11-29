@@ -7,11 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-//rules -> Raphi
-//paint -> Moritz
-//humanplayer -> Markus
-//field -> Lena
-//move -> Michi
 
 namespace OOPGames
 {
@@ -73,9 +68,9 @@ namespace OOPGames
         {
             get
             {
-                for (int i = 0; i <  6;i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    for (int j = 0; j < 7; j++)
+                    for (int j = 0; j < 3; j++)
                     {
                         if (_Field[i, j] == 0)
                         {
@@ -94,56 +89,33 @@ namespace OOPGames
         {
             for (int p = 1; p < 3; p++)
             {
-                for (int j = 0, j < 7; j++) // Checke Senkrecht 
+                for (int i = 0; i < 3; i++)
                 {
-                    for (int i = 0; i < 3; i++)
+                    if (_Field[i, 0] > 0 && _Field[i, 0] == _Field[i, 1] && _Field[i, 1] == _Field[i, 2])
                     {
-                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i + 1, j] && _Field[i + 1, j] == _Field[i + 2, j] && _Field[i + 2, j] == _Field[i + 3, j])
-                        {
-                            return p;
-                        }
+                        return p;
                     }
-                }
-                for (int i = 0, i < 6; i++) // Checke Waagrecht
-                {
-                    for (int j = 0; j < 4; j++)
+                    else if (_Field[0, i] > 0 && _Field[0, i] == _Field[1, i] && _Field[1, i] == _Field[2, i])
                     {
-                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i, j + 1] && _Field[i, j + 1] == _Field[i, j + 2] && _Field[i, j + 2] == _Field[i, j + 3])
-                        {
-                            return p;
-                        }
-                    }
-                }
-                for (int i = 0, i < 3; i++) // Checke links unten nach rechts oben 
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i + 1, j + 1] && _Field[i + 1, j + 1] == _Field[i + 2, j + 2] && _Field[i + 2, j + 2] == _Field[i + 3, j + 3])
-                        {
-                            return p;
-                        }
-                    }
-                }
-                for (int i = 5, i > 2; i--) // Checke links oben nach recht unten 
-                {
-                    for (int j = 0; j > 2; j++)
-                    {
-                        if (_Field[i, j] > 0 && _Field[i, j] == _Field[i - 1, j - 1] && _Field[i - 1, j - 1] == _Field[i - 2, j - 2] && _Field[i - 2, j - 2] == _Field[i - 3, j - 3])
-                        {
-                            return p;
-                        }
+                        return p;
                     }
                 }
 
-                return -1;
+                if ((_Field[0, 0] > 0 && _Field[0, 0] == _Field[1, 1] && _Field[1, 1] == _Field[2, 2]) ||
+                    (_Field[0, 2] > 0 && _Field[0, 2] == _Field[1, 1] && _Field[1, 1] == _Field[2, 0]))
+                {
+                    return p;
+                }
             }
+
+            return -1;
         }
 
         public override void ClearField()
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 3; j++)
                 {
                     _Field[i, j] = 0;
                 }
@@ -152,7 +124,7 @@ namespace OOPGames
 
         public override void DoVierGewinntMove(IVierGewinntMove move)
         {
-            if (move.Row >= 0 && move.Row < 6 && move.Column >= 0 && move.Column < 7)
+            if (move.Row >= 0 && move.Row < 3 && move.Column >= 0 && move.Column < 3)
             {
                 _Field[move.Row, move.Column] = move.PlayerNumber;
             }
@@ -161,7 +133,7 @@ namespace OOPGames
 
     public class GC_VierGewinntField : BaseVierGewinntField
     {
-        int[,] _Field = new int[6, 7] { { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 } };
+        int[,] _Field = new int[6, 7] { { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 } };
 
         public override int this[int r, int c]
         {
@@ -222,12 +194,12 @@ namespace OOPGames
 
         public override IVierGewinntMove GetMove(IMoveSelection selection, IVierGewinntField field)
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 6; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    if (selection.XClickPos > 20 + (j * 50) && selection.XClickPos < 120 + (j * 50) &&
-                        selection.YClickPos > 20 + (i * 42) && selection.YClickPos < 120 + (i * 42))
+                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
+                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
                     {
                         return new GC_VierGewinntMove(i, j, _PlayerNumber);
                     }
@@ -243,7 +215,7 @@ namespace OOPGames
         }
     }
 
-   public class GC_VierGewinntComputerPlayer : BaseComputerVierGewinntPlayer
+    public class GC_VierGewinntComputerPlayer : BaseComputerVierGewinntPlayer
     {
         int _PlayerNumber = 0;
 
@@ -260,10 +232,10 @@ namespace OOPGames
         {
             Random rand = new Random();
             int f = rand.Next(0, 8);
-            for (int i = 0; i < 42; i++)
+            for (int i = 0; i < 9; i++)
             {
-                int c = f % 6;
-                int r = ((f - c) / 6) % 7;
+                int c = f % 3;
+                int r = ((f - c) / 3) % 3;
                 if (field[r, c] <= 0)
                 {
                     return new GC_VierGewinntMove(r, c, _PlayerNumber);
@@ -282,5 +254,4 @@ namespace OOPGames
             _PlayerNumber = playerNumber;
         }
     }
- 
 }

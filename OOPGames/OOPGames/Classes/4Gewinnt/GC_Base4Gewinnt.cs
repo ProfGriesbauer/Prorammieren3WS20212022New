@@ -15,7 +15,7 @@ namespace OOPGames
 
         public void PaintGameField(Canvas canvas, IGameField currentField)
         {
-            if (currentField is ITicTacToeField)
+            if (currentField is IVierGewinntField)
             {
                 PaintVierGewinntField(canvas, (IVierGewinntField)currentField);
             }

@@ -52,6 +52,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPainter(new GJ_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterPainter(new Dino_PaintGame());
             OOPGamesManager.Singleton.RegisterPainter(new GG_StartrekPainter());
+            OOPGamesManager.Singleton.RegisterPainter(new GC_VierGewinntPaint());
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new GA_PongRules());
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
@@ -63,6 +64,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterRules(new GJ_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new Dino_GameRules());
             OOPGamesManager.Singleton.RegisterRules(new GG_StartrekRules());
+            OOPGamesManager.Singleton.RegisterRules(new GC_VierGewinntRules());
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GB_TicTacToeRules());
@@ -87,6 +89,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPlayer(new GI_TicTacToeComputerPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeMensch());
             OOPGamesManager.Singleton.RegisterPlayer(new Dino_GamePlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GC_VierGewinntHumanPlayer());
 
             InitializeComponent();
             PaintList.ItemsSource = OOPGamesManager.Singleton.Painters;
@@ -103,7 +106,9 @@ namespace OOPGames
         private void _PaintTimer_Tick(object sender, EventArgs e)
         {
             if (_CurrentPainter != null &&
-                   _CurrentRules != null && _CurrentRules.CurrentField.CanBePaintedBy(_CurrentPainter))
+                   _CurrentRules != null && 
+                   _CurrentRules.CurrentField != null &&
+                   _CurrentRules.CurrentField.CanBePaintedBy(_CurrentPainter))
             {
                 _CurrentPainter.PaintGameField(PaintCanvas, _CurrentRules.CurrentField);
             }
