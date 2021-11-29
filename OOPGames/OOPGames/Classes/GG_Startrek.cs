@@ -184,7 +184,7 @@ namespace OOPGames
             return painter is GG_IStartrekPainter;
         }
     }
-    public class GG_StartrekRules : GG_IStartrekRules
+    public class GG_StartrekRules : GG_IStartrekRules //eingefügt Samstag 29.11.2021
     {
         GG_StartrekField _Field = new GG_StartrekField();
 
