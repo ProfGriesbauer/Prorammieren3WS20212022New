@@ -43,22 +43,26 @@ namespace OOPGames
                 Brush OStroke = new SolidColorBrush(OColor);
                 for (int i = 0; i < width; i+=width/myField.GameSize) {
                     Line l1 = new Line() { X1 = i, Y1 = 0, X2 = i, Y2 = height, Stroke = lineStroke, StrokeThickness = 3.0 };
-                    }
+                    canvas.Children.Add(l1);
+                }
                     for (int i = 0; i < height; i+=height/myField.GameSize) {
                     Line l2 = new Line() { X1 = 0, Y1 = i, X2 = width, Y2 = i, Stroke = lineStroke, StrokeThickness = 3.0 };
-                    }
-                    for (int x = 0; x < myField.GameSize; x++) {
+                    canvas.Children.Add(l2);
+                }
+                for (int x = 0; x < myField.GameSize; x++) {
                     for (int y = 0; y < myField.GameSize; y++) {
-                        if(currentField[x, y] == 0) {
-                            Ellipse OE = new Ellipse() { Margin = new Thickness(x*width/myField.GameSize, y*height/myField.GameSize,0,0), Width = width/myField.GameSize, Height = height/myField.GameSize, Stroke = OStroke, StrokeThickness = 3.0 };
+                        if(currentField[y, x] == 1) {
+                            Line X1 = new Line() { X1 = x * width / myField.GameSize, Y1 = y * height / myField.GameSize, X2 = x * width / myField.GameSize + width / myField.GameSize, Y2 = y * height / myField.GameSize + height / myField.GameSize, Stroke = XStroke, StrokeThickness = 3.0 };
+                            canvas.Children.Add(X1);
+                            Line X2 = new Line() { X1 = x * width / myField.GameSize, Y1 = y * height / myField.GameSize + height / myField.GameSize, X2 = x * width / myField.GameSize + width / myField.GameSize, Y2 = y * height / myField.GameSize, Stroke = XStroke, StrokeThickness = 3.0 };
+                            canvas.Children.Add(X2);
+                        } else if(currentField[y, x] == 2)
+                        { 
+                            Ellipse OE = new Ellipse() { Margin = new Thickness(x * width / myField.GameSize, y * height / myField.GameSize, 0, 0), Width = width / myField.GameSize, Height = height / myField.GameSize, Stroke = OStroke, StrokeThickness = 3.0 };
                             canvas.Children.Add(OE);
-                            } else if(currentField[x, y] == 1)
-                            {
-                                Line l3 = new Line() { X1 = x*width/myField.GameSize, Y1 = y*height/myField.GameSize, X2 = x*width/myField.GameSize+width/myField.GameSize, Y2 = y*height/myField.GameSize+height/myField.GameSize, Stroke = lineStroke, StrokeThickness = 3.0 };
-                                Line l4 = new Line() { X1 = x*width/myField.GameSize, Y1 = y*height/myField.GameSize+height/myField.GameSize, X2 = x*width/myField.GameSize+width/myField.GameSize, Y2 = y*height/myField.GameSize, Stroke = lineStroke, StrokeThickness = 3.0 };
-                            }
                         }
                     }
+                }
             }
             else
             {
@@ -146,11 +150,11 @@ namespace OOPGames
                             return 1;
                             }
                         }
-                    else if(_Field[cols, rows] == 0) {
+                    else if(_Field[cols, rows] == 2) {
                         if(_Field[cols, rows] == _Field[cols, rows+1] &&
                             _Field[cols, rows] == _Field[cols, rows+2])
                             {
-                            return 0;
+                            return 2;
                             }
                         }
                 }
@@ -167,11 +171,11 @@ namespace OOPGames
                     return 1;
                     }
                 }
-                else if(_Field[cols, rows] == 0) {
+                else if(_Field[cols, rows] == 2) {
                 if(_Field[cols, rows] == _Field[cols+1, rows] &&
                     _Field[cols, rows] == _Field[cols+2, rows])
                     {
-                    return 0;
+                    return 2;
                     }
                 }
             }
@@ -188,11 +192,11 @@ namespace OOPGames
                     return 1;
                     }
                 }
-                else if(_Field[cols, rows] == 0) {
+                else if(_Field[cols, rows] == 2) {
                 if(_Field[cols, rows] == _Field[cols+1, rows-1] && 
                     _Field[cols, rows] == _Field[cols+2, rows-2])
                     {
-                    return 1;
+                    return 2;
                     }
                 }
             }
@@ -209,11 +213,11 @@ namespace OOPGames
                         return 1;
                     }
                 }
-                else if(_Field[cols, rows] == 0) {
+                else if(_Field[cols, rows] == 2) {
                 if(_Field[cols, rows] == _Field[cols+1, rows+1] && 
                     _Field[cols, rows] == _Field[cols+2, rows+2])
                     {
-                        return 0;
+                        return 2;
                     }
                 }
             }
@@ -234,7 +238,7 @@ namespace OOPGames
 
         public override void DoTicTacToeMove(ITicTacToeMove move)
         {
-            if (move.Row >= 0 && move.Row < 3 && move.Column >= 0 && move.Column < 3)
+            if (move.Row >= 0 && move.Row < _Field.GameSize && move.Column >= 0 && move.Column < _Field.GameSize)
             {
                 _Field[move.Row, move.Column] = move.PlayerNumber;
             }
@@ -478,18 +482,21 @@ namespace OOPGames
 
         public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)//support f�r tasten und hidden modus
         {
-            for (int i = 0; i < 3; i++)//anpassen
+            if (field is ITicTacToeField_GE)
             {
-                for (int j = 0; j < 3; j++)//anpassen
+                ITicTacToeField_GE myField = (ITicTacToeField_GE)field;
+                for (int i = 0; i < myField.GameSize; i++)//anpassen
                 {
-                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
-                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
+                    for (int j = 0; j < myField.GameSize; j++)//anpassen
                     {
-                        return new GE_TicTacToeMove(i, j, _PlayerNumber);
+                        if (selection.XClickPos > j*500/myField.GameSize && selection.XClickPos < (j+1) * 500 / myField.GameSize &&
+                            selection.YClickPos > i * 500 / myField.GameSize && selection.YClickPos < (i + 1) * 500 / myField.GameSize)
+                        {
+                            return new GE_TicTacToeMove(i, j, _PlayerNumber);
+                        }
                     }
                 }
             }
-
             return null;
         }
 
@@ -514,22 +521,25 @@ namespace OOPGames
 
         public override ITicTacToeMove GetMove(ITicTacToeField field) //change auf unser spielfeld
         {
-            Random rand = new Random();
-            int f = rand.Next(0, 8);
-            for (int i = 0; i < 9; i++)
+            if (field is ITicTacToeField_GE)
             {
-                int c = f % 3;
-                int r = ((f - c) / 3) % 3;
-                if (field[r, c] <= 0)
+                ITicTacToeField_GE myField = (ITicTacToeField_GE)field;
+                Random rand = new Random();
+                int f = rand.Next(0, myField.GameSize*myField.GameSize-1);
+                for (int i = 0; i < myField.GameSize*myField.GameSize; i++)
                 {
-                    return new TicTacToeMove(r, c, _PlayerNumber);
-                }
-                else
-                {
-                    f++;
+                    int c = f % myField.GameSize;
+                    int r = ((f - c) / myField.GameSize) % myField.GameSize;
+                    if (field[r, c] <= 0)
+                    {
+                        return new TicTacToeMove(r, c, _PlayerNumber);
+                    }
+                    else
+                    {
+                        f++;
+                    }
                 }
             }
-
             return null;
         }
 
