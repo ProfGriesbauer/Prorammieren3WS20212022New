@@ -22,7 +22,7 @@ namespace OOPGames
     {
         List<GG_Meteo> _Meteos = new List<GG_Meteo>();
         uint _aufrufe = 0;
-        int _spawnspeed = 40; //Takt der Meteoerzeugung
+        int _spawnspeed = 80; //Takt der Meteoerzeugung
         int _spawnnum = 1; //Anzahl der je Spawn erzeugten Meteos
         int _movespeed = 40; //Takt der Bewegung 
         bool _collision = false;
@@ -57,16 +57,9 @@ namespace OOPGames
             foreach (GG_Meteo meteo in _Meteos)
             {
                 meteo.UpdatePos();
-                //Wenn Meteo aus Spielfeld -> Löschen
-                //Führt zu Fehler, da während foreach nicht gelöscht werden darf
-                //Evtl Meteos zwischenspeichern und dann löschen?
-                //https://thedeveloperblog.com/removeall
-                //https://mycsharp.de/forum/threads/84026/faq-listenelemente-suchen-und-entfernen
-                /*if (meteo.PositionRow > 6)
-                {
-                    _Meteos.Remove(meteo);
-                }*/
             }
+            //Meteos auserhalb vom Spielfeld löschen:
+            _Meteos.RemoveAll(item => item.PositionRow > 6); 
         }
         //Schreibt Positionen der Meteos in Matrix
         public void updateField(GG_IStartrekGamefield currentField)
@@ -96,7 +89,6 @@ namespace OOPGames
 
         public void PaintStartrekGameField(Canvas canvas, GG_IStartrekGamefield currentField)
         {
-            _aufrufe++;
             removeOldPositions(currentField);
 
             if ((_aufrufe + _spawnspeed) % _spawnspeed == 0) //+spwanspeed dass bei Spielstart gleich gespawnd wird
@@ -144,6 +136,7 @@ namespace OOPGames
                     //ToDo: (currentField[i, j] == 3) Spaceship zeichnen
                 }
             }
+            _aufrufe++;
         }
     }
 
