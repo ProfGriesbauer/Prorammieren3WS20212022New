@@ -138,13 +138,13 @@ namespace OOPGames
 
     public class GC_VierGewinntField : BaseVierGewinntField
     {
-        int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
+        int[,] _Field = new int[6, 7] { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, };
 
         public override int this[int r, int c]
         {
             get
             {
-                if (r >= 0 && r < 3 && c >= 0 && c < 3)
+                if (r >= 0 && r < 6 && c >= 0 && c < 7)
                 {
                     return _Field[r, c];
                 }
@@ -156,7 +156,7 @@ namespace OOPGames
 
             set
             {
-                if (r >= 0 && r < 3 && c >= 0 && c < 3)
+                if (r >= 0 && r < 6 && c >= 0 && c < 7)
                 {
                     _Field[r, c] = value;
                 }
