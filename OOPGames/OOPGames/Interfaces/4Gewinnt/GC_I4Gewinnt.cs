@@ -30,7 +30,7 @@ namespace OOPGames
 
 
 
-    public interface IVierGewinntRules_GE : IVierGewinntRules
+    public interface IVierGewinntRules_GC : IVierGewinntRules
     {
         void AskForGameSize();
     }

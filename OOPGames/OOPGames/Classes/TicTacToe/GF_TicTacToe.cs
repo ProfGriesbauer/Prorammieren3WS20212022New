@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 
 namespace OOPGames
 {
+   
     public class GF_TicTacToePaint : BaseTicTacToePaint
     {
         
@@ -47,8 +48,15 @@ namespace OOPGames
             canvas.Children.Add(c3);
             Line c4 = new Line() { X1 = 125, Y1 = 65, X2 = 125, Y2 = 15, Stroke = clockStroke, StrokeThickness = 2.0 };
             canvas.Children.Add(c4);
+            TextBlock textBlock = new TextBlock();
+            TextBlock.SetFontSize(textBlock, 20);
+            textBlock.Text = "Time Left ";
+            Color textColor = Color.FromRgb(255, 255, 255);
+            textBlock.Foreground = new SolidColorBrush(textColor);
+            Canvas.SetLeft(textBlock, 30);
+            Canvas.SetTop(textBlock, 320);
+            canvas.Children.Add(textBlock);
 
-            
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -107,14 +115,18 @@ namespace OOPGames
 
     }
 
-
     
    public class GF_TicTacToeRules : BaseTicTacToeRules
     {
-        TicTacToeField _Field = new TicTacToeField();
-
+      
+        
+        GFTicTacToeField _Field = new GFTicTacToeField();
+        
+        int result;
+   
+            
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
-
+       
         public override bool MovesPossible 
         { 
             get 
@@ -123,7 +135,7 @@ namespace OOPGames
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        if (_Field[i, j] == 0)
+                        if (_Field[i, j] == 0 && _Field.läuftdasspiel)
                         {
                             return true;
                         }
@@ -151,7 +163,10 @@ namespace OOPGames
                         return p;
                     }
                 }
-
+                if (_Field.verbleibendezeit<1)
+                {
+                    return p;
+                }
                 if ((_Field[0, 0] > 0 && _Field[0, 0] == _Field[1, 1] && _Field[1, 1] == _Field[2, 2]) ||
                     (_Field[0, 2] > 0 && _Field[0, 2] == _Field[1, 1] && _Field[1, 1] == _Field[2, 0]))
                 {
@@ -160,7 +175,27 @@ namespace OOPGames
             }
 
             return -1;
+
+
         }
+        public  void check()
+        {
+            DateTime now = DateTime.Now;
+            result = DateTime.Compare((_Field.startetimer.AddSeconds(10)), now);
+            _Field.läuftdasspiel = true;
+            Console.WriteLine("hallo");
+            if (result>0)
+            {
+                _Field.läuftdasspiel = true;
+            }
+            else
+            {
+                _Field.läuftdasspiel = false;
+            }
+            
+        }
+
+
 
         public override void ClearField()
         {
@@ -169,6 +204,8 @@ namespace OOPGames
                 for (int j = 0; j < 3; j++)
                 {
                     _Field[i, j] = 0;
+                    _Field.startetimer = DateTime.Now;
+                    _Field.läuftdasspiel = true;
                 }
             }
         }
@@ -182,9 +219,14 @@ namespace OOPGames
         }
     }
 
-    public class GFTicTacToeField : BaseTicTacToeField
+    public class GFTicTacToeField : BaseTicTacToeField_GF
     {
         int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
+
+       
+
+       
+
 
         public override int this[int r, int c]
         {
@@ -212,7 +254,7 @@ namespace OOPGames
 
    
 
-    public class GF_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
+  /*  public class GF_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
 
@@ -250,5 +292,5 @@ namespace OOPGames
         {
             _PlayerNumber = playerNumber;
         }
-    }
+    }*/
 }
