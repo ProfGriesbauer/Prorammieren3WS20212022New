@@ -5,35 +5,57 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace OOPGames.Classes.Labyrinth
+namespace OOPGames
 {
-    public class PaintLabyrinth
+    public class PaintLabyrinth // : IPaintLabyrinth
     {
         
     }
 
-    public class LabyrinthField
+    public class LabyrinthField // : ILabyrinthField
     {
         
     }
 
-    public class LabyrinthRules
+    public class LabyrinthWKachel // : ILabyrinthKachel
+    {
+
+    }
+
+    public class LabyrinthIKachel // : ILabyrinthKachel
+    {
+
+    }
+
+    public class LabyrinthTKachel // : ILabyrinthKachel
+    {
+
+    }
+
+    public class LabyrinthRules // : ILabyrinthRules
     {
         
     }
 
-    public class LabyrinthMove
+    public class LabyrinthGoMove // : ILabyrinthGoMove
     {
 
     }
 
-    public class HumanLabyrinthPlayer
+    public class LabyrinthKachelMove // : ILabyrinthKachelMove 
+    {
+
+    }
+
+    public class HumanLabyrinthPlayer // : IHumanLabyrinthPlayer
     {
         
     }
 
-    public class ComputerLabyrinthPlayer
+    /*//
+    public class ComputerLabyrinthPlayer // : IComputerLabyrinthPlayer
     {
         
     }
+    //*/
 }

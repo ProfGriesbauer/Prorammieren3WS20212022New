@@ -35,4 +35,9 @@ namespace OOPGames
     {
         Key Key { get; }
     }
+
+    public interface IRotareMove : IPlayMove
+    {
+        int Direction { get; }
+    }
 }
