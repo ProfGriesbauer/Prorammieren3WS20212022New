@@ -149,7 +149,7 @@ namespace OOPGames
             }
         }
 
-        public override void DoVierGewinntMove(IVierGewinntMove move)
+        public override void DoVierGewinntMove(IVierGewinntMove move) // Überarbeitet
         {
             if (move.Column >= 0 && move.Column < 7)
             {
