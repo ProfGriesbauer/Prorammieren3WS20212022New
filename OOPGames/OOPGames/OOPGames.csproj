@@ -83,6 +83,7 @@
     <Compile Include="Classes\4Gewinnt\GC_4Gewinnt.cs" />
     <Compile Include="Classes\4Gewinnt\GC_Base4Gewinnt.cs" />
     <Compile Include="Classes\GG_Startrek.cs" />
+    <Compile Include="Classes\Labyrinth\Labyrinth.cs" />
     <Compile Include="Classes\TicTacToe\GA_TicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\GC_TicTacToe.cs" />
     <Compile Include="Classes\TicTacToe\GD_TicTacToe.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Interfaces\GG_IStartrek.cs" />
     <Compile Include="Interfaces\IPaintGame.cs" />
     <Compile Include="Interfaces\IPlayMoves.cs" />
+    <Compile Include="Interfaces\Labyrint\ILabyrinth.cs" />
     <Compile Include="Interfaces\TicTacToe\ITicTacToe.cs" />
     <Compile Include="Interfaces\GA_IPong.cs" />
     <Compile Include="MainWindow.xaml.cs">
