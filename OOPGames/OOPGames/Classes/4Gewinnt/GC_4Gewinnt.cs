@@ -151,9 +151,21 @@ namespace OOPGames
 
         public override void DoVierGewinntMove(IVierGewinntMove move)
         {
-            if (move.Row >= 0 && move.Row < 6 && move.Column >= 0 && move.Column < 7)
+            if (move.Column >= 0 && move.Column < 7)
             {
-                _Field[move.Row, move.Column] = move.PlayerNumber;
+                int Zeile = 5;
+                bool Leer = false;
+                for (int i = 5; i >-1 && Leer == false; i--)
+                {
+                    if (_Field[i, move.Column] == 0)
+                    {
+                        Leer = true;
+                        Zeile = i;
+                    }
+
+
+                }
+                _Field[Zeile, move.Column] = move.PlayerNumber;
             }
         }
     }
@@ -221,16 +233,17 @@ namespace OOPGames
 
         public override IVierGewinntMove GetMove(IMoveSelection selection, IVierGewinntField field)
         {
-            for (int i = 0; i < 6; i++)
+            
+            
+            for (int j = 0; j < 7; j++) // Überarbeitet am 29.11 durch Raphael
             {
-                for (int j = 0; j < 7; j++)
+                if (selection.XClickPos > 20 + (j * (300/7)) && selection.XClickPos < (20+300/7) + (j * (300/7)) &&
+                        selection.YClickPos > 20 && selection.YClickPos < 370)
                 {
-                    if (selection.XClickPos > 20 + (j * (300/7)) && selection.XClickPos < (20+300/7) + (j * (300/7)) &&
-                        selection.YClickPos > 20 + (i * 50) && selection.YClickPos < 70 + (i * 50))
-                    {
-                        return new GC_VierGewinntMove(i, j, _PlayerNumber);
-                    }
+                    return new GC_VierGewinntMove(0, j, _PlayerNumber); //Wenn die Komplette Klasse überarbeitet wird, kann man die Null rausstreichen 
+                
                 }
+                
             }
 
             return null;
