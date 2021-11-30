@@ -149,7 +149,7 @@ namespace OOPGames
             }
         }
 
-        public override void DoVierGewinntMove(IVierGewinntMove move) // Überarbeitet
+        public override void DoVierGewinntMove(IVierGewinntMove move)// Überarbeitet
         {
             if (move.Column >= 0 && move.Column < 7)
             {
@@ -165,7 +165,10 @@ namespace OOPGames
 
 
                 }
-                _Field[Zeile, move.Column] = move.PlayerNumber;
+                if (Leer == true)
+                {
+                    _Field[Zeile, move.Column] = move.PlayerNumber;
+                }
             }
         }
     }
