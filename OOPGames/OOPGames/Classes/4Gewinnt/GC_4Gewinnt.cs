@@ -34,7 +34,7 @@ namespace OOPGames
             Brush O2Stroke = new SolidColorBrush(O2Color);
             for (int i = 0; i < 7; i++)
             {
-                Line Z1 = new Line() { X1 = 20, Y1 = 20 + i * 50, X2 = 320, Y2 = 20 + i * 50, Stroke = lineStroke, StrokeThickness = 3.0 };
+                Line Z1 = new Line() { X1 = 20, Y1 = 20 + i * 50, X2 = 315, Y2 = 20 + i * 50, Stroke = lineStroke, StrokeThickness = 3.0 };
                 canvas.Children.Add(Z1);
             }
             for (int i = 0; i < 8; i++)
