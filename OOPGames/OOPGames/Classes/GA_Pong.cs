@@ -21,15 +21,15 @@ namespace OOPGames
         public int _vXBall;
         public int _vYBall;
         //Values Player 1
-        public int _p1MU;
-        public int _p1MD;
+        public bool _p1MU;
+        public bool _p1MD;
         public int _p1ULXPos;       //X Pos of Upper Left Corner of Player 1 Design
         public int _p1ULYPos;       //Y Pos of Upper Left Corner of Player 1 Design
         public int _p1Width;        //Width (Length in X Dir.) of Player 1 Design
         public int _p1Height;       //Height (Length in Y Dir.) of Player 1 Design
         //Values Player 2
-        public int _p2MU;
-        public int _p2MD;
+        public bool _p2MU;
+        public bool _p2MD;
         public int _p2ULXPos;       //X Pos of Upper Left Corner of Player 2 Design
         public int _p2ULYPos;       //Y Pos of Upper Left Corner of Player 2 Design
         public int _p2Width;        //Width (Length in X Dir.) of Player 2 Design
@@ -37,30 +37,22 @@ namespace OOPGames
 
         public void setP1(int p1x, int p1y, int p1w, int p1h)
         {
-            _p1MU = 0;
-            _p1MD = 0;
+            _p1MU = false;
+            _p1MD = false;
             _p1ULXPos = p1x;
             _p1ULYPos = p1y;
             _p1Width = p1w;
             _p1Height = p1h;
         }
 
-        public void setP1(int p1x, int p1y, int p1w, int p1h)
-        {
-            _p2MU = 0;
-            _p2MD = 0;
-            _p1ULXPos = p1x;
-            _p1ULYPos = p1y; 
-            _p1Width = p1w; 
-            _p1Height = p1h;  
-        }
-
         public void setP2(int p2x, int p2y, int p2w, int p2h)
         {
+            _p2MU = false;
+            _p2MD = false;
             _p2ULXPos = p2x;
             _p2ULYPos = p2y; 
             _p2Width = p2w; 
-            _p2Height = p2h;  
+            _p2Height = p2h;
         }
 
         public void updateBall(int bx, int by, int br, int vxb, int vyb)
@@ -276,21 +268,16 @@ namespace OOPGames
             canvas.Background = new SolidColorBrush(bgColor);
             Color lineColor = Color.FromRgb(255, 255, 255);
             Brush lineStroke = new SolidColorBrush(lineColor);
-<<<<<<< HEAD
-            Line l1 = new Line() { X1 = 300, Y1 = 0, X2 = 376, Y2 = 919, Stroke = lineStroke, StrokeThickness = 5.0 };
-            canvas.Children.Add(l1);
 
-=======
-            Line l1 = new Line() { X1 = 185, Y1 = 0, X2 = 185, Y2 = 450, Stroke = lineStroke, StrokeThickness = 5.0 }; canvas.Children.Add(l1);
-            
->>>>>>> b0988666c7421e3ff7a04dd7289bff62ecf72e50
             //Paint Player
             Color playerColor = Color.FromRgb(255, 255, 255);
             Brush playerStroke = new SolidColorBrush(playerColor);
+
             //Player1
             Rectangle P1 = new Rectangle() { Margin = new Thickness(Values.p1x(), Values.p1y(), 0, 0), Width = Values.p1w(), Height = Values.p1h(), Stroke = playerStroke, StrokeThickness = 3.0 };
             P1.Fill = playerStroke;
             canvas.Children.Add(P1);
+
             //Player2
             Rectangle P2 = new Rectangle() { Margin = new Thickness(Values.p2x(), Values.p2y(), 0, 0), Width = Values.p2w(), Height = Values.p2h(), Stroke = playerStroke, StrokeThickness = 3.0 };
             P2.Fill = playerStroke;
@@ -404,9 +391,8 @@ namespace OOPGames
        int _Row;
        int _Column;
 
-       public PongMove (int movement, int playerNumber)
+       public PongMove (int playerNumber)
         {
-            _Movement = movement;
             _PlayerNumber = playerNumber;
    
         }
@@ -422,17 +408,18 @@ namespace OOPGames
         int _PlayerNumber = 0;
         public string Name { get { return "GA_HumanPongPlayer"; } }
 
-        public override IGamePlayer Clone()
+        /*public override IGamePlayer Clone()
         {
             GA_HumanPongPlayer ttthp = new GA_HumanPongPlayer();
             ttthp.SetPlayerNumber(_PlayerNumber);
             return ttthp;
-        }
+        }*/
 
-        public override IPongMove GetMove(IMoveSelection selection, IPongField field)
+       /* public override IPongMove(IMoveSelection selection, IPongField field)
         {
             return GetMove_B(selection, field);
         }
+       */
 
         public IPongMove GetMove_A(IMoveSelection selection, IPongField field)
         {
@@ -443,7 +430,7 @@ namespace OOPGames
                     if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
                         selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
                     {
-                        return new PongMove(i, j, _PlayerNumber);
+                        return new PongMove(_PlayerNumber);
                     }
                 }
             }
@@ -456,7 +443,7 @@ namespace OOPGames
             if (selection is IKeySelection)
             {
                 IKeySelection keySelection = (IKeySelection)selection;
-                int x = -1, y = -1;
+                //int x = -1, y = -1;
                 /*//
                 switch (keySelection.Key)
                 {
@@ -482,24 +469,23 @@ namespace OOPGames
                 //*/
                 switch (keySelection.Key)
                 {
-                    case (Keys.Up):
+                    case (Key.Up):
                         Values.p1MU(true);
                         Values.p1MD(false);
                         break;
 
-                    case (Keys.W)
-                        else
-                            Values.p2MU(true);
+                    case (Key.W):
+                        Values.p2MU(true);
                         Values.p2MD(false);
                         break;
 
-                    case (Keys.Down):
+                    case (Key.Down):
                         Values.p1MU(false);
                         Values.p1MD(true);
                         break;
 
-                    case (Keys.S)
-                            Values.p2MU(false);
+                    case (Key.S):
+                        Values.p2MU(false);
                         Values.p2MD(true);
                         break;
 
@@ -519,12 +505,12 @@ namespace OOPGames
                          case (Key.NumPad9):
                              x = 2; y = 0; break;*/
                 }
-                return new PongMove(y, x, _PlayerNumber);
+                return new PongMove(_PlayerNumber);
             }
             else
             {
                 int x = (selection.XClickPos - 20) / 100, y = (selection.YClickPos - 20) / 100;
-                return new PongMove(y, x, _PlayerNumber);
+                return new PongMove(_PlayerNumber);
             }
         }
 
@@ -540,9 +526,9 @@ namespace OOPGames
             ***Biemel***
             *
             */
-            int m = 1;
-            int p = 1;
-            return new PongMove(m, p);
+            //int m = 1;
+            //int p = 1;
+            return new PongMove(_PlayerNumber);
         }
 
         public void SetPlayerNumber(int playerNumber)
@@ -606,7 +592,7 @@ namespace OOPGames
             */
 
             //***Biemel***Hier wieder nur eine Beispielzeile, damit kein Fahler geworfen wird
-            return new PongMove(_PlayerNumber, _PlayerNumber);
+            return new PongMove(_PlayerNumber);
         }
 
         public IGamePlayer Clone()
