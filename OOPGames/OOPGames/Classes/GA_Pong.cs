@@ -218,7 +218,7 @@ namespace OOPGames
             canvas.Background = new SolidColorBrush(bgColor);
             Color lineColor = Color.FromRgb(255, 255, 255);
             Brush lineStroke = new SolidColorBrush(lineColor);
-            Line l1 = new Line() { X1 = 300, Y1 = 0, X2 = 376, Y2 = 919, Stroke = lineStroke, StrokeThickness = 5.0 };
+            Line l1 = new Line() { X1 = 300, Y1 = 0, X2 = 300, Y2 = 919, Stroke = lineStroke, StrokeThickness = 5.0 };
             canvas.Children.Add(l1);
             
             //Paint Player
@@ -267,29 +267,17 @@ namespace OOPGames
 
         public int CheckIfPLayerWon()
         {
-            /*
-             * 
-             ***Biemel***
-            Hier muss deklariert werden, wann welcher Spieler gewonnen hat.
-            z.B.: 
-            /*
-            .
-            .
-            .
-            if(xBallPos > 400)      //Ball rechts auﬂerhalb des Spielfelds
-            {
-            p = 1;                  //Spieler 1 gewinnt
-            }
-            else if (xBallPos < 0)  //Ball links auﬂerhalb des Spielfelds
-            {
-            p = 2;                  //Spieler 2 gewinnt
-            }
-            ***Biemel***
-            *
-            */
+            int p = 0; 
 
-            int p;      //***Biemel*** Diese Zeilen sind nur Platzhalter, weil die Funktion    
-            p = 1;      //einen Fehler wirft wenn sie keinen R¸ckgabewert hat  ***Biemel***
+            if(Values.bx() > 370)      //Ball rechts auﬂerhalb des Spielfelds
+            {
+                p = 1;               //Spieler 1 gewinnt
+            }
+            else if (Values.bx() < 0)  //Ball links auﬂerhalb des Spielfelds
+            {
+                p = 2;               //Spieler 2 gewinnt
+            }
+
             return p;
 
         }
