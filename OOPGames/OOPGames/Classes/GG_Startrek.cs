@@ -34,8 +34,15 @@ namespace OOPGames
 
         public void checkCollison()
         {
-            //ToDo: Kollision prüfen: untere Reihe in currentfield auswerten (if == 3) =>true
-            throw new NotImplementedException();
+            foreach (GG_Meteo meteo in _Meteos)
+            {
+                if (meteo.PositionRow == 5) //& meteo.PositionColum ==ship.colum
+                {
+                    string box_msg = "You Lose";
+                    string box_Caption = "Game End";
+                    System.Windows.MessageBox.Show(box_msg, box_Caption);
+                }
+            }
         }
 
         public void spawnMeteos()
