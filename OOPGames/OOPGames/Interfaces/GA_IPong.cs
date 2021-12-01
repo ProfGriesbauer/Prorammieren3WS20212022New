@@ -35,11 +35,6 @@ namespace OOPGames
         void DoPongMove(IPongMove move);
     }
 
-    public interface IPongRules : IPongRules
-    {
-        void AskForGameSize();
-    }
-
     //PongMove which is derived from row and column
     public interface IPongMove : IRowMove, IColumnMove
     {

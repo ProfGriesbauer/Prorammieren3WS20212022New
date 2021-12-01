@@ -8,7 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Reflection;
-using System.Windows.Input;
 
 namespace OOPGames
 {
@@ -20,15 +19,11 @@ namespace OOPGames
         public int _vXBall;
         public int _vYBall;
         //Values Player 1
-        public int _p1MU;
-        public int _p1MD;
         public int _p1ULXPos;       //X Pos of Upper Left Corner of Player 1 Design
         public int _p1ULYPos;       //Y Pos of Upper Left Corner of Player 1 Design
         public int _p1Width;        //Width (Length in X Dir.) of Player 1 Design
         public int _p1Height;       //Height (Length in Y Dir.) of Player 1 Design
         //Values Player 2
-        public int _p2MU;
-        public int _p2MD;
         public int _p2ULXPos;       //X Pos of Upper Left Corner of Player 2 Design
         public int _p2ULYPos;       //Y Pos of Upper Left Corner of Player 2 Design
         public int _p2Width;        //Width (Length in X Dir.) of Player 2 Design
@@ -36,8 +31,6 @@ namespace OOPGames
 
         public void setP1(int p1x, int p1y, int p1w, int p1h)
         {
-            _p1MU = 0;
-            _p1MD = 0;
             _p1ULXPos = p1x;
             _p1ULYPos = p1y; 
             _p1Width = p1w; 
@@ -46,8 +39,6 @@ namespace OOPGames
 
         public void setP2(int p2x, int p2y, int p2w, int p2h)
         {
-            _p2MU = 0;
-            _p2MD = 0;
             _p2ULXPos = p2x;
             _p2ULYPos = p2y; 
             _p2Width = p2w; 
@@ -61,26 +52,6 @@ namespace OOPGames
             _BallRad = br;
             _vXBall = vxb;
             _vYBall = vyb;
-        }
-
-        public void p1MU(bool value)
-        {
-            _p1MU = value;
-        }
-
-        public void p1MD(bool value)
-        {
-            _p1MD = value;
-        }
-
-        public void p2MU(bool value)
-        {
-            _p2MU = value;
-        }
-
-        public void p2MD(bool value)
-        {
-            _p2MD = value;
         }
 
         public int p1x()
@@ -169,25 +140,6 @@ namespace OOPGames
             _Val.updateBall(bx, by, br, vxb, vyb);
         }
 
-        public static void p1MU(bool value)
-        {
-            _Val.p1MU(value);
-        }
-
-        public static void p1MD(bool value)
-        {
-            _Val.p1MD(value);
-        }
-
-        public static void p2MU(bool value)
-        {
-            _Val.p2MU(value);
-        }
-
-        public static void p2MD(bool value)
-        {
-            _Val.p2MD(value);
-        }
         public static int p1x()
         {
             return _Val.p1x();
@@ -266,7 +218,7 @@ namespace OOPGames
             canvas.Background = new SolidColorBrush(bgColor);
             Color lineColor = Color.FromRgb(255, 255, 255);
             Brush lineStroke = new SolidColorBrush(lineColor);
-            Line l1 = new Line() { X1 = 185, Y1 = 0, X2 = 185, Y2 = 450, Stroke = lineStroke, StrokeThickness = 5.0 };
+            Line l1 = new Line() { X1 = 300, Y1 = 0, X2 = 300, Y2 = 919, Stroke = lineStroke, StrokeThickness = 5.0 };
             canvas.Children.Add(l1);
             
             //Paint Player
@@ -315,29 +267,17 @@ namespace OOPGames
 
         public int CheckIfPLayerWon()
         {
-            /*
-             * 
-             ***Biemel***
-            Hier muss deklariert werden, wann welcher Spieler gewonnen hat.
-            z.B.: 
-            /*
-            .
-            .
-            .
-            if(xBallPos > 400)      //Ball rechts auﬂerhalb des Spielfelds
-            {
-            p = 1;                  //Spieler 1 gewinnt
-            }
-            else if (xBallPos < 0)  //Ball links auﬂerhalb des Spielfelds
-            {
-            p = 2;                  //Spieler 2 gewinnt
-            }
-            ***Biemel***
-            *
-            */
+            int p = 0; 
 
-            int p;      //***Biemel*** Diese Zeilen sind nur Platzhalter, weil die Funktion    
-            p = 1;      //einen Fehler wirft wenn sie keinen R¸ckgabewert hat  ***Biemel***
+            if(Values.bx() > 370)      //Ball rechts auﬂerhalb des Spielfelds
+            {
+                p = 1;               //Spieler 1 gewinnt
+            }
+            else if (Values.bx() < 0)  //Ball links auﬂerhalb des Spielfelds
+            {
+                p = 2;               //Spieler 2 gewinnt
+            }
+
             return p;
 
         }
@@ -408,118 +348,6 @@ namespace OOPGames
         int _PlayerNumber = 0;
         public string Name { get { return "GA_HumanPongPlayer"; } }
 
-        public override IGamePlayer Clone()
-        {
-            GA_HumanPongPlayer ttthp = new GA_HumanPongPlayer();
-            ttthp.SetPlayerNumber(_PlayerNumber);
-            return ttthp;
-        }
-
-        public override IPongMove GetMove(IMoveSelection selection, IPongField field)
-        {
-            return GetMove_B(selection, field);
-        }
-
-        public IPongMove GetMove_A(IMoveSelection selection, IPongField field)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    if (selection.XClickPos > 20 + (j * 100) && selection.XClickPos < 120 + (j * 100) &&
-                        selection.YClickPos > 20 + (i * 100) && selection.YClickPos < 120 + (i * 100))
-                    {
-                        return new PongMove(i, j, _PlayerNumber);
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        public IPongMove GetMove_B(IMoveSelection selection, IPongField field)
-        {
-            if (selection is IKeySelection)
-            {
-                IKeySelection keySelection = (IKeySelection)selection;
-                int x = -1, y = -1;
-                /*//
-                switch (keySelection.Key)
-                {
-                    case (Key.D1):
-                        x = 0; y = 2; break;
-                    case (Key.D2):
-                        x = 1; y = 2; break;
-                    case (Key.D3):
-                        x = 2; y = 2; break;
-                    case (Key.D4):
-                        x = 0; y = 1; break;
-                    case (Key.D5):
-                        x = 1; y = 1; break;
-                    case (Key.D6):
-                        x = 2; y = 1; break;
-                    case (Key.D7):
-                        x = 0; y = 0; break;
-                    case (Key.D8):
-                        x = 1; y = 0; break;
-                    case (Key.D9):
-                        x = 2; y = 0; break;
-                }
-                //*/
-                switch (keySelection.Key)
-                {
-                    case (Keys.Up):
-                            Values.p1MU(true);
-                            Values.p1MD(false);
-                        break;
-
-                    case (Keys.W)
-                        else
-                            Values.p2MU(true);
-                            Values.p2MD(false);
-                        break;
-
-                    case (Keys.Down):
-                            Values.p1MU(false);
-                            Values.p1MD(true);
-                        break;
-
-                    case (Keys.S)
-                            Values.p2MU(false);
-                            Values.p2MD(true);
-                        break;
-
-
-                   /* case (Key.NumPad3):
-                        x = 2; y = 2; break;
-                    case (Key.NumPad4):
-                        x = 0; y = 1; break;
-                    case (Key.NumPad5):
-                        x = 1; y = 1; break;
-                    case (Key.NumPad6):
-                        x = 2; y = 1; break;
-                    case (Key.NumPad7):
-                        x = 0; y = 0; break;
-                    case (Key.NumPad8):
-                        x = 1; y = 0; break;
-                    case (Key.NumPad9):
-                        x = 2; y = 0; break;*/
-                }
-                return new PongMove(y, x, _PlayerNumber);
-            }
-            else
-            {
-                int x = (selection.XClickPos - 20) / 100, y = (selection.YClickPos - 20) / 100;
-                return new PongMove(y, x, _PlayerNumber);
-            }
-        }
-
-        public override void SetPlayerNumber(int playerNumber)
-        {
-            _PlayerNumber = playerNumber;
-        }
-    
-
         public IPongMove GetMove(IMoveSelection selection, IPongField field)
         {
             /*
@@ -535,6 +363,11 @@ namespace OOPGames
             int m = 1;
             int p = 1;
             return new PongMove(m, p);
+        }
+
+        public void SetPlayerNumber(int playerNumber)
+        {
+            _PlayerNumber = playerNumber;
         }
 
         public IGamePlayer Clone()
