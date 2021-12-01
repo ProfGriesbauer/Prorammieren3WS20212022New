@@ -20,6 +20,7 @@ namespace OOPGames
         public int _BallRad;
         public int _vXBall;
         public int _vYBall;
+        public bool _BallStop;
         //Values Player 1
         public bool _p1MU;
         public bool _p1MD;
@@ -55,13 +56,47 @@ namespace OOPGames
             _p2Height = p2h;
         }
 
-        public void updateBall(int bx, int by, int br, int vxb, int vyb)
+        public void setBall()
         {
-            _BallXPos = bx;
-            _BallYPos = by;
-            _BallRad = br;
-            _vXBall = vxb;
-            _vYBall = vyb;
+            _BallXPos = 560;
+            _BallYPos = 200;
+            _BallRad = 5;
+            _vXBall = -8;
+            _vYBall = -5;
+            _BallStop = false;
+        }
+
+        public void updateBall()
+        {
+            if (!_BallStop)
+            {
+                _BallXPos = _BallXPos + _vXBall;
+                _BallYPos = _BallYPos + _vYBall;
+
+                if (_BallYPos <= 6 || _BallYPos >= 394)
+                {
+                    _vYBall = -_vYBall;
+                }
+                if (_BallXPos <= 23)
+                {
+                    if (_BallYPos + 3 >= _p1ULYPos && _BallYPos - 3 <= _p1ULYPos + _p1Height)
+                    {
+                        _vXBall = -_vXBall;
+                    }
+                }
+                if (_BallXPos >= 577)
+                {
+                    if (_BallYPos + 3 >= _p2ULYPos && _BallYPos - 3 <= _p2ULYPos + _p2Height)
+                    {
+                        _vXBall = -_vXBall;
+                    }
+                }
+            }
+        }
+
+        public void stopBall()
+        {
+            _BallStop = true;
         }
 
         public void update()
@@ -170,7 +205,6 @@ namespace OOPGames
         }
     }
 
-
     public static class Values
     {
         public static ManageValues _Val = new ManageValues();
@@ -185,9 +219,19 @@ namespace OOPGames
             _Val.setP2(p2x, p2y, p2w, p2h);
         }
 
-        public static void updateBall(int bx, int by, int br, int vxb, int vyb)
+        public static void setBall()
         {
-            _Val.updateBall(bx, by, br, vxb, vyb);
+            _Val.setBall();
+        }
+
+        public static void updateBall()
+        {
+            _Val.updateBall();
+        }
+
+        public static void stopBall()
+        {
+            _Val.stopBall();
         }
 
         public static void update()
@@ -288,6 +332,7 @@ namespace OOPGames
         public void PaintPongField(Canvas canvas, IPongField currentField)
         {
             Values.update();
+            Values.updateBall();
 
             //Paint GameField
             canvas.Children.Clear();
@@ -314,7 +359,9 @@ namespace OOPGames
             canvas.Children.Add(P2);
 
             //Paint Ball
-            
+            Ellipse Ball = new Ellipse() { Margin = new Thickness(Values.bx(), Values.by(), 0, 0), Width = 2*Values.br(), Height = 2*Values.br(), Stroke = playerStroke, StrokeThickness = 1.0 };
+            Ball.Fill = playerStroke;
+            canvas.Children.Add(Ball);
         }
 
         public void PaintGameField(Canvas canvas, IGameField currentField)
@@ -360,13 +407,15 @@ namespace OOPGames
         {
             int p = 0; 
 
-            if(Values.bx() > 370)      //Ball rechts auﬂerhalb des Spielfelds
+            if(Values.bx() > 580)      //Ball rechts auﬂerhalb des Spielfelds
             {
                 p = 1;               //Spieler 1 gewinnt
+                Values.stopBall();
             }
             else if (Values.bx() < 0)  //Ball links auﬂerhalb des Spielfelds
             {
                 p = 2;               //Spieler 2 gewinnt
+                Values.stopBall();
             }
 
             return p;
@@ -585,6 +634,7 @@ namespace OOPGames
             else if (_PlayerNumber == 2)
             {
                 Values.setP2(580, 175, 10, 50);
+                Values.setBall();
             }
         }
 
@@ -628,6 +678,7 @@ namespace OOPGames
             else if (_PlayerNumber == 2)
             {
                 Values.setP2(580, 0, 10, 400);
+                Values.setBall();
             }
         }
 
