@@ -64,6 +64,26 @@ namespace OOPGames
             _vYBall = vyb;
         }
 
+        public void update()
+        {
+            if (_p1MD)
+            {
+                _p1ULYPos = _p1ULYPos - 5;
+            }
+            if (_p1MU)
+            {
+                _p1ULYPos = _p1ULYPos + 5;
+            }
+            if (_p2MD)
+            {
+                _p2ULYPos = _p2ULYPos - 5;
+            }
+            if (_p2MU)
+            {
+                _p2ULYPos = _p2ULYPos + 5;
+            }
+        }
+
         public void p1MU(bool value)
         {
             _p1MU = value;
@@ -170,6 +190,11 @@ namespace OOPGames
             _Val.updateBall(bx, by, br, vxb, vyb);
         }
 
+        public static void update()
+        {
+            _Val.update();
+        }
+
         public static void p1MU(bool value)
         {
             _Val.p1MU(value);
@@ -261,7 +286,9 @@ namespace OOPGames
         public string Name { get { return "GA_PongPainter"; } }
 
         public void PaintPongField(Canvas canvas, IPongField currentField)
-        { 
+        {
+            Values.update();
+
             //Paint GameField
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
@@ -519,19 +546,33 @@ namespace OOPGames
 
         public IPongMove GetMove(IMoveSelection selection, IPongField field)
         {
-            /*
-             * 
-             ***Biemel**
-            Hier ist nur Beispielhaft etwas reingeschrieben, damit kein Fehler geworfen wird.
-            Hier müssen wir überlegen, wie wir den Move deklarieren, weil wir ja nicht mit der
-            Maus klicken wollen.
-            Evtl. müssen wir hier dei ganze GetMoveFunktion umgehen
-            ***Biemel***
-            *
-            */
-            //int m = 1;
-            //int p = 1;
-            return new PongMove(_PlayerNumber);
+            if (selection is IKeySelection)
+            {
+                IKeySelection keySelection = (IKeySelection)selection;
+                switch (keySelection.Key)
+                {
+                    case (Key.Up):
+                        Values.p1MU(true);
+                        Values.p1MD(false);
+                        break;
+
+                    case (Key.W):
+                        Values.p2MU(true);
+                        Values.p2MD(false);
+                        break;
+
+                    case (Key.Down):
+                        Values.p1MU(false);
+                        Values.p1MD(true);
+                        break;
+
+                    case (Key.S):
+                        Values.p2MU(false);
+                        Values.p2MD(true);
+                        break;
+                }
+            }
+                    return new PongMove(_PlayerNumber);
         }
 
         public void SetPlayerNumber(int playerNumber)
