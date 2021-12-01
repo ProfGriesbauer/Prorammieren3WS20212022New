@@ -218,12 +218,23 @@ namespace OOPGames
             canvas.Background = new SolidColorBrush(bgColor);
             Color lineColor = Color.FromRgb(255, 255, 255);
             Brush lineStroke = new SolidColorBrush(lineColor);
-            Line l1 = new Line() { X1 = 300, Y1 = 0, X2 = 300, Y2 = 919, Stroke = lineStroke, StrokeThickness = 5.0 };
+            Line l1 = new Line() { X1 = 300, Y1 = 0, X2 = 376, Y2 = 919, Stroke = lineStroke, StrokeThickness = 5.0 };
             canvas.Children.Add(l1);
-            
+
             //Paint Player
+            Color playerColor = Color.FromRgb(255, 255, 255);
+            Brush playerStroke = new SolidColorBrush(playerColor);
+            //Player1
+            Rectangle P1 = new Rectangle() { Margin = new Thickness(Values.p1x(), Values.p1y(), 0, 0), Width = Values.p1w(), Height = Values.p1h(), Stroke = playerStroke, StrokeThickness = 3.0 };
+            P1.Fill = playerStroke;
+            canvas.Children.Add(P1);
+            //Player2
+            Rectangle P2 = new Rectangle() { Margin = new Thickness(Values.p2x(), Values.p2y(), 0, 0), Width = Values.p2w(), Height = Values.p2h(), Stroke = playerStroke, StrokeThickness = 3.0 };
+            P2.Fill = playerStroke;
+            canvas.Children.Add(P2);
 
             //Paint Ball
+            
         }
 
         public void PaintGameField(Canvas canvas, IGameField currentField)
