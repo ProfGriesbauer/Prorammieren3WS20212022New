@@ -73,20 +73,20 @@ namespace OOPGames
                 _BallXPos = _BallXPos + _vXBall;
                 _BallYPos = _BallYPos + _vYBall;
 
-                if (_BallYPos <= 6 || _BallYPos >= 394)
+                if (_BallYPos <= 0 || _BallYPos >= 390)
                 {
                     _vYBall = -_vYBall;
                 }
-                if (_BallXPos <= 23)
+                if (_BallXPos <= 25)
                 {
-                    if (_BallYPos + 3 >= _p1ULYPos && _BallYPos - 3 <= _p1ULYPos + _p1Height)
+                    if (_BallYPos + 5 >= _p1ULYPos && _BallYPos - 5 <= _p1ULYPos + _p1Height)
                     {
                         _vXBall = -_vXBall;
                     }
                 }
-                if (_BallXPos >= 577)
+                if (_BallXPos >= 565)
                 {
-                    if (_BallYPos + 3 >= _p2ULYPos && _BallYPos - 3 <= _p2ULYPos + _p2Height)
+                    if (_BallYPos + 5 >= _p2ULYPos && _BallYPos - 5 <= _p2ULYPos + _p2Height)
                     {
                         _vXBall = -_vXBall;
                     }
