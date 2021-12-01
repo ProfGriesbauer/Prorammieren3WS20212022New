@@ -264,15 +264,18 @@ namespace OOPGames
         { 
             //Paint GameField
             canvas.Children.Clear();
-            Color bgColor = Color.FromRgb(0, 0, 0);
+            Color bgColor = Color.FromRgb(255, 255, 255);
             canvas.Background = new SolidColorBrush(bgColor);
-            Color lineColor = Color.FromRgb(255, 255, 255);
+            Color lineColor = Color.FromRgb(0, 0, 0);
             Brush lineStroke = new SolidColorBrush(lineColor);
+            Rectangle Board = new Rectangle() { Margin = new Thickness(0, 0, 0, 0), Width = 600, Height = 400, Stroke = lineStroke, StrokeThickness = 3.0 };
+            Board.Fill = lineStroke;
+            canvas.Children.Add(Board);
 
             //Paint Player
             Color playerColor = Color.FromRgb(255, 255, 255);
             Brush playerStroke = new SolidColorBrush(playerColor);
-
+            
             //Player1
             Rectangle P1 = new Rectangle() { Margin = new Thickness(Values.p1x(), Values.p1y(), 0, 0), Width = Values.p1w(), Height = Values.p1h(), Stroke = playerStroke, StrokeThickness = 3.0 };
             P1.Fill = playerStroke;
@@ -534,20 +537,20 @@ namespace OOPGames
         public void SetPlayerNumber(int playerNumber)
         {
             _PlayerNumber = playerNumber;
+            if (_PlayerNumber == 1)
+            {
+                Values.setP1(10, 175, 10, 50);
+            }
+            else if (_PlayerNumber == 2)
+            {
+                Values.setP2(580, 175, 10, 50);
+            }
         }
 
         public IGamePlayer Clone()
         {
             GA_HumanPongPlayer hpp = new GA_HumanPongPlayer();
             hpp.SetPlayerNumber(_PlayerNumber);
-            if(_PlayerNumber==1)
-            {
-                Values.setP1(10, 225, 10, 40);
-            }
-            else if (_PlayerNumber==2)
-            {
-                Values.setP2(350, 225, 10, 40);
-            }
             return hpp;
         }
 
@@ -572,25 +575,25 @@ namespace OOPGames
     public class GA_ComputerPongPlayer : IComputerPongPlayer
     {
         int _PlayerNumber = 0;
-        public string Name { get; }
+        public string Name { get { return "GA_ComputerPongPlayer"; } }
 
         public void SetPlayerNumber(int playerNumber)
         {
             _PlayerNumber = playerNumber;
+            if (_PlayerNumber == 1)
+            {
+                Values.setP1(10, 0, 10, 400);
+            }
+            else if (_PlayerNumber == 2)
+            {
+                Values.setP2(580, 0, 10, 400);
+            }
         }
 
         public IGamePlayer Clone()
         {
             GA_ComputerPongPlayer cpp= new GA_ComputerPongPlayer();
             cpp.SetPlayerNumber(_PlayerNumber);
-            if (_PlayerNumber == 1)
-            {
-                Values.setP1(10, 225, 10, 40);
-            }
-            else if (_PlayerNumber == 2)
-            {
-                Values.setP2(350, 225, 10, 40);
-            }
             return cpp;
         }
         public IPongMove GetMove(IPongField field)
