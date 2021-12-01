@@ -35,7 +35,7 @@ namespace OOPGames
         void DoPongMove(IPongMove move);
     }
 
-    public interface IPongRules_GE : IPongRules
+    public interface IPongRules : IPongRules
     {
         void AskForGameSize();
     }
