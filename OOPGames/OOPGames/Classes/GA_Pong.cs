@@ -540,6 +540,14 @@ namespace OOPGames
         {
             GA_HumanPongPlayer hpp = new GA_HumanPongPlayer();
             hpp.SetPlayerNumber(_PlayerNumber);
+            if(_PlayerNumber==1)
+            {
+                Values.setP1(10, 225, 10, 40);
+            }
+            else if (_PlayerNumber==2)
+            {
+                Values.setP2(350, 225, 10, 40);
+            }
             return hpp;
         }
 
@@ -571,6 +579,20 @@ namespace OOPGames
             _PlayerNumber = playerNumber;
         }
 
+        public IGamePlayer Clone()
+        {
+            GA_ComputerPongPlayer cpp= new GA_ComputerPongPlayer();
+            cpp.SetPlayerNumber(_PlayerNumber);
+            if (_PlayerNumber == 1)
+            {
+                Values.setP1(10, 225, 10, 40);
+            }
+            else if (_PlayerNumber == 2)
+            {
+                Values.setP2(350, 225, 10, 40);
+            }
+            return cpp;
+        }
         public IPongMove GetMove(IPongField field)
         {
             /*
@@ -595,12 +617,6 @@ namespace OOPGames
             return new PongMove(_PlayerNumber);
         }
 
-        public IGamePlayer Clone()
-        {
-            GA_ComputerPongPlayer cpp = new GA_ComputerPongPlayer();
-            cpp.SetPlayerNumber(_PlayerNumber);
-            return cpp;
-        }
 
         public bool CanBeRuledBy(IGameRules rules)
         {

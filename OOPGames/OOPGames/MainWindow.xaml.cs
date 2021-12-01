@@ -53,11 +53,11 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPainter(new Dino_PaintGame());
             OOPGamesManager.Singleton.RegisterPainter(new GG_StartrekPainter());
             OOPGamesManager.Singleton.RegisterPainter(new GC_VierGewinntPaint());
+            OOPGamesManager.Singleton.RegisterPainter(new GB_TicTacToePaint());
             //Rules
             OOPGamesManager.Singleton.RegisterRules(new GA_PongRules());
             OOPGamesManager.Singleton.RegisterRules(new TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GE_TicTacToeRules());
-            OOPGamesManager.Singleton.RegisterPainter(new GB_TicTacToePaint());
             OOPGamesManager.Singleton.RegisterRules(new Gh_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GI_TicTacToeRules());
             OOPGamesManager.Singleton.RegisterRules(new GC_TicTacToeRules());
