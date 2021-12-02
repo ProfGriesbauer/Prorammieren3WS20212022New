@@ -48,12 +48,12 @@ namespace OOPGames
                 {
                     if (currentField[i, j] == 1)
                     {
-                        Ellipse O1 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 20 + (i * 50), 0, 0), Width = (42), Height = 42, Stroke = O1Stroke, StrokeThickness = 3.0 };
+                        Ellipse O1 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 21 + (i * 50), 0, 0), Width = 40, Height = 40, Stroke = O1Stroke, Fill = O1Stroke, StrokeThickness = 3.0 };
                         canvas.Children.Add(O1);
                     }
                     else if (currentField[i, j] == 2)
                     {
-                        Ellipse O2 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 20 + (i * 50), 0, 0), Width = 42, Height = 42, Stroke = O2Stroke, StrokeThickness = 3.0 };
+                        Ellipse O2 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 21 + (i * 50), 0, 0), Width = 40, Height = 40, Stroke = O2Stroke, Fill = O2Stroke, StrokeThickness = 3.0 };
                         canvas.Children.Add(O2);
                     }
                 }
