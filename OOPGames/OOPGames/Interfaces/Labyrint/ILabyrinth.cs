@@ -16,7 +16,7 @@ namespace OOPGames
     {
         int this[int r, int c] { get; set; }
 
-        ILabyrinthKachel[][] Kacheln { get; set; }
+        ILabyrinthKachel[,] Kacheln { get; set; }
         ILabyrinthKachel FreeKachel { get; set; }
     }
 
@@ -50,6 +50,7 @@ namespace OOPGames
 
     public interface IHumanLabyrinthPlayer : IHumanGamePlayer
     {
+
         ILabyrinthGoMove GetGoMove(ILabyrinthGoMove labyrinthMove);
 
         ILabyrinthKachelMove GetKachelMove(ILabyrinthKachelMove labyrinthMove);

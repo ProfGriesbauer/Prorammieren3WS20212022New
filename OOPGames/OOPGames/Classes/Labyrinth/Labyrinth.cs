@@ -12,27 +12,80 @@ namespace OOPGames
         
     }
 
-    public class LabyrinthField // : ILabyrinthField
+    public class LabyrinthField : ILabyrinthField
     {
-        
+        int _Size = 7;
+
+        BaseLabyrinthKachel[,] _Kacheln;
+        BaseLabyrinthKachel _FreeKachel;
+
+        public LabyrinthField ()
+        {
+            _Kacheln = new BaseLabyrinthKachel[_Size, _Size];
+        }
+
+        public int this[int r, int c]
+        {
+            get
+            {
+                if (r >= 0 && r < _Size && c >= 0 && c < _Size)
+                {
+                    return _Kacheln[r, c].Player;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+
+            set
+            {
+                if (r >= 0 && r < _Size && c >= 0 && c < _Size)
+                {
+                    _Kacheln[r, c].Player = value;
+                }
+            }
+        }
+
+        public ILabyrinthKachel[,] Kacheln { get { return _Kacheln; } set => throw new NotImplementedException(); }
+        public ILabyrinthKachel FreeKachel { get { return _FreeKachel; } set => throw new NotImplementedException(); }
+
+        public bool CanBePaintedBy(IPaintGame painter)
+        {
+            return painter is IPaintLabyrinth;
+        }
     }
 
-    public class LabyrinthLKachel // : ILabyrinthKachel
+    public abstract class BaseLabyrinthKachel : ILabyrinthKachel
+    {
+        int _Ways = 0;
+
+        public int Ways { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Trophy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Player { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void Rotate(int dir)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class LabyrinthLKachel : BaseLabyrinthKachel
     {
 
     }
 
-    public class LabyrinthIKachel // : ILabyrinthKachel
+    public class LabyrinthIKachel : BaseLabyrinthKachel
     {
 
     }
 
-    public class LabyrinthTKachel // : ILabyrinthKachel
+    public class LabyrinthTKachel : BaseLabyrinthKachel
     {
 
     }
 
-    public class LabyrinthXKachel // : ILabyrinthKachel
+    public class LabyrinthXKachel : BaseLabyrinthKachel
     {
 
     }
