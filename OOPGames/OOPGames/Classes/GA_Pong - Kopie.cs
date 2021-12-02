@@ -20,7 +20,6 @@ namespace OOPGames
         public int _BallRad;
         public int _vXBall;
         public int _vYBall;
-        public bool _BallStop;
         //Values Player 1
         public bool _p1MU;
         public bool _p1MD;
@@ -56,72 +55,13 @@ namespace OOPGames
             _p2Height = p2h;
         }
 
-        public void setBall()
+        public void updateBall(int bx, int by, int br, int vxb, int vyb)
         {
-            _BallXPos = 560;
-            _BallYPos = 200;
-            _BallRad = 5;
-            _vXBall = -8;
-            _vYBall = -5;
-            _BallStop = false;
-        }
-
-        public void updateBall()
-        {
-            if (!_BallStop)
-            {
-                _BallXPos = _BallXPos + _vXBall;
-                _BallYPos = _BallYPos + _vYBall;
-
-                if (_BallYPos <= 0 || _BallYPos >= 390)
-                {
-                    _vYBall = -_vYBall;
-                }
-                if (_BallXPos <= 25)
-                {
-                    if (_BallYPos + 5 >= _p1ULYPos && _BallYPos - 5 <= _p1ULYPos + _p1Height)
-                    {
-                        _vXBall = -_vXBall;
-                    }
-                }
-                if (_BallXPos >= 565)
-                {
-                    if (_BallYPos + 5 >= _p2ULYPos && _BallYPos - 5 <= _p2ULYPos + _p2Height)
-                    {
-                        _vXBall = -_vXBall;
-
-                    }
-                }
-                if (_BallXPos < 0 || _BallXPos > 600)
-                {
-                    Values.stopBall();
-                }
-            }
-        }
-
-        public void stopBall()
-        {
-            _BallStop = true;
-        }
-
-        public void update()
-        {
-            if (_p1MD && (_p1ULYPos + _p1Height < 400) )
-            {
-                _p1ULYPos = _p1ULYPos + 5;
-            }
-            if (_p1MU && (_p1ULYPos > 0) )
-            {
-                _p1ULYPos = _p1ULYPos - 5;
-            }
-            if (_p2MD && (_p2ULYPos + _p2Height < 400) )
-            {
-                _p2ULYPos = _p2ULYPos + 5;
-            }
-            if (_p2MU && (_p2ULYPos > 0))
-            {
-                _p2ULYPos = _p2ULYPos - 5;
-            }
+            _BallXPos = bx;
+            _BallYPos = by;
+            _BallRad = br;
+            _vXBall = vxb;
+            _vYBall = vyb;
         }
 
         public void p1MU(bool value)
@@ -210,6 +150,7 @@ namespace OOPGames
         }
     }
 
+
     public static class Values
     {
         public static ManageValues _Val = new ManageValues();
@@ -224,24 +165,9 @@ namespace OOPGames
             _Val.setP2(p2x, p2y, p2w, p2h);
         }
 
-        public static void setBall()
+        public static void updateBall(int bx, int by, int br, int vxb, int vyb)
         {
-            _Val.setBall();
-        }
-
-        public static void updateBall()
-        {
-            _Val.updateBall();
-        }
-
-        public static void stopBall()
-        {
-            _Val.stopBall();
-        }
-
-        public static void update()
-        {
-            _Val.update();
+            _Val.updateBall(bx, by, br, vxb, vyb);
         }
 
         public static void p1MU(bool value)
@@ -335,24 +261,18 @@ namespace OOPGames
         public string Name { get { return "GA_PongPainter"; } }
 
         public void PaintPongField(Canvas canvas, IPongField currentField)
-        {
-            Values.update();
-            Values.updateBall();
-
+        { 
             //Paint GameField
             canvas.Children.Clear();
-            Color bgColor = Color.FromRgb(255, 255, 255);
+            Color bgColor = Color.FromRgb(0, 0, 0);
             canvas.Background = new SolidColorBrush(bgColor);
-            Color lineColor = Color.FromRgb(0, 0, 0);
+            Color lineColor = Color.FromRgb(255, 255, 255);
             Brush lineStroke = new SolidColorBrush(lineColor);
-            Rectangle Board = new Rectangle() { Margin = new Thickness(0, 0, 0, 0), Width = 600, Height = 400, Stroke = lineStroke, StrokeThickness = 3.0 };
-            Board.Fill = lineStroke;
-            canvas.Children.Add(Board);
 
             //Paint Player
             Color playerColor = Color.FromRgb(255, 255, 255);
             Brush playerStroke = new SolidColorBrush(playerColor);
-            
+
             //Player1
             Rectangle P1 = new Rectangle() { Margin = new Thickness(Values.p1x(), Values.p1y(), 0, 0), Width = Values.p1w(), Height = Values.p1h(), Stroke = playerStroke, StrokeThickness = 3.0 };
             P1.Fill = playerStroke;
@@ -364,9 +284,7 @@ namespace OOPGames
             canvas.Children.Add(P2);
 
             //Paint Ball
-            Ellipse Ball = new Ellipse() { Margin = new Thickness(Values.bx(), Values.by(), 0, 0), Width = 2*Values.br(), Height = 2*Values.br(), Stroke = playerStroke, StrokeThickness = 1.0 };
-            Ball.Fill = playerStroke;
-            canvas.Children.Add(Ball);
+            
         }
 
         public void PaintGameField(Canvas canvas, IGameField currentField)
@@ -406,21 +324,19 @@ namespace OOPGames
 
         public IPongField PongField { get { return _Field; } }
 
-        public bool MovesPossible { get { return true; } }
+        public bool MovesPossible { get; }
 
         public int CheckIfPLayerWon()
         {
             int p = 0; 
 
-            if(Values.bx() > 580)      //Ball rechts auﬂerhalb des Spielfelds
+            if(Values.bx() > 370)      //Ball rechts auﬂerhalb des Spielfelds
             {
                 p = 1;               //Spieler 1 gewinnt
-                Values.stopBall();
             }
             else if (Values.bx() < 0)  //Ball links auﬂerhalb des Spielfelds
             {
                 p = 2;               //Spieler 2 gewinnt
-                Values.stopBall();
             }
 
             return p;
@@ -505,7 +421,6 @@ namespace OOPGames
         }
        */
 
-       /* Von TicTacToeGruppeB
         public IPongMove GetMove_A(IMoveSelection selection, IPongField field)
         {
             for (int i = 0; i < 4; i++)
@@ -529,7 +444,7 @@ namespace OOPGames
             {
                 IKeySelection keySelection = (IKeySelection)selection;
                 //int x = -1, y = -1;
-                
+                /*//
                 switch (keySelection.Key)
                 {
                     case (Key.D1):
@@ -551,10 +466,10 @@ namespace OOPGames
                     case (Key.D9):
                         x = 2; y = 0; break;
                 }
-                
+                //*/
                 switch (keySelection.Key)
                 {
-                    case (Key.O):
+                    case (Key.Up):
                         Values.p1MU(true);
                         Values.p1MD(false);
                         break;
@@ -564,7 +479,7 @@ namespace OOPGames
                         Values.p2MD(false);
                         break;
 
-                    case (Key.L):
+                    case (Key.Down):
                         Values.p1MU(false);
                         Values.p1MD(true);
                         break;
@@ -575,7 +490,7 @@ namespace OOPGames
                         break;
 
 
-                         case (Key.NumPad3):
+                        /* case (Key.NumPad3):
                              x = 2; y = 2; break;
                          case (Key.NumPad4):
                              x = 0; y = 1; break;
@@ -588,7 +503,7 @@ namespace OOPGames
                          case (Key.NumPad8):
                              x = 1; y = 0; break;
                          case (Key.NumPad9):
-                             x = 2; y = 0; break;
+                             x = 2; y = 0; break;*/
                 }
                 return new PongMove(_PlayerNumber);
             }
@@ -598,51 +513,27 @@ namespace OOPGames
                 return new PongMove(_PlayerNumber);
             }
         }
-*/
 
         public IPongMove GetMove(IMoveSelection selection, IPongField field)
         {
-            if (selection is IKeySelection)
-            {
-                IKeySelection keySelection = (IKeySelection)selection;
-                switch (keySelection.Key)
-                {
-                    case (Key.O):
-                        Values.p2MU(true);
-                        Values.p2MD(false);
-                        break;
-
-                    case (Key.W):
-                        Values.p1MU(true);
-                        Values.p1MD(false);
-                        break;
-
-                    case (Key.L):
-                        Values.p2MU(false);
-                        Values.p2MD(true);
-                        break;
-
-                    case (Key.S):
-                        Values.p1MU(false);
-                        Values.p1MD(true);
-                        break;
-                }
-            }
-                    return new PongMove(_PlayerNumber);
+            /*
+             * 
+             ***Biemel**
+            Hier ist nur Beispielhaft etwas reingeschrieben, damit kein Fehler geworfen wird.
+            Hier m¸ssen wir ¸berlegen, wie wir den Move deklarieren, weil wir ja nicht mit der
+            Maus klicken wollen.
+            Evtl. m¸ssen wir hier dei ganze GetMoveFunktion umgehen
+            ***Biemel***
+            *
+            */
+            //int m = 1;
+            //int p = 1;
+            return new PongMove(_PlayerNumber);
         }
 
         public void SetPlayerNumber(int playerNumber)
         {
             _PlayerNumber = playerNumber;
-            if (_PlayerNumber == 1)
-            {
-                Values.setP1(10, 175, 10, 50);
-            }
-            else if (_PlayerNumber == 2)
-            {
-                Values.setP2(580, 175, 10, 50);
-                Values.setBall();
-            }
         }
 
         public IGamePlayer Clone()
@@ -673,28 +564,13 @@ namespace OOPGames
     public class GA_ComputerPongPlayer : IComputerPongPlayer
     {
         int _PlayerNumber = 0;
-        public string Name { get { return "GA_ComputerPongPlayer"; } }
+        public string Name { get; }
 
         public void SetPlayerNumber(int playerNumber)
         {
             _PlayerNumber = playerNumber;
-            if (_PlayerNumber == 1)
-            {
-                Values.setP1(10, 0, 10, 400);
-            }
-            else if (_PlayerNumber == 2)
-            {
-                Values.setP2(580, 0, 10, 400);
-                Values.setBall();
-            }
         }
 
-        public IGamePlayer Clone()
-        {
-            GA_ComputerPongPlayer cpp= new GA_ComputerPongPlayer();
-            cpp.SetPlayerNumber(_PlayerNumber);
-            return cpp;
-        }
         public IPongMove GetMove(IPongField field)
         {
             /*
@@ -719,6 +595,12 @@ namespace OOPGames
             return new PongMove(_PlayerNumber);
         }
 
+        public IGamePlayer Clone()
+        {
+            GA_ComputerPongPlayer cpp = new GA_ComputerPongPlayer();
+            cpp.SetPlayerNumber(_PlayerNumber);
+            return cpp;
+        }
 
         public bool CanBeRuledBy(IGameRules rules)
         {
