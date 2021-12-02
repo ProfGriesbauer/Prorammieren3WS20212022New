@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -29,14 +30,11 @@ namespace OOPGames
 
 
         public bool Collison { get { return _collision; } }
-
         public string Name { get { return "StartrekPainter"; } }
-
-        public void checkCollison()
-        {
-            foreach (GG_Meteo meteo in _Meteos)
-            {
-                if (meteo.PositionRow == 5) //& meteo.PositionColum ==ship.colum
+        public void checkCollison(GG_IStartrekGamefield currentField)
+        {   
+            for (int c = 0; c < 6; c++) { 
+                if (currentField[c,5] > 2) 
                 {
                     string box_msg = "You Lose";
                     string box_Caption = "Game End";
@@ -44,21 +42,19 @@ namespace OOPGames
                 }
             }
         }
-
         public void spawnMeteos()
         {
             GG_Meteo meteo = new GG_Meteo();
             //Gegen Meteos an gleicher Posititon absichern
             if (_Meteos.Count > 0) //Gegen Fehler bei erstem Aufruf absicher, dort ist Liste noch leer
             {
-                while (meteo.PositionColum == _Meteos[_Meteos.Count-1].PositionColum)
+                while (meteo.PositionColum == _Meteos[_Meteos.Count - 1].PositionColum)
                 {
                     meteo = new GG_Meteo();
                 }
             }
             _Meteos.Add(meteo);
         }
-
         public void moveMetos()
         {
             foreach (GG_Meteo meteo in _Meteos)
@@ -84,7 +80,6 @@ namespace OOPGames
                 currentField[meteo.PositionRow, meteo.PositionColum] = 0;
             }
         }
-
         //Übergibt PaintStartrekGameField currentField als passenden Typ GG_IStartrekGamefield
         public void PaintGameField(Canvas canvas, IGameField currentField)
         {
@@ -93,7 +88,6 @@ namespace OOPGames
                 PaintStartrekGameField(canvas, (GG_IStartrekGamefield)currentField);
             }
         }
-
         public void PaintStartrekGameField(Canvas canvas, GG_IStartrekGamefield currentField)
         {
             removeOldPositions(currentField);
@@ -110,11 +104,8 @@ namespace OOPGames
             {
                 moveMetos();
               
-            }
-            
+            } 
             updateField(currentField);
-
-
             //Tatsächliches Zeichnen:
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(255, 255, 255);
@@ -123,9 +114,8 @@ namespace OOPGames
             Brush lineStroke = new SolidColorBrush(MeteoColor);
             Color SpaceshipColor = Color.FromRgb(0, 255, 0);
             Brush XStroke = new SolidColorBrush(SpaceshipColor);
-
-            //ToDO: if collision == true => Anzeige, dass Spiel verloren
-
+            //if collision == true => Anzeige, dass Spiel verloren
+            checkCollison(currentField);
             // Matrix auswerten und Meteos an entsprechende Stelle zeichnen
            for (int i = 0; i < 6; i++)
            {
@@ -199,22 +189,24 @@ namespace OOPGames
             return painter is GG_IStartrekPainter;
         }
     }
-    public class GG_StartrekRules : GG_IStartrekRules //eingefügt Samstag 29.11.2021
+    public class GG_StartrekRules : GG_IStartrekRules
     {
         GG_StartrekField _Field = new GG_StartrekField();
-
         public string Name { get { return "StartrekRules"; } }
-
-
         public IGameField CurrentField { get { return _Field; } }
-
         public bool MovesPossible { get { return true; } }
 
         public int CheckIfPLayerWon()
         {
+            for (int c = 0; c < 6; c++)
+            {
+                if (_Field[c, 5] > 2)
+                {
+                    return 1;
+                }
+            }
             return -1;
         }
-
         public void ClearField()
         {
             for (int i = 0; i < 6; i++)
@@ -225,13 +217,69 @@ namespace OOPGames
                 }
             }
         }
-
         public void DoMove(IPlayMove move)
         {
             //ToDo:
-            //Cast auf IStartrekmove
+            //Cast auf IStartrekmove->weiterleitung an DoStartrekmove
             //move in currentfield übertragen 
             //move hat direction => negativ für links positiv für rechts            
         }
+    }
+
+    public class GG_StartrekHumanPlayer : GG_IStartrekHumanPlayer
+    {
+        public string Name { get { return "StartrekPlayer"; } }
+        public bool CanBeRuledBy(IGameRules rules)
+        {
+            return rules is GG_IStartrekRules;
+        }
+        public IGamePlayer Clone()
+        {
+            return new GG_StartrekHumanPlayer();
+        }
+        public IPlayMove GetMove(IMoveSelection selection, IGameField field)
+        {
+            //Polymorphie: Wenn Playmove mit Tastatur erfolgt ist wird spezifischere Methode GetStartrekMove aufgerufen
+            if (selection is IKeySelection && field is ) 
+            {
+                return GetStartrekMove((IKeySelection)selection, (GG_IStartrekGamefield)field);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public IPlayMove GetStartrekMove(IKeySelection selection, IGameField field)
+        {
+            int _direction = 0;
+            
+            if (selection.Key == Key.Left)
+            {
+                _direction = -1;
+            }
+            if (selection.Key == Key.Right)
+            {
+                _direction = 1;
+            }
+            return new GG_StartrekMove(_direction, 42);
+        }
+
+        public void SetPlayerNumber(int playerNumber)
+        {
+            //Playernumber ist nicht relevant, deshalb keine Implementierung
+            //Es wird standartmäßig ein PlayMove mit Spielernummer 42 zurückgegeben
+        }
+    }
+    public class GG_StartrekMove : GG_IStartrekMove
+    {
+        int _playernumber = 42;
+        int _direction = 0;
+        public GG_StartrekMove(int direction, int playernumber)
+        {
+            _playernumber = playernumber;
+            _direction = direction;
+        }
+        public int PlayerNumber { get { return _playernumber; } }
+        public int Direction { get { return _direction; } }
     }
 }

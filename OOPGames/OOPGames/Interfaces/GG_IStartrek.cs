@@ -45,15 +45,10 @@ namespace OOPGames
     public interface GG_IStartrekGamefield : IGameField
     {
         int this[int r, int c] { get; set; }
-        //ToDo: Vererbung
-        // 6x6 Matrix
     }
 
     public interface GG_IStartrekRules : IGameRules
-    {
-        //Hält Gamefield!
-        //Muss bei Painter abfragen, ob Kollision vorliegt --> Collsion-Variable
-
+    {      //Hält Gamefield!
     }
 
     public interface GG_IMeteo
@@ -68,9 +63,15 @@ namespace OOPGames
         void UpdatePos();
     }
 
-    //ToDO: 
-    //Interface: neues für GG_IStartrekMove erbt von IPlaymove und IKeymove
-    //Hat Methode mit getter für direction( int direction{get;})
-    //Evtl auch gleich Klasse GG_StartrekMove mitimplementieren
+    public interface GG_IStartrekHumanPlayer : IHumanGamePlayer
+    {
+    }
+
+    public interface GG_IStartrekMove : IPlayMove
+    {
+        //gibt an in welche Richtung das Shaceship bewegt werden soll 
+        // Direction<0 links Direction > 0 rechts
+        int Direction { get; }
+    }
 
 }
