@@ -25,7 +25,7 @@ namespace OOPGames
         uint _aufrufe = 0;
         int _spawnspeed = 80; //Takt der Meteoerzeugung
         int _spawnnum = 1; //Anzahl der je Spawn erzeugten Meteos
-        int _movespeed = 40; //Takt der Bewegung 
+        int _movespeed = 40; //Takt der MeteoBewegung 
         bool _collision = false;
 
 
@@ -34,7 +34,7 @@ namespace OOPGames
         public void checkCollison(GG_IStartrekGamefield currentField)
         {   
             for (int c = 0; c < 6; c++) { 
-                if (currentField[c,5] > 2) 
+                if (currentField[5,c] > 2) 
                 {
                     string box_msg = "You Lose";
                     string box_Caption = "Game End";
@@ -92,13 +92,28 @@ namespace OOPGames
         {
             removeOldPositions(currentField);
 
-            if ((_aufrufe + _spawnspeed) % _spawnspeed == 0) //+spwanspeed dass bei Spielstart gleich gespawnd wird
+            if ((_aufrufe+1) % 100 == 0)
+            {
+                if (_movespeed > 0)
+                {
+                    _movespeed -= 3;
+                    _spawnspeed = _movespeed * 2;
+                }
+            }
+            if ((_aufrufe+1) % 1000 == 0)
+            {
+                if (_spawnnum < 4)
+                {
+                    _spawnnum++;
+                }
+            }
+
+            if (_aufrufe %_spawnspeed == 0)
             {   
                 for (int i = 0; i < _spawnnum; i++)
                 { 
                     spawnMeteos();
                 }
-
             }
             if (_aufrufe % _movespeed == 0)
             {
@@ -112,8 +127,9 @@ namespace OOPGames
             canvas.Background = new SolidColorBrush(bgColor);
             Color MeteoColor = Color.FromRgb(0, 255, 0);
             Brush lineStroke = new SolidColorBrush(MeteoColor);
-            Color SpaceshipColor = Color.FromRgb(0, 255, 0);
-            Brush XStroke = new SolidColorBrush(SpaceshipColor);
+            Color SpaceshipColor = Color.FromRgb(255, 255, 0);
+            Brush XStroke = new SolidColorBrush(MeteoColor);
+            Brush ShipStroke = new SolidColorBrush(SpaceshipColor);
             //if collision == true => Anzeige, dass Spiel verloren
             checkCollison(currentField);
             // Matrix auswerten und Meteos an entsprechende Stelle zeichnen
@@ -130,6 +146,11 @@ namespace OOPGames
                        Line X3 = new Line() { X1 = 20 + (j * 60), Y1 = 50 + (i * 60), X2 = 80 + (j * 60), Y2 = 50 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
                        canvas.Children.Add(X3);
                    }
+                   if(currentField[i, j] == 2)
+                    {
+                        Line X4 = new Line() { X1 = 20 + (j * 60), Y1 = 20 + (i * 60), X2 = 80 + (j * 60), Y2 = 80 + (i * 60), Stroke = ShipStroke, StrokeThickness = 3.0 };
+                        canvas.Children.Add(X4);
+                    }
                     //ToDo: (currentField[i, j] == 3) Spaceship zeichnen
                 }
             }
@@ -160,7 +181,13 @@ namespace OOPGames
     }
     public class GG_StartrekField : GG_IStartrekGamefield
     {
-        int[,] _Field = new int[6, 6] { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
+        int[,] _Field = new int[6, 6] { 
+            { 0, 0, 0, 0, 0, 0 }, 
+            { 0, 0, 0, 0, 0, 0 }, 
+            { 0, 0, 0, 0, 0, 0 }, 
+            { 0, 0, 0, 0, 0, 0 }, 
+            { 0, 0, 0, 0, 0, 0 }, 
+            { 0, 0, 0, 2, 0, 0 } };
 
         public int this[int r, int c]
         {
@@ -200,7 +227,7 @@ namespace OOPGames
         {
             for (int c = 0; c < 6; c++)
             {
-                if (_Field[c, 5] > 2)
+                if (_Field[5, c] > 2)
                 {
                     return 1;
                 }
@@ -216,13 +243,50 @@ namespace OOPGames
                     _Field[i, j] = 0;
                 }
             }
+            _Field[5, 3] = 2;
         }
         public void DoMove(IPlayMove move)
         {
             //ToDo:
             //Cast auf IStartrekmove->weiterleitung an DoStartrekmove
             //move in currentfield übertragen 
-            //move hat direction => negativ für links positiv für rechts            
+            //move hat direction => negativ für links positiv für rechts
+            if (move is GG_IStartrekMove)
+            {
+                DoStartrekMove((GG_IStartrekMove)move);
+            }
+        }
+        public void DoStartrekMove(GG_IStartrekMove move)
+        {
+            int _shippos = -1;
+            if (move.Direction != 0)
+            {
+                //Stelle suchen an der 2 steht
+                for (int c = 0; c < 6; c++)
+                {
+                    if (_Field[5, c] == 2)
+                    {
+                        _shippos = c;
+                    }
+                }
+                //Ship entsprechend nach Direction des Moves bewegen, sofern dann noch im Spielfeld
+                if (move.Direction > 0) //rechts
+                {
+                    if (_shippos < 5)
+                    {
+                        _Field[5, _shippos + 1] = 2;
+                        _Field[5, _shippos] = 0;
+                    }
+                }
+                if (move.Direction < 0) //links
+                {
+                    if (_shippos > 0)
+                    {
+                        _Field[5, _shippos - 1] = 2;
+                        _Field[5, _shippos] = 0;
+                    }
+                }
+            }
         }
     }
 
@@ -240,7 +304,7 @@ namespace OOPGames
         public IPlayMove GetMove(IMoveSelection selection, IGameField field)
         {
             //Polymorphie: Wenn Playmove mit Tastatur erfolgt ist wird spezifischere Methode GetStartrekMove aufgerufen
-            if (selection is IKeySelection && field is ) 
+            if (selection is IKeySelection && field is GG_IStartrekGamefield) 
             {
                 return GetStartrekMove((IKeySelection)selection, (GG_IStartrekGamefield)field);
             }

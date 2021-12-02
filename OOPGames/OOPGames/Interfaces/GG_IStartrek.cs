@@ -33,7 +33,7 @@ namespace OOPGames
         //-bei allen Meteoobjekten die Position abrufen und entsprechend im Spielfeld eintragen
         //  wenn Meteorit das Spielfeld damit verlässt aus Liste löschen https://www.csharp-examples.net/foreach/
         //-auf Kollision prüfen und im Fall von Kollision entsprechende Bildschirmausgabe erzeugen 
-        void checkCollison();
+        void checkCollison(GG_IStartrekGamefield currentField);
         //  Kollison muss dann den Wert von CheckifPlayerWon in der Rulesklasse auf true setzen, dann wurd nach Playerinteraktion(Mausklick)
         // das Spiel wirklich beendet und die Anzeige entsprechend gestalltet
         //Methode muss durch PaintGameField mit entsprechendem Cast auf GG_IStartrekGamefield aufgerufen werden 
