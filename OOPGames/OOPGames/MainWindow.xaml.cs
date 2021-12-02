@@ -95,6 +95,7 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPlayer(new Dino_GamePlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new SnakeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GC_VierGewinntHumanPlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GC_VierGewinntComputerPlayer());
 
             InitializeComponent();
             PaintList.ItemsSource = OOPGamesManager.Singleton.Painters;
