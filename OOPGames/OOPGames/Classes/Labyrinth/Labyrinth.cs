@@ -58,36 +58,86 @@ namespace OOPGames
 
     public abstract class BaseLabyrinthKachel : ILabyrinthKachel
     {
-        int _Ways = 0;
+        protected int _Ways, _Trophy, _Player;
 
-        public int Ways { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Trophy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Player { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void Rotate(int dir)
+        //*//
+        public BaseLabyrinthKachel()
         {
-            throw new NotImplementedException();
+            _Ways = 0;
+            _Trophy = 0;
+            _Player = 0;
+            Rotate(1);
         }
+        //*/
+
+        public int Ways { get { return _Ways; } set => throw new NotImplementedException(); }
+        public int Trophy { get { return _Trophy; } set => throw new NotImplementedException(); }
+        public int Player { get { return _Player; } set { _Player = value; } }
+
+        public abstract void Rotate(int dir);
     }
 
     public class LabyrinthLKachel : BaseLabyrinthKachel
     {
-
+        
+        public override void Rotate(int dir)
+        {
+            switch (dir)
+            {
+                case 0:
+                    switch (_Ways)
+                    {
+                        case 0b0011: _Ways = 0b0110; break;
+                        case 0b0110: _Ways = 0b1100; break;
+                        case 0b1100: _Ways = 0b1001; break;
+                        case 0b1001: _Ways = 0b0011; break;
+                        default: _Ways = 0b0011; break;
+                    }
+                    break;
+                case 1:
+                    switch (_Ways)
+                    {
+                        case 0b1100: _Ways = 0b0110; break;
+                        case 0b0110: _Ways = 0b0011; break;
+                        case 0b0011: _Ways = 0b1001; break;
+                        case 0b1001: _Ways = 0b1100; break;
+                        default: _Ways = 0b0011; break;
+                    }
+                    break;
+                default: break;
+            }
+        }
     }
 
     public class LabyrinthIKachel : BaseLabyrinthKachel
     {
+       
+        public override void Rotate(int dir)
+        {
 
+        }
     }
 
     public class LabyrinthTKachel : BaseLabyrinthKachel
     {
+        
+        public override void Rotate(int dir)
+        {
 
+        }
     }
 
     public class LabyrinthXKachel : BaseLabyrinthKachel
     {
+        public LabyrinthXKachel()
+        {
+            _Ways = 0b1111;
+        }
 
+        public override void Rotate(int dir)
+        {
+            
+        }
     }
 
     public class LabyrinthRules // : ILabyrinthRules
