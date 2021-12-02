@@ -89,7 +89,12 @@ namespace OOPGames
                     if (_BallYPos + 5 >= _p2ULYPos && _BallYPos - 5 <= _p2ULYPos + _p2Height)
                     {
                         _vXBall = -_vXBall;
+
                     }
+                }
+                if (_BallXPos < 0 || _BallXPos > 600)
+                {
+                    Values.stopBall();
                 }
             }
         }
@@ -401,7 +406,7 @@ namespace OOPGames
 
         public IPongField PongField { get { return _Field; } }
 
-        public bool MovesPossible { get; }
+        public bool MovesPossible { get { return true; } }
 
         public int CheckIfPLayerWon()
         {
