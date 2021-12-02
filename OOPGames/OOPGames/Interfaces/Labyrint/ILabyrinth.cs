@@ -16,7 +16,7 @@ namespace OOPGames
     {
         int this[int r, int c] { get; set; }
 
-        ILabyrinthKachel[] Kacheln { get; set; }
+        ILabyrinthKachel[][] Kacheln { get; set; }
         ILabyrinthKachel FreeKachel { get; set; }
     }
 

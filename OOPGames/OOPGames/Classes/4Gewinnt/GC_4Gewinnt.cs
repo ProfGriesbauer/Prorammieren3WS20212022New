@@ -92,15 +92,13 @@ namespace OOPGames
 
         public override int CheckIfPLayerWon()
         {
-            for (int p = 1; p < 3; p++)
-            {
                 for (int j = 0; j < 7; j++) // Checke Senkrecht 
                 {
                     for (int i = 0; i < 3; i++)
                     {
                         if (_Field[i, j] > 0 && _Field[i, j] == _Field[i + 1, j] && _Field[i + 1, j] == _Field[i + 2, j] && _Field[i + 2, j] == _Field[i + 3, j])
                         {
-                            return p;
+                            return _Field[i, j];
                         }
                     }
                 }
@@ -110,7 +108,7 @@ namespace OOPGames
                     {
                         if (_Field[i, j] > 0 && _Field[i, j] == _Field[i, j + 1] && _Field[i, j + 1] == _Field[i, j + 2] && _Field[i, j + 2] == _Field[i, j + 3])
                         {
-                            return p;
+                            return _Field[i, j];
                         }
                     }
                 }
@@ -120,7 +118,7 @@ namespace OOPGames
                     {
                         if (_Field[i, j] > 0 && _Field[i, j] == _Field[i + 1, j + 1] && _Field[i + 1, j + 1] == _Field[i + 2, j + 2] && _Field[i + 2, j + 2] == _Field[i + 3, j + 3])
                         {
-                            return p;
+                            return _Field[i, j];
                         }
                     }
                 }
@@ -130,11 +128,10 @@ namespace OOPGames
                     {
                         if (_Field[i, j] > 0 && _Field[i, j] == _Field[i - 1, j + 1] && _Field[i - 1, j + 1] == _Field[i - 2, j + 2] && _Field[i - 2, j + 2] == _Field[i - 3, j + 3])
                         {
-                            return p;
+                            return _Field[i, j];
                         }
                     }
                 }
-            }
             return -1;
         }
 

@@ -17,7 +17,7 @@ namespace OOPGames
         
     }
 
-    public class LabyrinthWKachel // : ILabyrinthKachel
+    public class LabyrinthLKachel // : ILabyrinthKachel
     {
 
     }
@@ -28,6 +28,11 @@ namespace OOPGames
     }
 
     public class LabyrinthTKachel // : ILabyrinthKachel
+    {
+
+    }
+
+    public class LabyrinthXKachel // : ILabyrinthKachel
     {
 
     }
