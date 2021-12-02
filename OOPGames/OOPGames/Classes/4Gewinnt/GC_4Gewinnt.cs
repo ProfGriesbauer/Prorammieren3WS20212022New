@@ -48,12 +48,12 @@ namespace OOPGames
                 {
                     if (currentField[i, j] == 1)
                     {
-                        Ellipse O1 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 20 + (i * 50), 0, 0), Width = (42), Height = 42, Stroke = O1Stroke, StrokeThickness = 3.0 };
+                        Ellipse O1 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 21 + (i * 50), 0, 0), Width = 40, Height = 40, Stroke = O1Stroke, Fill = O1Stroke, StrokeThickness = 3.0 };
                         canvas.Children.Add(O1);
                     }
                     else if (currentField[i, j] == 2)
                     {
-                        Ellipse O2 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 20 + (i * 50), 0, 0), Width = 42, Height = 42, Stroke = O2Stroke, StrokeThickness = 3.0 };
+                        Ellipse O2 = new Ellipse() { Margin = new Thickness(20 + (j * (300/7)), 21 + (i * 50), 0, 0), Width = 40, Height = 40, Stroke = O2Stroke, Fill = O2Stroke, StrokeThickness = 3.0 };
                         canvas.Children.Add(O2);
                     }
                 }
@@ -92,15 +92,13 @@ namespace OOPGames
 
         public override int CheckIfPLayerWon()
         {
-            for (int p = 1; p < 3; p++)
-            {
                 for (int j = 0; j < 7; j++) // Checke Senkrecht 
                 {
                     for (int i = 0; i < 3; i++)
                     {
                         if (_Field[i, j] > 0 && _Field[i, j] == _Field[i + 1, j] && _Field[i + 1, j] == _Field[i + 2, j] && _Field[i + 2, j] == _Field[i + 3, j])
                         {
-                            return p;
+                            return _Field[i, j];
                         }
                     }
                 }
@@ -110,7 +108,7 @@ namespace OOPGames
                     {
                         if (_Field[i, j] > 0 && _Field[i, j] == _Field[i, j + 1] && _Field[i, j + 1] == _Field[i, j + 2] && _Field[i, j + 2] == _Field[i, j + 3])
                         {
-                            return p;
+                            return _Field[i, j];
                         }
                     }
                 }
@@ -120,7 +118,7 @@ namespace OOPGames
                     {
                         if (_Field[i, j] > 0 && _Field[i, j] == _Field[i + 1, j + 1] && _Field[i + 1, j + 1] == _Field[i + 2, j + 2] && _Field[i + 2, j + 2] == _Field[i + 3, j + 3])
                         {
-                            return p;
+                            return _Field[i, j];
                         }
                     }
                 }
@@ -130,11 +128,10 @@ namespace OOPGames
                     {
                         if (_Field[i, j] > 0 && _Field[i, j] == _Field[i - 1, j + 1] && _Field[i - 1, j + 1] == _Field[i - 2, j + 2] && _Field[i - 2, j + 2] == _Field[i - 3, j + 3])
                         {
-                            return p;
+                            return _Field[i, j];
                         }
                     }
                 }
-            }
             return -1;
         }
 
