@@ -51,6 +51,10 @@ namespace OOPGames
     {
         void AskForGameSize();
     }
+    public interface ITicTacToeRules_GJ : ITicTacToeRules
+    {
+        void AskForGameColour();
+    }
 
     //TicTacToeMove which is derived from row and column
     //DIESES INTERFACE NICHT ÄNDERN!

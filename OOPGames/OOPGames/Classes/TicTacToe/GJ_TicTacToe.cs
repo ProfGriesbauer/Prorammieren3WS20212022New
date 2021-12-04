@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -83,15 +84,15 @@ namespace OOPGames
 
 
 
-    public class GJ_TicTacToeRules : BaseTicTacToeRules
+    public class GJ_TicTacToeRules : BaseTicTacToeRules_GJ
     {
         GJ_TicTacToeField _Field = new GJ_TicTacToeField();
 
         public override ITicTacToeField TicTacToeField { get { return _Field; } }
 
-        public override bool MovesPossible 
-        { 
-            get 
+        public override bool MovesPossible
+        {
+            get
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -104,8 +105,8 @@ namespace OOPGames
                     }
                 }
 
-                return false; 
-            } 
+                return false;
+            }
         }
 
         public override string Name { get { return "TicTacToeRules GJ"; } }
@@ -154,8 +155,120 @@ namespace OOPGames
                 _Field[move.Row, move.Column] = move.PlayerNumber;
             }
         }
-    }
+        public override void AskForGameColour()
+        {
+            int Colour = Prompt.ShowDialog("Bitte Farbe wählen:", "Farbe Festlegen");
+            
+        }
+        public static class Prompt
+        {
+            public static int ShowDialog(string text, string caption)
+            {
+                Form prompt = new Form()
+                {
+                    Width = 500,
+                    Height = 150,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    Text = caption,
+                    StartPosition = FormStartPosition.CenterScreen
+                };
+                string[] auswahl0 = { "Rot", "Grün", "Blau" };
+                System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 10, Top = 10, Text = text };
+                System.Windows.Forms.ComboBox textBox = new System.Windows.Forms.ComboBox();
+                System.Windows.Forms.ComboBox textBox2 = new System.Windows.Forms.ComboBox();
+                textBox.Location = new System.Drawing.Point(10, 60);
+                textBox.IntegralHeight = false;
+                textBox.MaxDropDownItems = 3;
+                textBox.DropDownStyle = ComboBoxStyle.DropDownList;
+                textBox.Name = "ComboBox1";
+                textBox.Size = new System.Drawing.Size(136, 81);
+                textBox.TabIndex = 0;
+                textBox.SelectedIndexChanged += TextBox_SelectedIndexChanged;
+                
+                textBox2.Items.AddRange(auswahl0);
+                textBox2.Location = new System.Drawing.Point(170, 60);
+                textBox2.IntegralHeight = false;
+                textBox2.MaxDropDownItems = 3;
+                textBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+                textBox2.Name = "ComboBox2";
+                textBox2.Size = new System.Drawing.Size(136, 81);
+                textBox2.TabIndex = 0;
+                textBox2.SelectedIndexChanged += TextBox_SelectedIndexChanged;
+                
+                System.Windows.Forms.Button confirmation = new System.Windows.Forms.Button() { Text = "OK", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+                confirmation.Click += (sender, e) => { prompt.Close(); };
+                prompt.Controls.Add(textBox);
+                prompt.Controls.Add(textBox2);           
+                prompt.Controls.Add(confirmation);
+                prompt.Controls.Add(textLabel);
+                prompt.AcceptButton = confirmation;
+                prompt.ShowDialog(); // nicht vergessen am ende zu führen
 
+                return textBox.SelectedIndex;
+            }
+        }
+        private static void TextBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ComboBox cmb = (System.Windows.Forms.ComboBox)sender;
+            int selectedindex = cmb.SelectedIndex;
+            /*
+            //int selectedValue = (int)cmb.SelectedValue;
+
+            //System.Windows.Forms.ComboBox selectedColor = (System.Windows.Forms.ComboBox)cmb.SelectedItem;
+
+            Color XColorRed = Color.FromRgb(255, 0, 0);
+            Color XColorGreen = Color.FromRgb(0, 255, 0);
+            Color XColorBlue = Color.FromRgb(0, 0, 255);
+            Color OColorRed = Color.FromRgb(255, 0, 0);
+            Color OColorGreen = Color.FromRgb(0, 255, 0);
+            Color OColorBlue = Color.FromRgb(0, 0, 255);
+
+            List<Color> XColors = new List<Color>() { XColorRed, XColorGreen, XColorBlue};
+            List<Color> OColors = new List<Color>() { OColorRed, OColorGreen, OColorBlue};
+            
+            /*if (selectedI)
+            {
+
+            }
+            */
+            return;
+          //  int[] promptValue = AskForGameColour();
+
+         //   var textBoxValue = promptValue[0];
+         //   var textBox2Value = promptValue[1];
+        }
+    }
+    public abstract class BaseTicTacToeRules_GJ : ITicTacToeRules_GJ
+    {
+        public abstract ITicTacToeField TicTacToeField { get; }
+
+        public abstract bool MovesPossible { get; }
+
+        public abstract string Name { get; }
+
+        public abstract int CheckIfPLayerWon();
+
+        public abstract void ClearField();
+
+        public abstract void DoTicTacToeMove(ITicTacToeMove move);
+
+        public IGameField CurrentField { get { return TicTacToeField; } }
+
+        public void DoMove(IPlayMove move)
+        {
+            if (move is ITicTacToeMove)
+            {
+                DoTicTacToeMove((ITicTacToeMove)move);
+            }
+        }
+
+        public abstract void AskForGameColour();
+        /*
+        {
+            //open window
+        }
+        */
+    }
     public class GJ_TicTacToeField : BaseTicTacToeField, ITicTacToeField_GJ
     {
         int[,] _Field = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
@@ -221,6 +334,10 @@ namespace OOPGames
             int Tilespace = Fieldsize - _Border;
             _Border = _Border / 2;
             _Tile = Tilespace / 3;
+        }
+        public void AskForGameColour()
+        {
+            throw new NotImplementedException();
         }
     }
 

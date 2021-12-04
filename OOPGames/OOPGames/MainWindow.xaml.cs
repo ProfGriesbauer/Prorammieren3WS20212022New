@@ -132,6 +132,10 @@ namespace OOPGames
             {
                 ((ITicTacToeRules_GE)_CurrentRules).AskForGameSize();
             }
+            if (_CurrentRules is ITicTacToeRules_GJ)
+            {
+                ((ITicTacToeRules_GJ)_CurrentRules).AskForGameColour();
+            }
 
             if (_CurrentPainter != null &&
                 _CurrentRules != null && _CurrentRules.CurrentField.CanBePaintedBy(_CurrentPainter))
