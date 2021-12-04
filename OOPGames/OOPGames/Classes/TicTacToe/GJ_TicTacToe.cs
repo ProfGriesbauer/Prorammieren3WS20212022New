@@ -176,6 +176,7 @@ namespace OOPGames
                 System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 10, Top = 10, Text = text };
                 System.Windows.Forms.ComboBox textBox = new System.Windows.Forms.ComboBox();
                 System.Windows.Forms.ComboBox textBox2 = new System.Windows.Forms.ComboBox();
+                textBox.Items.AddRange(auswahl0);
                 textBox.Location = new System.Drawing.Point(10, 60);
                 textBox.IntegralHeight = false;
                 textBox.MaxDropDownItems = 3;
