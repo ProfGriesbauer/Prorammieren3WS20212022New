@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -210,6 +211,12 @@ namespace OOPGames
 
         public bool MovesPossible { get { return true; } }
 
+        string IGameRules.Name => throw new NotImplementedException();
+
+        IGameField IGameRules.CurrentField => throw new NotImplementedException();
+
+        bool IGameRules.MovesPossible => throw new NotImplementedException();
+
         public int CheckIfPLayerWon()
         {
             return -1;
@@ -226,12 +233,68 @@ namespace OOPGames
             }
         }
 
-        public void DoMove(IPlayMove move)
+        int IGameRules.CheckIfPLayerWon()
         {
+            throw new NotImplementedException();
+        }
+
+        void IGameRules.ClearField()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IGameRules.DoMove(IPlayMove move)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class GG_StartrekMove : GG_IStartrekMove
+    {
+        public Key Key => throw new NotImplementedException();
+
+        public int PlayerNumber => throw new NotImplementedException();
+
+        Key IKeyMove.Key => throw new NotImplementedException();
+
+        int IPlayMove.PlayerNumber => throw new NotImplementedException();
+
+        public void  DoMove(IKeySelection selection, GG_IStartrekGamefield currentField)
+
+
+        {
+            if (selection.Key == System.Windows.Input.Key.Left) //linke Pfeiltaste
+            {
+                for (int i =1; i<5; i++)
+                {
+
+                    if (currentField[i, 0] == 2)
+                    {
+                        currentField[i, 0] = 0;
+                        currentField[i -1, 0] = 2;
+                    }
+                }
+            }
+            if (selection.Key == System.Windows.Input.Key.Right) //rechte Pfeiltaste
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (currentField[i, 0] == 2)
+                    {
+                        currentField[i, 0] = 0;
+                        currentField[i +1, 0] = 2;
+                    }
+                }
+            }
             //ToDo:
             //Cast auf IStartrekmove
             //move in currentfield übertragen 
             //move hat direction => negativ für links positiv für rechts            
+        }
+
+        void GG_IStartrekMove.DoMove()
+        {
+            throw new NotImplementedException();
         }
     }
 }

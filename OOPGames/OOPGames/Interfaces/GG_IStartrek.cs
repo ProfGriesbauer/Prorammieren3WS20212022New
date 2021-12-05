@@ -53,7 +53,7 @@ namespace OOPGames
     {
         //Hält Gamefield!
         //Muss bei Painter abfragen, ob Kollision vorliegt --> Collsion-Variable
-
+        
     }
 
     public interface GG_IMeteo
@@ -72,5 +72,9 @@ namespace OOPGames
     //Interface: neues für GG_IStartrekMove erbt von IPlaymove und IKeymove
     //Hat Methode mit getter für direction( int direction{get;})
     //Evtl auch gleich Klasse GG_StartrekMove mitimplementieren
+    public interface GG_IStartrekMove : IPlayMove, IKeyMove
+    {
 
+        void DoMove();
+    }
 }
