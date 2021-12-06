@@ -17,27 +17,69 @@ namespace OOPGames
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
-
+            byte R = 0;
+            byte G = 0;
+            byte B = 0;
+            byte R2 = 0;
+            byte G2 = 0;
+            byte B2 = 0;
             int Border = 20;
             int Tilesize = 100;
-           
+            int selectedindex = 0;
+            int selectedindex2 = 0;
             if (currentField is ITicTacToeField_GJ)
             {
                 ITicTacToeField_GJ currentField_GJ = (ITicTacToeField_GJ)currentField;
                 currentField_GJ.Set_Tile_and_Border(canvas);
                 Border = currentField_GJ.Border;
                 Tilesize = currentField_GJ.Tile;
+                selectedindex = currentField_GJ.selectedIndex;
+                selectedindex2 = currentField_GJ.selectedIndex2;
             }
-
-
+            if (selectedindex == 0)
+            {
+                R = 255;
+                G = 0;
+                B = 0;
+            }
+            else if (selectedindex == 1)
+            {
+                R = 0;
+                G = 255;
+                B = 0;
+            }
+            else if (selectedindex == 2)
+            {
+                R = 0;
+                G = 0;
+                B = 255;
+            }
+            if (selectedindex2 == 0)
+            {
+                R2 = 255;
+                G2 = 0;
+                B2 = 0;
+            }
+            else if (selectedindex2 == 1)
+            {
+                R2 = 0;
+                G2 = 255;
+                B2 = 0;
+            }
+            else if (selectedindex2 == 2)
+            {
+                R2 = 0;
+                G2 = 0;
+                B2 = 255;
+            }
             canvas.Children.Clear();
             Color bgColor = Color.FromRgb(64, 224, 208);
             canvas.Background = new SolidColorBrush(bgColor);
             Color lineColor = Color.FromRgb(64, 180, 150);
             Brush lineStroke = new SolidColorBrush(lineColor);
-            Color XColor = Color.FromRgb(0, 0, 0);
+            Color XColor = Color.FromRgb(R, G, B);
             Brush XStroke = new SolidColorBrush(XColor);
-            Color OColor = Color.FromRgb(255, 255, 255);
+            Color OColor = Color.FromRgb(R2, G2, B2);
             Brush OStroke = new SolidColorBrush(OColor);
 
             // These are the deviding lines which cut the field in its squares
@@ -157,87 +199,75 @@ namespace OOPGames
         }
         public override void AskForGameColour()
         {
-            int Colour = Prompt.ShowDialog("Bitte Farbe wählen:", "Farbe Festlegen");
-            
+            ShowDialog("Bitte Farbe wählen:", "Farbe Festlegen");
         }
-        public static class Prompt
+        
+        
+       
+        public void ShowDialog(string text, string caption)
         {
-            public static int ShowDialog(string text, string caption)
-            {
-                Form prompt = new Form()
-                {
-                    Width = 500,
-                    Height = 150,
-                    FormBorderStyle = FormBorderStyle.FixedDialog,
-                    Text = caption,
-                    StartPosition = FormStartPosition.CenterScreen
-                };
-                string[] auswahl0 = { "Rot", "Grün", "Blau" };
-                System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 10, Top = 10, Text = text };
-                System.Windows.Forms.ComboBox textBox = new System.Windows.Forms.ComboBox();
-                System.Windows.Forms.ComboBox textBox2 = new System.Windows.Forms.ComboBox();
-                textBox.Items.AddRange(auswahl0);
-                textBox.Location = new System.Drawing.Point(10, 60);
-                textBox.IntegralHeight = false;
-                textBox.MaxDropDownItems = 3;
-                textBox.DropDownStyle = ComboBoxStyle.DropDownList;
-                textBox.Name = "ComboBox1";
-                textBox.Size = new System.Drawing.Size(136, 81);
-                textBox.TabIndex = 0;
-                textBox.SelectedIndexChanged += TextBox_SelectedIndexChanged;
-                
-                textBox2.Items.AddRange(auswahl0);
-                textBox2.Location = new System.Drawing.Point(170, 60);
-                textBox2.IntegralHeight = false;
-                textBox2.MaxDropDownItems = 3;
-                textBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-                textBox2.Name = "ComboBox2";
-                textBox2.Size = new System.Drawing.Size(136, 81);
-                textBox2.TabIndex = 0;
-                textBox2.SelectedIndexChanged += TextBox_SelectedIndexChanged;
-                
-                System.Windows.Forms.Button confirmation = new System.Windows.Forms.Button() { Text = "OK", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
-                confirmation.Click += (sender, e) => { prompt.Close(); };
-                prompt.Controls.Add(textBox);
-                prompt.Controls.Add(textBox2);           
-                prompt.Controls.Add(confirmation);
-                prompt.Controls.Add(textLabel);
-                prompt.AcceptButton = confirmation;
-                prompt.ShowDialog(); // nicht vergessen am ende zu führen
 
-                return textBox.SelectedIndex;
-            }
+            Form prompt = new Form()
+            {
+                Width = 500,
+                Height = 150,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            string[] auswahl0 = { "Rot", "Grün", "Blau" };
+            System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 10, Top = 10, Text = text };
+            System.Windows.Forms.ComboBox textBox = new System.Windows.Forms.ComboBox();
+            System.Windows.Forms.ComboBox textBox2 = new System.Windows.Forms.ComboBox();
+            textBox.Items.AddRange(auswahl0);
+            textBox.Location = new System.Drawing.Point(10, 60);
+            textBox.IntegralHeight = false;
+            textBox.MaxDropDownItems = 3;
+            textBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            textBox.Name = "ComboBox1";
+            textBox.Size = new System.Drawing.Size(136, 81);
+            textBox.TabIndex = 0;
+            textBox.SelectedIndexChanged += TextBox_SelectedIndexChanged;
+
+            textBox2.Items.AddRange(auswahl0);
+            textBox2.Location = new System.Drawing.Point(170, 60);
+            textBox2.IntegralHeight = false;
+            textBox2.MaxDropDownItems = 3;
+            textBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            textBox2.Name = "ComboBox2";
+            textBox2.Size = new System.Drawing.Size(136, 81);
+            textBox2.TabIndex = 0;
+            textBox2.SelectedIndexChanged += TextBox2_SelectedIndexChanged;
+
+            System.Windows.Forms.Button confirmation = new System.Windows.Forms.Button() { Text = "OK", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(textBox);
+            prompt.Controls.Add(textBox2);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+            prompt.ShowDialog(); // nicht vergessen am ende zu führen
+
+
         }
-        private static void TextBox_SelectedIndexChanged(object sender, EventArgs e)
+        public void TextBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+                System.Windows.Forms.ComboBox cmb = (System.Windows.Forms.ComboBox)sender;
+
+            _Field.selectedIndex = cmb.SelectedIndex;
+                return;
+               
+        }
+        public void TextBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             System.Windows.Forms.ComboBox cmb = (System.Windows.Forms.ComboBox)sender;
-            int selectedindex = cmb.SelectedIndex;
-            /*
-            //int selectedValue = (int)cmb.SelectedValue;
 
-            //System.Windows.Forms.ComboBox selectedColor = (System.Windows.Forms.ComboBox)cmb.SelectedItem;
-
-            Color XColorRed = Color.FromRgb(255, 0, 0);
-            Color XColorGreen = Color.FromRgb(0, 255, 0);
-            Color XColorBlue = Color.FromRgb(0, 0, 255);
-            Color OColorRed = Color.FromRgb(255, 0, 0);
-            Color OColorGreen = Color.FromRgb(0, 255, 0);
-            Color OColorBlue = Color.FromRgb(0, 0, 255);
-
-            List<Color> XColors = new List<Color>() { XColorRed, XColorGreen, XColorBlue};
-            List<Color> OColors = new List<Color>() { OColorRed, OColorGreen, OColorBlue};
-            
-            /*if (selectedI)
-            {
-
-            }
-            */
+            _Field.selectedIndex2 = cmb.SelectedIndex;
             return;
-          //  int[] promptValue = AskForGameColour();
 
-         //   var textBoxValue = promptValue[0];
-         //   var textBox2Value = promptValue[1];
         }
+
+
     }
     public abstract class BaseTicTacToeRules_GJ : ITicTacToeRules_GJ
     {
@@ -276,7 +306,8 @@ namespace OOPGames
 
         public int _Border = 10;
         public int _Tile = 100;
-
+        public int _selectedIndex = 0;
+        public int _selectedIndex2 = 0;
         public override int this[int r, int c]
         {
             get
@@ -297,9 +328,9 @@ namespace OOPGames
                 {
                     _Field[r, c] = value;
                 }
+
             }
         }
-    
         public int Border
         {
             get
@@ -315,7 +346,31 @@ namespace OOPGames
                 return _Tile;
             }
         }
-   
+
+        public int selectedIndex 
+        { 
+            get
+            {
+                return _selectedIndex;
+            }
+            set
+            {
+                _selectedIndex = value;
+            }
+        
+        }
+        public int selectedIndex2
+        {
+            get
+            {
+                return _selectedIndex2;
+            }
+            set
+            {
+                _selectedIndex2 = value;
+            }
+
+        }
         public void Set_Tile_and_Border(Canvas canvas)
         {
             int width = (int)Math.Round(canvas.ActualWidth);

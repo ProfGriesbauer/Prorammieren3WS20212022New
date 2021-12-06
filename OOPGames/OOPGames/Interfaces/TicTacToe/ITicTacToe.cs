@@ -30,6 +30,8 @@ namespace OOPGames
         int Border { get; }
         int Tile { get; }
 
+        int selectedIndex { get; set; }
+        int selectedIndex2 { get; set; }
         void Set_Tile_and_Border(Canvas canvas);
     }
 
