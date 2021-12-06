@@ -75,6 +75,5 @@ namespace OOPGames
     public interface GG_IStartrekMove : IPlayMove, IKeyMove
     {
 
-        void DoMove();
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
+
 namespace OOPGames
 {
     //JO:in GG_Startrek.cs: CheckCollison() Methode implementieren + in PaintStartrekGameField() Anzeige, wenn Spiel verloren impementieren
@@ -52,7 +53,7 @@ namespace OOPGames
             //Gegen Meteos an gleicher Posititon absichern
             if (_Meteos.Count > 0) //Gegen Fehler bei erstem Aufruf absicher, dort ist Liste noch leer
             {
-                while (meteo.PositionColum == _Meteos[_Meteos.Count-1].PositionColum)
+                while (meteo.PositionColum == _Meteos[_Meteos.Count - 1].PositionColum)
                 {
                     meteo = new GG_Meteo();
                 }
@@ -67,14 +68,14 @@ namespace OOPGames
                 meteo.UpdatePos();
             }
             //Meteos auserhalb vom Spielfeld löschen:
-            _Meteos.RemoveAll(item => item.PositionRow > 6); 
+            _Meteos.RemoveAll(item => item.PositionRow > 6);
         }
         //Schreibt Positionen der Meteos in Matrix
         public void updateField(GG_IStartrekGamefield currentField)
         {
             foreach (GG_Meteo meteo in _Meteos)
             {
-                currentField[meteo.PositionRow, meteo.PositionColum] += 1; 
+                currentField[meteo.PositionRow, meteo.PositionColum] += 1;
             }
         }
         //Löscht bisherige Positionen aus Matrix, dass fallende Meteos keine Striche hinterlassen
@@ -90,7 +91,7 @@ namespace OOPGames
         public void PaintGameField(Canvas canvas, IGameField currentField)
         {
             if (currentField is GG_IStartrekGamefield)
-            {   
+            {
                 PaintStartrekGameField(canvas, (GG_IStartrekGamefield)currentField);
             }
         }
@@ -100,9 +101,9 @@ namespace OOPGames
             removeOldPositions(currentField);
 
             if ((_aufrufe + _spawnspeed) % _spawnspeed == 0) //+spwanspeed dass bei Spielstart gleich gespawnd wird
-            {   
+            {
                 for (int i = 0; i < _spawnnum; i++)
-                { 
+                {
                     spawnMeteos();
                 }
 
@@ -110,9 +111,9 @@ namespace OOPGames
             if (_aufrufe % _movespeed == 0)
             {
                 moveMetos();
-              
+
             }
-            
+
             updateField(currentField);
 
 
@@ -128,19 +129,19 @@ namespace OOPGames
             //ToDO: if collision == true => Anzeige, dass Spiel verloren
 
             // Matrix auswerten und Meteos an entsprechende Stelle zeichnen
-           for (int i = 0; i < 6; i++)
-           {
-               for (int j = 0; j < 6; j++)
-               {
-                   if (currentField[i, j] == 1)    
-                   {
-                       Line X1 = new Line() { X1 = 20 + (j * 60), Y1 = 20 + (i * 60), X2 = 80 + (j * 60), Y2 = 80 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
-                       canvas.Children.Add(X1);
-                       Line X2 = new Line() { X1 = 20 + (j * 60), Y1 = 80 + (i * 60), X2 = 80 + (j * 60), Y2 = 20 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
-                       canvas.Children.Add(X2);
-                       Line X3 = new Line() { X1 = 20 + (j * 60), Y1 = 50 + (i * 60), X2 = 80 + (j * 60), Y2 = 50 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
-                       canvas.Children.Add(X3);
-                   }
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    if (currentField[i, j] == 1)
+                    {
+                        Line X1 = new Line() { X1 = 20 + (j * 60), Y1 = 20 + (i * 60), X2 = 80 + (j * 60), Y2 = 80 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
+                        canvas.Children.Add(X1);
+                        Line X2 = new Line() { X1 = 20 + (j * 60), Y1 = 80 + (i * 60), X2 = 80 + (j * 60), Y2 = 20 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
+                        canvas.Children.Add(X2);
+                        Line X3 = new Line() { X1 = 20 + (j * 60), Y1 = 50 + (i * 60), X2 = 80 + (j * 60), Y2 = 50 + (i * 60), Stroke = XStroke, StrokeThickness = 3.0 };
+                        canvas.Children.Add(X3);
+                    }
                     //ToDo: (currentField[i, j] == 3) Spaceship zeichnen
                 }
             }
@@ -211,11 +212,6 @@ namespace OOPGames
 
         public bool MovesPossible { get { return true; } }
 
-        string IGameRules.Name => throw new NotImplementedException();
-
-        IGameField IGameRules.CurrentField => throw new NotImplementedException();
-
-        bool IGameRules.MovesPossible => throw new NotImplementedException();
 
         public int CheckIfPLayerWon()
         {
@@ -233,68 +229,59 @@ namespace OOPGames
             }
         }
 
-        int IGameRules.CheckIfPLayerWon()
+        public void DoMove(IPlayMove move)
         {
-            throw new NotImplementedException();
-        }
 
-        void IGameRules.ClearField()
-        {
-            throw new NotImplementedException();
-        }
+            if (move is GG_StartrekMove)
+            {
+                GG_StartrekMove _myMove = (GG_StartrekMove)move;
 
-        void IGameRules.DoMove(IPlayMove move)
-        {
-            throw new NotImplementedException();
+                if (_myMove.Key == Key.Left) //linke Pfeiltaste
+                {
+                    for (int i = 1; i < 5; i++)
+                    {
+
+                        if (_Field[i, 0] == 2)
+                        {
+                            _Field[i, 0] = 0;
+                            _Field[i - 1, 0] = 2;
+                        }
+                    }
+                }
+                if (_myMove.Key == Key.Right) //rechte Pfeiltaste
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (_Field[i, 0] == 2)
+                        {
+                            _Field[i, 0] = 0;
+                            _Field[i + 1, 0] = 2;
+                        }
+                    }
+                }
+            }
         }
     }
 
     public class GG_StartrekMove : GG_IStartrekMove
     {
-        public Key Key => throw new NotImplementedException();
 
-        public int PlayerNumber => throw new NotImplementedException();
+        Key _Direction;
+        public Key Key { get { return _Direction; } }
 
-        Key IKeyMove.Key => throw new NotImplementedException();
+        int _PlayerNumber = 42;
+        public int PlayerNumber { get { return _PlayerNumber; } }
 
-        int IPlayMove.PlayerNumber => throw new NotImplementedException();
-
-        public void  DoMove(IKeySelection selection, GG_IStartrekGamefield currentField)
-
-
+        public GG_StartrekMove(Key _Arrow)
         {
-            if (selection.Key == System.Windows.Input.Key.Left) //linke Pfeiltaste
-            {
-                for (int i =1; i<5; i++)
-                {
-
-                    if (currentField[i, 0] == 2)
-                    {
-                        currentField[i, 0] = 0;
-                        currentField[i -1, 0] = 2;
-                    }
-                }
-            }
-            if (selection.Key == System.Windows.Input.Key.Right) //rechte Pfeiltaste
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    if (currentField[i, 0] == 2)
-                    {
-                        currentField[i, 0] = 0;
-                        currentField[i +1, 0] = 2;
-                    }
-                }
-            }
-            //ToDo:
-            //Cast auf IStartrekmove
-            //move in currentfield übertragen 
-            //move hat direction => negativ für links positiv für rechts            
+            _Direction = _Arrow;
         }
-
-        void GG_IStartrekMove.DoMove()
-        {
-            throw new NotImplementedException();
-        }
+        //ToDo:
+        //Cast auf IStartrekmove
+        //move in currentfield übertragen 
+        //move hat direction => negativ für links positiv für rechts            
     }
+
+
 }
+
