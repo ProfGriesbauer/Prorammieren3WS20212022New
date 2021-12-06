@@ -249,64 +249,33 @@ namespace OOPGames
         }
         public void DoMove(IPlayMove move)
         {
-
             if (move is GG_StartrekMove)
             {
                 GG_StartrekMove _myMove = (GG_StartrekMove)move;
 
                 if (_myMove.Key == Key.Left) //linke Pfeiltaste
                 {
-                    for (int i = 1; i < 5; i++)
+                    for (int i = 1; i < 6; i++)
                     {
 
-                        if (_Field[i, 0] == 2)
+                        if (_Field[5, i] == 2)
                         {
-                            _Field[i, 0] = 0;
-                            _Field[i - 1, 0] = 2;
+                            _Field[5, i] = 0;
+                            _Field[5, i - 1] = 2;
+                            return;
                         }
                     }
                 }
                 if (_myMove.Key == Key.Right) //rechte Pfeiltaste
                 {
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 5; i++)
                     {
-                        if (_Field[i, 0] == 2)
+                        if (_Field[5, i] == 2)
                         {
-                            _Field[i, 0] = 0;
-                            _Field[i + 1, 0] = 2;
+                            _Field[5, i] = 0;
+                            _Field[5, i + 1] = 2;
+                            return;
                         }
-                    }
-                }
-            }
-        }
-        public void DoStartrekMove(GG_IStartrekMove move)
-        {
-            int _shippos = -1;
-            if (move.Direction != 0)
-            {
-                //Stelle suchen an der 2 steht
-                for (int c = 0; c < 6; c++)
-                {
-                    if (_Field[5, c] == 2)
-                    {
-                        _shippos = c;
-                    }
-                }
-                //Ship entsprechend nach Direction des Moves bewegen, sofern dann noch im Spielfeld
-                if (move.Direction > 0) //rechts
-                {
-                    if (_shippos < 5)
-                    {
-                        _Field[5, _shippos + 1] = 2;
-                        _Field[5, _shippos] = 0;
-                    }
-                }
-                if (move.Direction < 0) //links
-                {
-                    if (_shippos > 0)
-                    {
-                        _Field[5, _shippos - 1] = 2;
-                        _Field[5, _shippos] = 0;
                     }
                 }
             }
@@ -338,17 +307,7 @@ namespace OOPGames
         }
         public IPlayMove GetStartrekMove(IKeySelection selection, IGameField field)
         {
-            int _direction = 0;
-            
-            if (selection.Key == Key.Left)
-            {
-                _direction = -1;
-            }
-            if (selection.Key == Key.Right)
-            {
-                _direction = 1;
-            }
-            return new GG_StartrekMove(_direction, 42);
+            return new GG_StartrekMove(selection.Key);
         }
 
         public void SetPlayerNumber(int playerNumber)
@@ -356,7 +315,10 @@ namespace OOPGames
             //Playernumber ist nicht relevant, deshalb keine Implementierung
             //Es wird standartmäßig ein PlayMove mit Spielernummer 42 zurückgegeben
         }
-public class GG_StartrekMove : GG_IStartrekMove
+        
+
+    }
+    public class GG_StartrekMove : GG_IStartrekMove
     {
 
         Key _Direction;
@@ -375,7 +337,5 @@ public class GG_StartrekMove : GG_IStartrekMove
         //move hat direction => negativ für links positiv für rechts            
     }
 
-    }
-    
 }
 
