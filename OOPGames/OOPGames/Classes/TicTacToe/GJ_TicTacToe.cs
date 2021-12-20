@@ -217,6 +217,8 @@ namespace OOPGames
             };
             string[] auswahl0 = { "Rot", "Grün", "Blau" };
             System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label() { Left = 10, Top = 10, Text = text };
+            System.Windows.Forms.Label textLabel2 = new System.Windows.Forms.Label() { Left = 10, Top = 45, Text = "Player1" };
+            System.Windows.Forms.Label textLabel3 = new System.Windows.Forms.Label() { Left = 170, Top = 45, Text = "Player2" };
             System.Windows.Forms.ComboBox textBox = new System.Windows.Forms.ComboBox();
             System.Windows.Forms.ComboBox textBox2 = new System.Windows.Forms.ComboBox();
             textBox.Items.AddRange(auswahl0);
@@ -225,6 +227,7 @@ namespace OOPGames
             textBox.MaxDropDownItems = 3;
             textBox.DropDownStyle = ComboBoxStyle.DropDownList;
             textBox.Name = "ComboBox1";
+            
             textBox.Size = new System.Drawing.Size(136, 81);
             textBox.TabIndex = 0;
             textBox.SelectedIndexChanged += TextBox_SelectedIndexChanged;
@@ -245,6 +248,8 @@ namespace OOPGames
             prompt.Controls.Add(textBox2);
             prompt.Controls.Add(confirmation);
             prompt.Controls.Add(textLabel);
+            prompt.Controls.Add(textLabel2);
+            prompt.Controls.Add(textLabel3);
             prompt.AcceptButton = confirmation;
             prompt.ShowDialog(); // nicht vergessen am ende zu führen
 
