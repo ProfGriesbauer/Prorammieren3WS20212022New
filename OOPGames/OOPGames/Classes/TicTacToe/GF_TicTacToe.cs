@@ -13,7 +13,7 @@ namespace OOPGames
    
     public class GF_TicTacToePaint : BaseTicTacToePaint
     {
-        
+        int a;
         public override string Name { get { return "TicTacToePaintGruppe F"; } }
 
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
@@ -52,8 +52,40 @@ namespace OOPGames
             canvas.Children.Add(c3);
             Line c4 = new Line() { X1 = 125, Y1 = 65, X2 = 125, Y2 = 15, Stroke = clockStroke, StrokeThickness = 2.0 };
             canvas.Children.Add(c4);
-            
 
+            for (int b = 0; b < a; b++)
+            {
+                byte farbe;
+                byte farbe2;
+                if (a > 6)
+                {
+                    farbe = 255;
+                    farbe2 = 185;
+                }
+                else if (a > 3)
+                {
+                    farbe = 204;
+                    farbe2 = 102;
+                }
+                else
+                {
+                    farbe = 204;
+                    farbe2 = 0;
+                }
+                Color CStroker = Color.FromRgb(farbe, farbe2, 15);
+                Brush clockStroker = new SolidColorBrush(CStroker);
+                Line strich = new Line() { X1 = 30 + 10 * b, Y1 = 25, X2 = 30 + 10 * b, Y2 = 55, Stroke = clockStroker, StrokeThickness = 2.0 };
+                canvas.Children.Add(strich);
+            }
+            if (a == 0)
+            {
+                Color CStroker = Color.FromRgb(204, 0, 15);
+                Brush clockStroker = new SolidColorBrush(CStroker);
+                Line strich = new Line() { X1 = 70, Y1 = 70, X2 = 470, Y2 = 470, Stroke = clockStroker, StrokeThickness = 5.0 };
+                canvas.Children.Add(strich);
+                Line strich2 = new Line() { X1 = 470, Y1 = 70, X2 = 70, Y2 = 470, Stroke = clockStroker, StrokeThickness = 5.0 };
+                canvas.Children.Add(strich2);
+            }
 
 
 
@@ -79,12 +111,23 @@ namespace OOPGames
        
         public void check(GFTicTacToeField meinfeld)
         {
-            int result;
+            meinfeld.spielzeit = 10;
+            meinfeld.läuftdasspiel = true;
             DateTime now = DateTime.Now;
-            result = DateTime.Compare((meinfeld.startetimer.AddSeconds(4)), now);
 
 
-            if (result > 0)
+            for (int b = 0; b < ((meinfeld.spielzeit) + 1); b++)
+            {
+                int result = DateTime.Compare((meinfeld.startetimer.AddSeconds(b)), now);
+                if (result > 0)
+                {
+                    meinfeld.abgelaufenezeit = b;
+                    break;
+                }
+            }
+
+
+            if (meinfeld.abgelaufenezeit < meinfeld.spielzeit)
             {
                 meinfeld.läuftdasspiel = true;
             }
@@ -92,6 +135,7 @@ namespace OOPGames
             {
                 meinfeld.läuftdasspiel = false;
             }
+            a = (meinfeld.spielzeit) - (meinfeld.abgelaufenezeit);
 
         }
     }
@@ -181,10 +225,7 @@ namespace OOPGames
                         return p;
                     }
                 }
-                if (_Field.verbleibendezeit<1)
-                {
-                    return p;
-                }
+               
                 if ((_Field[0, 0] > 0 && _Field[0, 0] == _Field[1, 1] && _Field[1, 1] == _Field[2, 2]) ||
                     (_Field[0, 2] > 0 && _Field[0, 2] == _Field[1, 1] && _Field[1, 1] == _Field[2, 0]))
                 {
