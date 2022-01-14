@@ -296,12 +296,11 @@ namespace OOPGames
     }
 
    
-
-  /*  public class GF_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
+  public class GF_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer
     {
         int _PlayerNumber = 0;
 
-        public override string Name { get { return "GF_ComputerTicTacToePlayer"; } }
+        public override string Name { get { return "ComputerTicTacToeGruppeF"; } }
 
         public override IGamePlayer Clone()
         {
@@ -335,5 +334,5 @@ namespace OOPGames
         {
             _PlayerNumber = playerNumber;
         }
-    }*/
+    }
 }
