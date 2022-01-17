@@ -8,27 +8,19 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Shapes;
-//using System.Drawing.Point;
-//ToDo:
-/*
- Am montag den Griesbauer Fragen: 
--Warum gehts nicht?
--Test
-Bisschen einlesen
-
-Test
-
- */
 
 namespace OOPGames
 {
     public class GE_TicTacToePaint : BaseTicTacToePaint
     {
+        // Rückgabe an Painter- Auswahlfenster 
         public override string Name { get { return "GE_TicTacToePaint"; } }
 
+        // Nach OK in Popupfenster wird die Größe des Spielfelds festgelegt (currentField)
         public override void PaintTicTacToeField(Canvas canvas, ITicTacToeField currentField)
         {
-            if(currentField is ITicTacToeField_GE){
+            // Spielfeld - Gitternetz wird gezeichnet
+            if(currentField is ITicTacToeField_GE){ // Überprüfung ob GE_Spielfeld ausgewählt ist?! 
                 int width = 500;
                 int height = 500;
                 ITicTacToeField_GE myField = (ITicTacToeField_GE)currentField;
@@ -66,6 +58,7 @@ namespace OOPGames
             }
             else
             {
+                // Falls nicht unser Spielfeld ausgewählt ist, weiter mit ursprünglichem Spielfeld
                 canvas.Children.Clear();
                 Color bgColor = Color.FromRgb(255, 255, 255);
                 canvas.Background = new SolidColorBrush(bgColor);
@@ -108,14 +101,14 @@ namespace OOPGames
     }
 
 
-
-    public class GE_TicTacToeRules : BaseTicTacToeRules_GE
+    // Ableiten der GE_TicTacToeRules von BaseTicTacToeRules_GE
+    public class GE_TicTacToeRules : BaseTicTacToeRules_GE //GE_TicTacToeRules wird abgeleitet und mit "Leben" gefüllt (override- Funktion)
     {
-        GE_TicTacToeField _Field;
+        GE_TicTacToeField _Field; // Variable _Field wird erstellt - global in GE_TicTacToeRules
 
-        public override ITicTacToeField TicTacToeField { get { return _Field; } }
-
-        public override bool MovesPossible
+        public override ITicTacToeField TicTacToeField { get { return _Field; } } //Bei Nachfrage nach ITicTacToeField wird Feld zurückgegeben (Größe & alle Funktionen)
+        
+        public override bool MovesPossible // Überprüfung ob in Feld schon ein Zeichen gesetzt wurde
         {
             get
             {
@@ -159,6 +152,7 @@ namespace OOPGames
                         }
                 }
             }
+            // alle Gewinnmöglichkeiten werden überprüft
             //horizontal
             for (int cols = 0; cols < _Field.GameSize-2; cols++) 
             {
@@ -240,11 +234,12 @@ namespace OOPGames
         {
             if (move.Row >= 0 && move.Row < _Field.GameSize && move.Column >= 0 && move.Column < _Field.GameSize)
             {
-                _Field[move.Row, move.Column] = move.PlayerNumber;
+                _Field[move.Row, move.Column] = move.PlayerNumber; // 3 Werte werden zugeordnet um Richtigkeit zu überprüfen
             }
         }
 
-        public override void AskForGameSize()
+        // Popup Fenster
+        public override void AskForGameSize() //Definieren der Spielfeldgröße durch Popup- Fenster
         {
          int size = Prompt.ShowDialog("Bitte Größe wählen:", "Größe Festlegen");
          _Field = new GE_TicTacToeField((size+1)*3);
@@ -270,7 +265,7 @@ namespace OOPGames
                 dropDown.Name = "ComboBox1";
                 dropDown.Size = new System.Drawing.Size(136, 81);
                 dropDown.TabIndex = 0;
-                dropDown.SelectedIndexChanged += DropDown_SelectedIndexChanged;
+                dropDown.SelectedIndexChanged += DropDown_SelectedIndexChanged; // Event (+= DropDown_SelectedIndexChanged) - Funktion wird dort angeheftet
 
                 System.Windows.Forms.Button confirmation = new System.Windows.Forms.Button() { Text = "Ok", Left = 350, Width = 100, Top = 70 };
                 confirmation.Click += (sender, e) => { prompt.Close(); };
@@ -291,86 +286,12 @@ namespace OOPGames
     }
 
 
-    /*
-    public class GE_TicTacToeRules : BaseTicTacToeRules
+   
+
+    public abstract class BaseTicTacToeRules_GE : ITicTacToeRules_GE //(wird erstellt:BaseTicTacToeRules_GE und von:ITicTacToeRules_GE abgeleitet)
+        //abstract class muss noch befüllt werden (override muss noch geschehen) - siehe Zeile 105
     {
-
-        int[,] fieldSize = {{3,3}, {6,6}, {9,9}}; //Besser implementieren: WO soll die Variable hin? GB
-        int auswahl = 0;
-        TicTacToeField _Field;// = new GE_TicTacToeField();
-
-        public override ITicTacToeField TicTacToeField { get { return _Field; } }
-
-        public override bool MovesPossible //muss auf die spielfeldgr��e angepasst werden
-        { 
-            get 
-            {
-                for (int i = 0; i < fieldSize[auswahl][0]; i++)
-                {
-                    for (int j = 0; j < fieldSize[auswahl][1]; j++)
-                    {
-                        if (_Field[i, j] == 0)
-                        {
-                            return true;
-                        }
-                    }
-                }
-                return false; 
-            } 
-        }
-
-        public override string Name { get { return "GE_TicTacToeRules"; } }
-
-        public override int CheckIfPLayerWon()//anpassen auf spielfeld gr��e; (vlt anpassen ab wie viel man gewinnt)
-        {
-            for (int p = 1; p < 3; p++)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    if (_Field[i, 0] > 0 && _Field[i, 0] == _Field[i, 1] && _Field[i, 1] == _Field[i, 2])
-                    {
-                        return p;
-                    }
-                    else if (_Field[0, i] > 0 && _Field[0, i] == _Field[1, i] && _Field[1, i] == _Field[2, i])
-                    {
-                        return p;
-                    }
-                }
-
-                if ((_Field[0, 0] > 0 && _Field[0, 0] == _Field[1, 1] && _Field[1, 1] == _Field[2, 2]) ||
-                    (_Field[0, 2] > 0 && _Field[0, 2] == _Field[1, 1] && _Field[1, 1] == _Field[2, 0]))
-                {
-                    return p;
-                }
-            }
-
-            return -1;
-        }
-
-        public override void ClearField()//anpassen
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    _Field[i, j] = 0;
-                }
-            }
-        }
-
-        public override void DoTicTacToeMove(ITicTacToeMove move)//anpassen
-        {
-            if (move.Row >= 0 && move.Row < 3 && move.Column >= 0 && move.Column < 3)
-            {
-                _Field[move.Row, move.Column] = move.PlayerNumber;
-            }
-        }
-    }
-    */
-
-    public abstract class BaseTicTacToeRules_GE : ITicTacToeRules_GE
-    {
-        public abstract ITicTacToeField TicTacToeField { get; }
+        public abstract ITicTacToeField TicTacToeField { get; } 
 
         public abstract bool MovesPossible { get; }
 
@@ -382,30 +303,25 @@ namespace OOPGames
 
         public abstract void DoTicTacToeMove(ITicTacToeMove move);
 
-        public IGameField CurrentField { get { return TicTacToeField; } }
+        public IGameField CurrentField { get { return TicTacToeField; } } // siehe Zeile 109
 
-        public void DoMove(IPlayMove move)
+        public void DoMove(IPlayMove move) 
         {
             if (move is ITicTacToeMove)
             {
-                DoTicTacToeMove((ITicTacToeMove)move);
+                DoTicTacToeMove((ITicTacToeMove)move); // Passt das Ausgewählte zur Spielfeldgröße?
             }
         }
 
-        public abstract void AskForGameSize();
-        /*
-        {
-            //open window
-        }
-        */
+        public abstract void AskForGameSize(); // Legt "ungefüllte" Funktion für Spielfeldgröße an - siehe Zeile 242 (Füllung mit Infos)
     }
 
     public class GE_TicTacToeField : ITicTacToeField_GE
     {
         int _Size;
         int[,] _Field;
-        public int GameSize { get { return _Size;} }
-        public GE_TicTacToeField(int s)
+        public int GameSize { get { return _Size;} } //Size wird über Objekt "GameSize" übergeben
+        public GE_TicTacToeField(int s) //constructor für zuvorig mitgegebene Size (Erstellen der Zeilen und Spalten)
         {
             _Size = s;
             _Field = new int[s, s];
@@ -453,13 +369,14 @@ namespace OOPGames
         int _Column = 0;
         int _PlayerNumber = 0;
 
-        public GE_TicTacToeMove(int row, int column, int playerNumber)
+        public GE_TicTacToeMove(int row, int column, int playerNumber) //Variablen werden im Konstruktor übertragen auf GE_TicTacToeMove
         {
             _Row = row;
             _Column = column;
             _PlayerNumber = playerNumber;
         }
 
+        // Direkte Abfrage durch " GE_TicTacToeMove.Row" abrufbar
         public int Row { get { return _Row; } }
 
         public int Column { get { return _Column; } }
@@ -473,26 +390,27 @@ namespace OOPGames
 
         public override string Name { get { return "GE_HumanTicTacToePlayer"; } }
 
+        // zwei menschliche Spieler 
         public override IGamePlayer Clone()
         {
             GE_TicTacToeHumanPlayer ttthp = new GE_TicTacToeHumanPlayer();
-            ttthp.SetPlayerNumber(_PlayerNumber);
+            ttthp.SetPlayerNumber(_PlayerNumber);// Definition einer anderen Spielernummer für 2. menschlichen Spieler
             return ttthp;
         }
 
-        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)//support f�r tasten und hidden modus
+        public override ITicTacToeMove GetMove(IMoveSelection selection, ITicTacToeField field)
         {
-            if (field is ITicTacToeField_GE)
+            if (field is ITicTacToeField_GE) // ist es unser ITicTacToeField_GE
             {
-                ITicTacToeField_GE myField = (ITicTacToeField_GE)field;
-                for (int i = 0; i < myField.GameSize; i++)//anpassen
+                ITicTacToeField_GE myField = (ITicTacToeField_GE)field;// "field" wird zu "ITicTacToeField_GE" durch "(ITicTacToeField_GE)field"
+                for (int i = 0; i < myField.GameSize; i++)
                 {
-                    for (int j = 0; j < myField.GameSize; j++)//anpassen
+                    for (int j = 0; j < myField.GameSize; j++)
                     {
                         if (selection.XClickPos > j*500/myField.GameSize && selection.XClickPos < (j+1) * 500 / myField.GameSize &&
                             selection.YClickPos > i * 500 / myField.GameSize && selection.YClickPos < (i + 1) * 500 / myField.GameSize)
                         {
-                            return new GE_TicTacToeMove(i, j, _PlayerNumber);
+                            return new GE_TicTacToeMove(i, j, _PlayerNumber); //Definiert Kästchen wo von entsprechender Playernummer geklickt wurde
                         }
                     }
                 }
@@ -508,22 +426,22 @@ namespace OOPGames
 
     public class GE_TicTacToeComputerPlayer : BaseComputerTicTacToePlayer //lege neuen computerspieler an
     {
-        int _PlayerNumber = 0;
+        int _PlayerNumber = 0; // computer spieler "bekommt" Nummer 0 zugewiesen --> 0 = Symbol Kreuz
 
         public override string Name { get { return "GE_ComputerTicTacToePlayer"; } }
 
         public override IGamePlayer Clone()
         {
-            GE_TicTacToeComputerPlayer ttthp = new GE_TicTacToeComputerPlayer(); //make new player
+            GE_TicTacToeComputerPlayer ttthp = new GE_TicTacToeComputerPlayer(); //make new player - siehe 2. human player
             ttthp.SetPlayerNumber(_PlayerNumber);
             return ttthp;
         }
 
-        public override ITicTacToeMove GetMove(ITicTacToeField field) //change auf unser spielfeld
+        public override ITicTacToeMove GetMove(ITicTacToeField field) //change auf unser spielfeld // nur Argument "field" wird angegeben - bei human player wird noch x-/y- Position von Maus angegeben
         {
-            if (field is ITicTacToeField_GE)
+            if (field is ITicTacToeField_GE) 
             {
-                ITicTacToeField_GE myField = (ITicTacToeField_GE)field;
+                ITicTacToeField_GE myField = (ITicTacToeField_GE)field; // Computerspieler wählt willkürlich Spielfeld
                 Random rand = new Random();
                 int f = rand.Next(0, myField.GameSize*myField.GameSize-1);
                 for (int i = 0; i < myField.GameSize*myField.GameSize; i++)

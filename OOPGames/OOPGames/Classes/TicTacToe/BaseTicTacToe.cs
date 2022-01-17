@@ -35,29 +35,18 @@ namespace OOPGames
     
      public abstract class BaseTicTacToeField_GF : ITicTacToeField
     {
-        bool start1;
-       
         public abstract int this[int r, int c] { get; set; }
-        public bool startTimerSpieler1
-        {
-            get {
-                return start1;
-            }
-            set {
-                start1 = value;
 
-            }
-        }
         public bool CanBePaintedBy(IPaintGame painter)
         {
             return painter is IPaintTicTacToe;
         }
 
         //Timer
-        int spielzeit = 10;
+        int _spielzeit;
         bool _läuftdasspiel;
-        int _verbleibendezeit=7;
-        DateTime _startzeit; 
+        int _abgelaufenezeit;
+        DateTime _startzeit;
 
 
         public DateTime startetimer
@@ -68,33 +57,29 @@ namespace OOPGames
                 _startzeit = value;
             }
         }
-       
-
-
         public bool läuftdasspiel
         {
-          
+
             get { return _läuftdasspiel; }
             set
             {
                 _läuftdasspiel = value;
             }
         }
-        public int verbleibendezeit
+        public int spielzeit
         {
-            get { return _verbleibendezeit; }
-
-        }
-        public bool stopreset
-        {
-            get { return _läuftdasspiel; }
+            get { return _spielzeit; }
             set
             {
-                if (value)
-                {
-                    _verbleibendezeit = spielzeit;
-                    _läuftdasspiel = false;
-                }
+                _spielzeit = value;
+            }
+        }
+        public int abgelaufenezeit
+        {
+            get { return _abgelaufenezeit; }
+            set
+            {
+                _abgelaufenezeit = value;
             }
         }
 

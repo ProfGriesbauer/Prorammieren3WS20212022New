@@ -96,6 +96,8 @@ namespace OOPGames
             OOPGamesManager.Singleton.RegisterPlayer(new SnakeHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GC_VierGewinntHumanPlayer());
             OOPGamesManager.Singleton.RegisterPlayer(new GC_VierGewinntComputerPlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GG_StartrekHumanPlayer());
+            OOPGamesManager.Singleton.RegisterPlayer(new GF_TicTacToeComputerPlayer());
 
             InitializeComponent();
             PaintList.ItemsSource = OOPGamesManager.Singleton.Painters;
