@@ -73,7 +73,7 @@ for i in range (0, 1000):
 
 testdata = []
 testlabels = []
-for i in range (0, 10):
+for i in range (0, 100):
     pic, label = do.getPictureSampleWithLabel()
     testdata.append(pic)
     testlabels.append([label])
@@ -83,7 +83,7 @@ for i in range (0, 10):
 
 model = kr.Sequential()
 #model.add(LSTM(NUMBERS_SIZE*2))
-model.add(Conv2D(32, (4,4), activation='relu'))
+model.add(Conv2D(32, (4,4), activation='relu', input_shape=(25, 25, 1)))
 #model.add(Conv2D(64, (2,2), activation='sigmoid'))
 #model.add(Conv2D(128, (1,1), activation='sigmoid'))
 model.add(MaxPooling2D((4,4)))
@@ -101,6 +101,16 @@ print("**************************************************")
 prediction = model.predict(np.array(testdata), batch_size=1)
 for i in range(0, len(testdata)):
     print("Prediction", prediction[i], " - Label ", testlabels[i])
+
+plt.figure(figsize=(20, 4))
+n=20
+for i in range(n):
+    ax = plt.subplot(5, n, i + 1)
+    plt.imshow(traindata[i].reshape(25, 25))
+    plt.gray()
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
+plt.show()
 
 model.save("PicModels/GriesbauerPicModel.model")
 
